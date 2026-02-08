@@ -9,11 +9,11 @@
     <div class="container relative z-10">
       <div class="max-w-3xl">
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-white">
-          Open Source IoT Platform for Enterprise Operations
+         Your IoT Control Plane Made Simple.          
         </h1>
         <p class="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-100">
-          A secure, scalable platform built on proven open source components like NATS, Pocketbase, and TimescaleDB, 
-          designed for diverse IoT applications across industries.
+          A single-binary platform that orchestrates NATS, Nebula, and PocketBase. 
+          Deploy private IoT infrastructure without vendor lock-in.
         </p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
           <button 
@@ -25,7 +25,7 @@
             Get Started
           </button>
           <a 
-            href="https://github.com/stone-age-io" 
+            href="https://github.com/stone-age-io/platform" 
             class="btn btn-outlined w-full sm:w-auto" 
             style="border-color: white; color: white;"
             aria-label="View Stone-Age.io on GitHub"
@@ -44,7 +44,8 @@
 <script setup>
 /**
  * Hero section component for the landing page
- * Displays the main headline, description, and primary call-to-action buttons
+ * Emphasizes the platform as a "Control Plane in a Box" for MSPs and SIs
+ * Highlights single-binary simplicity and no vendor lock-in
  */
 
 /**

@@ -1,9 +1,10 @@
 <template>
-	<section id="benefits" class="section dark-section" style="background-color: #121212; color: white;">
+  <section id="benefits" class="section dark-section" style="background-color: #121212; color: white;">
     <div class="container">
       <h2 class="section-title text-center text-white">Why Choose Stone-Age.io?</h2>
       <p class="section-subtitle text-center text-gray-300">
-        Our open source approach combined with proven enterprise components provides exceptional advantages for all IoT applications across industries.
+        Built specifically for MSPs and System Integrators who need to deploy reliable, private IoT infrastructure 
+        for their customers without vendor lock-in or architectural complexity.
       </p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-12 md:mt-16">
@@ -12,7 +13,7 @@
           <div class="tech-card-header dark-card-header">
             <div class="flex items-center">
               <div class="rounded-full p-2 mr-3 flex items-center justify-center w-10 h-10"
-                 :style="{ backgroundColor: iconBgColors[0] }">
+                 :style="{ backgroundColor: benefit.color }">
                 <i :class="benefit.icon" class="text-white"></i>
               </div>
               <h3 class="text-xl font-semibold text-white">{{ benefit.title }}</h3>
@@ -37,62 +38,59 @@
 <script setup>
 /**
  * Benefits section component
- * Highlights the key advantages of using Stone-Age.io platform
+ * Highlights the key advantages for MSPs and System Integrators
+ * Emphasizes multi-tenancy, simplicity, security, and the radio network analogy
  */
 
-// Background colors for icons - blue gradient
-const iconBgColors = [
-  '#4361ee', // Blue for code
-  '#3a86ff', // Blue for shield
-  '#4895ef', // Blue for server
-  '#4cc9f0'  // Blue for dollar
-];
-
-// Benefits data with platform-focused messaging
+// Benefits data with MSP/SI focus
 const benefits = [
   {
+    icon: 'pi pi-building',
+    title: 'Built for MSPs & System Integrators',
+    description: 'Deploy and manage infrastructure for hundreds of customers from a single platform:',
+    points: [
+      'Multi-tenant by design with cryptographic isolation per organization',
+      'White-label ready with customizable branding and domains',
+      'Central management for distributed customer sites worldwide',
+      'Leaf Nodes enable local autonomy during network outages'
+    ],
+    color: '#3b82f6'
+  },
+  {
+    icon: 'pi pi-box',
+    title: 'Single Binary Simplicity',
+    description: 'No Docker-compose hell, no database migrations, no microservices complexity:',
+    points: [
+      'One executable includes database, API, and UI (built on PocketBase)',
+      'SQLite embedded - no separate database server to manage',
+      'Deploy on bare metal, Docker, or Kubernetes as you prefer',
+      'Works on FreeBSD (preferred), Linux, Windows, and containers'
+    ],
+    color: '#8b5cf6'
+  },
+  {
+    icon: 'pi pi-lock',
+    title: 'Outbound-Only Security',
+    description: 'Devices connect outbound to your infrastructure - no open ports or port forwarding:',
+    points: [
+      'NATS connections initiated from device to server only',
+      'Nebula P2P mesh with automatic NAT traversal and hole punching',
+      'Devices invisible to port scanners and automated bot attacks',
+      'Identity-based firewall rules instead of fragile IP-based rules'
+    ],
+    color: '#10b981'
+  },
+  {
     icon: 'pi pi-code',
-    title: 'Open Source Transparency',
-    description: 'Built entirely on proven open source components with full transparency:',
+    title: 'Open Source & Commercial Support',
+    description: 'Transparent development with professional backing for production deployments:',
     points: [
-      'Core platform components under permissive licenses',
-      'Complete visibility into all system operations',
-      'Community-driven development and contributions',
-      'No vendor lock-in with extensible, standards-based architecture'
-    ]
-  },
-  {
-    icon: 'pi pi-shield',
-    title: 'Enterprise-Grade Security',
-    description: 'Built with security at its core using proven components:',
-    points: [
-      'TLS encryption for all NATS communications',
-      'Decentralized authentication via NATS operator/resolver',
-      'JWT-based device credentials with topic-level permissions',
-      'Secure device bootstrapping and credential management'
-    ]
-  },
-  {
-    icon: 'pi pi-server',
-    title: 'Flexible Deployment',
-    description: 'Choose the environment that works for your infrastructure:',
-    points: [
-      'FreeBSD preferred for optimal stability and performance',
-      'Full support for Linux distributions and container environments',
-      'Edge-based deployment with NATS leaf nodes for multi-site installations',
-      'Resilient to connectivity issues with comprehensive offline operation'
-    ]
-  },
-  {
-    icon: 'pi pi-dollar',
-    title: 'Commercial Support',
-    description: 'Production-ready platform with professional backing:',
-    points: [
-      'Free self-hosted community edition with full features',
-      'Tiered commercial support plans for enterprise deployments',
-      'Professional implementation and integration services',
-      'Training and certification programs for development teams'
-    ]
+      'Core platform under permissive open source licenses (MIT/Apache)',
+      'Full visibility into system operations - no proprietary black boxes',
+      'Community-driven development with public roadmap',
+      'Commercial support, training, and implementation services available'
+    ],
+    color: '#f59e0b'
   }
 ];
 </script>

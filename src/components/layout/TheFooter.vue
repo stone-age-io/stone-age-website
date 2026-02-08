@@ -5,7 +5,7 @@
         <div>
           <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
           <p class="text-gray-300">
-            An open source IoT platform for enterprise operations, built on proven components like NATS, Pocketbase, and TimescaleDB.
+            A single-binary platform that orchestrates NATS, Nebula, and PocketBase. Deploy private IoT infrastructure without vendor lock-in.
           </p>
         </div>
         <div>
@@ -50,11 +50,12 @@
 </template>
 
 <script setup>
-// Updated link data - changed "Technology" to "Architecture"
+// Footer navigation links
 const productLinks = [
-  { text: 'Features', href: '#features' },
-  { text: 'Benefits', href: '#benefits' },
-  { text: 'Architecture', href: '#architecture' }
+  { text: 'Three Pillars', href: '#key-features' },
+  { text: 'Architecture', href: '#architecture' },
+  { text: 'Observability', href: '#observability' },
+  { text: 'Benefits', href: '#benefits' }
 ];
 
 const resourceLinks = [
