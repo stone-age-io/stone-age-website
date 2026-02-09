@@ -30,23 +30,6 @@
     </div>
   </div>
 
-  <!-- Single Binary Callout -->
-  <div class="mt-12 max-w-4xl mx-auto">
-    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border-l-4 border-blue-500">
-      <div class="flex items-start">
-        <i class="pi pi-info-circle text-blue-500 text-2xl mr-4 mt-1 flex-shrink-0"></i>
-        <div>
-          <h4 class="text-lg font-semibold mb-2">Single Binary Simplicity</h4>
-          <p class="text-sm opacity-90">
-            The entire Stone-Age.io platform (database, identity, API, and embedded UI) is delivered as a 
-            <strong>single executable binary</strong> built on PocketBase. No Docker-compose complexity, 
-            no database migrations, and no "it works on my machine" deployment bugs. Just download and run.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Architecture Details -->
   <div id="arch-flow" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16 scroll-mt-20">
     <!-- Control Plane vs Data Plane -->
@@ -122,9 +105,9 @@
   <!-- Observability -->
   <div id="arch-observability" class="mt-16 max-w-5xl mx-auto scroll-mt-20">
     <div class="text-center mb-8">
-      <h3 class="text-2xl sm:text-3xl font-bold mb-4">Observability: "Bring Your Own"</h3>
+      <h3 class="text-2xl sm:text-3xl font-bold mb-4">Bring Your Own Observability</h3>
       <p class="text-lg opacity-75">
-        Platform focuses on live control. Use industry-leading TSDBs for historical data.
+        Stone-Age.io focuses on live control. Use industry-leading TSDBs for historical data.
       </p>
     </div>
 
@@ -303,7 +286,7 @@ const pillars = [
     icon: 'pi pi-share-alt',
     title: 'Messaging',
     subtitle: 'NATS.io',
-    description: 'High-performance, multi-tenant "Nervous System" for telemetry and commands. Handles pub/sub, streaming, and key-value storage.',
+    description: 'High-performance, multi-tenant messaging backbone for telemetry and commands. Handles pub/sub, streaming persistence, and key-value storage.',
     features: [
       'Core pub/sub messaging',
       'JetStream for persistence',
@@ -316,7 +299,7 @@ const pillars = [
     icon: 'pi pi-shield',
     title: 'Connectivity',
     subtitle: 'Nebula',
-    description: 'Peer-to-peer mesh VPN providing secure, encrypted tunnels to the extreme edge. No open ports required.',
+    description: 'Peer-to-peer mesh VPN providing secure overlay networks, and  encrypted tunnels to the extreme edge. No open ports required.',
     features: [
       'P2P mesh networking',
       'NAT traversal & hole punching',
@@ -368,6 +351,11 @@ const capabilities = [
     description: 'Cryptographic isolation per organization with dedicated NATS Accounts.'
   },
   {
+    icon: 'pi pi-lock',
+    title: 'Zero Trust Security',
+    description: 'JWT-based auth with subject-level permissions. Outbound-only connections.'
+  },  
+  {
     icon: 'pi pi-bolt',
     title: 'Rule-Router',
     description: 'YAML-based automation processing thousands of messages per second.'
@@ -381,11 +369,6 @@ const capabilities = [
     icon: 'pi pi-cog',
     title: 'Edge Agent',
     description: 'Lightweight Go binary for Linux, Windows, FreeBSD management.'
-  },
-  {
-    icon: 'pi pi-lock',
-    title: 'Zero Trust Security',
-    description: 'JWT-based auth with topic-level permissions. Outbound-only connections.'
   }
 ];
 </script>

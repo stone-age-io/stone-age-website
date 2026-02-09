@@ -1,7 +1,7 @@
 <template>
   <section id="observability" class="section dark-section" style="background-color: #1a1d36; color: white;">
     <div class="container">
-      <h2 class="section-title text-center text-white">Observability: The "Bring Your Own" Philosophy</h2>
+      <h2 class="section-title text-center text-white">Bring Your Own Observability</h2>
       <p class="section-subtitle text-center text-gray-300">
         Stone-Age.io focuses on live state and control. For historical data, use industry-leading time-series databases.
       </p>

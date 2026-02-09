@@ -83,7 +83,7 @@ const benefits = [
     title: 'Open Source & Commercial Support',
     description: 'Transparent development with professional backing for production:',
     points: [
-      'Core platform under permissive licenses (MIT/Apache)',
+      'Core platform under permissive licenses',
       'Full visibility into all system operations',
       'Commercial support and training available'
     ],
