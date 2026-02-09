@@ -6,101 +6,75 @@
         Stone-Age.io orchestrates three industry-leading technologies into a unified, single-binary platform
       </p>
 
-  <!-- The Three Pillars -->
-  <div id="arch-pillars" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-16 scroll-mt-20">
-    <div v-for="(pillar, index) in pillars" :key="`pillar-${index}`" class="tech-card">
-      <div class="tech-card-header">
-        <div class="flex items-center justify-center mb-4">
-          <div class="rounded-full p-4 text-white" :style="{ backgroundColor: pillar.color }">
-            <i :class="pillar.icon" class="text-3xl"></i>
+   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 md:mt-16">
+        <!-- Core Components Card -->
+        <div class="tech-card">
+          <div class="tech-card-header">
+            <h3 class="text-xl font-semibold">Core Components</h3>
           </div>
-        </div>
-        <h3 class="text-2xl font-bold text-center">{{ pillar.title }}</h3>
-        <p class="text-center text-sm mt-2 opacity-75">{{ pillar.subtitle }}</p>
-      </div>
-      <div class="tech-card-body">
-        <p class="mb-4">{{ pillar.description }}</p>
-        <ul class="space-y-2 text-sm">
-          <li v-for="(feature, fIndex) in pillar.features" :key="`feature-${index}-${fIndex}`" class="flex items-start">
-            <i class="pi pi-check text-green-500 mr-2 mt-1 flex-shrink-0"></i>
-            <span>{{ feature }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Architecture Details -->
-  <div id="arch-flow" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16 scroll-mt-20">
-    <!-- Control Plane vs Data Plane -->
-    <div class="tech-card dark-card">
-      <div class="tech-card-header dark-card-header">
-        <h3 class="text-xl font-semibold">Control Plane vs Data Plane</h3>
-      </div>
-      <div class="tech-card-body dark-card-body">
-        <div class="space-y-6">
-          <div v-for="(component, index) in coreComponents" :key="`component-${index}`" class="feature-item">
-            <div class="feature-icon" :style="{ backgroundColor: component.color }">
-              <i :class="component.icon" class="text-white"></i>
-            </div>
-            <div class="feature-content">
-              <h4 class="feature-title">{{ component.title }}</h4>
-              <p class="feature-description">{{ component.description }}</p>
+          <div class="tech-card-body">
+            <div class="space-y-6">
+              <div v-for="(component, index) in coreComponents" :key="`component-${index}`" class="feature-item">
+                <div class="feature-icon" :style="{ backgroundColor: component.color }">
+                  <i :class="component.icon" class="text-white"></i>
+                </div>
+                <div class="feature-content">
+                  <h4 class="feature-title text-gray-900 dark:text-white">{{ component.title }}</h4>
+                  <p class="feature-description text-gray-600 dark:text-gray-300">{{ component.description }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Data Flow -->
-    <div class="tech-card dark-card">
-      <div class="tech-card-header dark-card-header">
-        <h3 class="text-xl font-semibold">Data Flow Architecture</h3>
-      </div>
-      <div class="tech-card-body dark-card-body">
-        <div class="h-full flex flex-col justify-between p-4 rounded-lg font-mono text-sm leading-relaxed" 
-             style="background-color: #131631; color: #f8f8f2;">
-          <div class="space-y-4">
-            <div>
-              <div class="text-blue-300 font-semibold">Device Registration</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (PocketBase Control Plane)</div>
-            </div>
-            <div>
-              <div class="text-green-300 font-semibold">Bootstrap & Credentials</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (.creds files, NATS JWT, Nebula cert)</div>
-            </div>
-            <div>
-              <div class="text-yellow-300 font-semibold">NATS Cluster Connection</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (pub/sub to isolated Account)</div>
-            </div>
-            <div>
-              <div class="text-purple-300 font-semibold">Edge Processing</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (Leaf Nodes, Rule-Router)</div>
-            </div>
-            <div>
-              <div class="text-pink-300 font-semibold">Digital Twin Update</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (NATS KV for live state)</div>
-            </div>
-            <div>
-              <div class="text-orange-300 font-semibold">Historical Storage</div>
-              <div class="text-gray-400 text-xs ml-4">↓ (Telegraf → TSDB of choice)</div>
-            </div>
+        
+        <!-- Architecture Flow Card -->
+        <div class="tech-card">
+          <div class="tech-card-header">
+            <h3 class="text-xl font-semibold">Data Flow Architecture</h3>
           </div>
-          
-          <div class="space-y-3 mt-6 pt-4 border-t border-gray-600">
-            <div>
-              <div class="text-cyan-300 font-semibold">Multi-Tenant Security:</div>
-              <div class="text-gray-300 text-xs">Each Org → NATS Account + Nebula CA</div>
-            </div>
-            <div>
-              <div class="text-red-300 font-semibold">Edge Resilience:</div>
-              <div class="text-gray-300 text-xs">Leaf Node Cache → Local Rules → Auto Sync</div>
+          <div class="tech-card-body">
+            <div class="h-full flex flex-col justify-between p-4 rounded-lg font-mono text-sm leading-relaxed data-flow-card">
+              <div class="space-y-4">
+                <div>
+                  <div class="data-flow-title data-flow-blue">Device Registration</div>
+                  <div class="data-flow-subtitle">↓ (PocketBase Control Plane)</div>
+                </div>
+                <div>
+                  <div class="data-flow-title data-flow-green">Bootstrap & Credentials</div>
+                  <div class="data-flow-subtitle">↓ (.creds files, NATS JWT, Nebula cert)</div>
+                </div>
+                <div>
+                  <div class="data-flow-title data-flow-yellow">NATS Cluster Connection</div>
+                  <div class="data-flow-subtitle">↓ (pub/sub to isolated Account)</div>
+                </div>
+                <div>
+                  <div class="data-flow-title data-flow-purple">Edge Processing</div>
+                  <div class="data-flow-subtitle">↓ (Leaf Nodes, Rule-Router)</div>
+                </div>
+                <div>
+                  <div class="data-flow-title data-flow-pink">Digital Twin Update</div>
+                  <div class="data-flow-subtitle">↓ (NATS KV for live state)</div>
+                </div>
+                <div>
+                  <div class="data-flow-title data-flow-orange">Historical Storage</div>
+                  <div class="data-flow-subtitle">↓ (Telegraf → TSDB of choice)</div>
+                </div>
+              </div>
+              
+              <div class="space-y-3 mt-6 pt-4 data-flow-footer">
+                <div>
+                  <div class="data-flow-highlight data-flow-cyan">Multi-Tenant Security:</div>
+                  <div class="data-flow-text">Each Org → NATS Account + Nebula CA</div>
+                </div>
+                <div>
+                  <div class="data-flow-highlight data-flow-red">Edge Resilience:</div>
+                  <div class="data-flow-text">Leaf Node Cache → Local Rules → Auto Sync</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- Observability -->
   <div id="arch-observability" class="mt-16 max-w-5xl mx-auto scroll-mt-20">
@@ -374,30 +348,6 @@ const capabilities = [
 </script>
 
 <style scoped>
-/* Dark card styling for technical sections */
-.dark-card {
-  background-color: #1a1d36;
-  color: #e5e7eb;
-}
-
-.dark .dark-card {
-  background-color: #131631;
-}
-
-.dark-card-header {
-  background-color: #131631;
-  border-color: rgba(75, 85, 99, 0.4);
-  color: #f9fafb;
-}
-
-.dark .dark-card-header {
-  background-color: #0d1117;
-}
-
-.dark-card-body {
-  color: #e5e7eb;
-}
-
 /* Modern Radio Network Card Styling */
 .radio-network-card {
   background: linear-gradient(to right, rgb(191, 219, 254), rgb(233, 213, 255));
@@ -415,5 +365,81 @@ const capabilities = [
 
 .dark .icon-box {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Data Flow Card Styling */
+.data-flow-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.dark .data-flow-card {
+  background-color: #131631;
+  border-color: #1e293b;
+}
+
+.data-flow-title {
+  font-weight: 600;
+}
+
+/* Light mode colors - vibrant but readable */
+.data-flow-blue { color: #1e40af; }
+.dark .data-flow-blue { color: #93c5fd; }
+
+.data-flow-green { color: #15803d; }
+.dark .data-flow-green { color: #86efac; }
+
+.data-flow-yellow { color: #ca8a04; }
+.dark .data-flow-yellow { color: #fde047; }
+
+.data-flow-purple { color: #7e22ce; }
+.dark .data-flow-purple { color: #d8b4fe; }
+
+.data-flow-pink { color: #be185d; }
+.dark .data-flow-pink { color: #f9a8d4; }
+
+.data-flow-orange { color: #c2410c; }
+.dark .data-flow-orange { color: #fdba74; }
+
+.data-flow-cyan { color: #0891b2; }
+.dark .data-flow-cyan { color: #67e8f9; }
+
+.data-flow-red { color: #b91c1c; }
+.dark .data-flow-red { color: #fca5a5; }
+
+.data-flow-subtitle {
+  font-size: 0.75rem;
+  margin-left: 1rem;
+  color: #64748b;
+}
+
+.dark .data-flow-subtitle {
+  color: #94a3b8;
+}
+
+.data-flow-footer {
+  border-top: 1px solid #e2e8f0;
+}
+
+.dark .data-flow-footer {
+  border-top-color: #334155;
+}
+
+.data-flow-highlight {
+  font-weight: 600;
+  color: #0891b2;
+}
+
+.dark .data-flow-highlight {
+  color: #67e8f9;
+}
+
+.data-flow-text {
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.dark .data-flow-text {
+  color: #cbd5e1;
 }
 </style>
