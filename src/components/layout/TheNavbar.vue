@@ -160,7 +160,6 @@ const regularNavItems = [
 // Architecture subsection items
 const archSubItems = [
   { id: 'architecture', label: 'Overview', icon: 'pi-sitemap' },
-  { id: 'arch-flow', label: 'Data Flow', icon: 'pi-arrow-right' },
   { id: 'arch-observability', label: 'Observability', icon: 'pi-chart-line' },
   { id: 'arch-capabilities', label: 'Capabilities', icon: 'pi-check-circle' }
 ];

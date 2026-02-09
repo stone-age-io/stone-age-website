@@ -5,8 +5,31 @@
       <p class="section-subtitle text-center">
         Stone-Age.io orchestrates three industry-leading technologies into a unified, single-binary platform
       </p>
-
-   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 md:mt-16">
+        <!-- The Three Pillars -->
+         <div id="arch-pillars" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 md:mt-16 scroll-mt-20">
+           <div v-for="(pillar, index) in pillars" :key="`pillar-${index}`" class="tech-card">
+             <div class="tech-card-header">
+               <div class="flex items-center justify-center mb-4">
+                 <div class="rounded-full p-4 text-white" :style="{ backgroundColor: pillar.color }">
+                   <i :class="pillar.icon" class="text-3xl"></i>
+                 </div>
+               </div>
+               <h3 class="text-2xl font-bold text-center">{{ pillar.title }}</h3>
+               <p class="text-center text-sm mt-2 opacity-75">{{ pillar.subtitle }}</p>
+             </div>
+             <div class="tech-card-body">
+               <p class="mb-4">{{ pillar.description }}</p>
+               <ul class="space-y-2 text-sm">
+                 <li v-for="(feature, fIndex) in pillar.features" :key="`feature-${index}-${fIndex}`" class="flex items-start">
+                   <i class="pi pi-check text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                   <span>{{ feature }}</span>
+                 </li>
+               </ul>
+             </div>
+           </div>
+         </div>
+   
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 md:mt-16">
         <!-- Core Components Card -->
         <div class="tech-card">
           <div class="tech-card-header">
