@@ -52,10 +52,9 @@
 <script setup>
 // Footer navigation links
 const productLinks = [
-  { text: 'Three Pillars', href: '#key-features' },
   { text: 'Architecture', href: '#architecture' },
-  { text: 'Observability', href: '#observability' },
-  { text: 'Benefits', href: '#benefits' }
+  { text: 'Benefits', href: '#benefits' },
+  { text: 'Pricing', href: '#cta' }
 ];
 
 const resourceLinks = [

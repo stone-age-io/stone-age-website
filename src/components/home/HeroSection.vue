@@ -9,7 +9,7 @@
     <div class="container relative z-10">
       <div class="max-w-3xl">
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-white">
-         Your IoT Control Plane Made Simple.          
+         Your IoT Infrastructure Made Simple.          
         </h1>
         <p class="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-100">
           A single-binary platform that orchestrates NATS, Nebula, and PocketBase. 
