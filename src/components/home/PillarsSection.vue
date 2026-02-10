@@ -6,7 +6,7 @@
       <div class="text-center mb-12 md:mb-16">
         <h2 class="section-title">The Modern Radio Network</h2>
         <p class="section-subtitle">
-          Think of Stone-Age.io like a digital radio network. You build the towers, 
+          Think of a digital radio network. You build the towers, 
           assign private channels to each organization, and hand out radios to utilize 
 	  the infrastructure. 
           Stone-Age.io applies this concept as a modern IoT Framework or Event-Driven Architecture .
