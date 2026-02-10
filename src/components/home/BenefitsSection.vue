@@ -3,8 +3,8 @@
     <div class="container">
       <h2 class="section-title text-center">Why Choose Stone-Age.io?</h2>
       <p class="section-subtitle text-center">
-        Built for MSPs and System Integrators who deploy infrastructure for their customers — 
-        not for hobbyists running a single Raspberry Pi.
+        Built for MSPs and System Integrators who deploy infrastructure for their customers,  
+         or even hobbyists who self-host running a single Raspberry Pi.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-12 md:mt-16">
@@ -55,9 +55,9 @@ const benefits = [
     title: 'Hundreds of Customers, One Deployment',
     description: 'Multi-tenancy is infrastructure-enforced, not just a database filter:',
     points: [
-      'Each organization gets its own NATS Account with cryptographic isolation — a compromised device in Org A has zero path to Org B',
+      'Each organization gets its own NATS Account with cryptographic isolation. A compromised device in Org A has zero path to Org B',
       'Dedicated Nebula Certificate Authority per org for network-level separation',
-      'White-label ready — your brand, your domains, your customer-facing experience'
+      'White-label ready. Customize to your brand, your domains, your identity'
     ],
     color: '#3b82f6'
   },
@@ -66,8 +66,8 @@ const benefits = [
     title: 'Deploy in Minutes, Not Weeks',
     description: 'No microservices to orchestrate. No database servers to maintain:',
     points: [
-      'Single binary includes database, API, and UI — just download and run',
-      'SQLite embedded — no PostgreSQL, no Redis, no connection strings',
+      'Single binary includes database, API, and UI. Just download and run',
+      'SQLite embedded. No PostgreSQL, no Redis, no connection strings',
       'Works on FreeBSD, Linux, Windows. Bare metal, Docker, or VMs.'
     ],
     color: '#8b5cf6'
@@ -79,7 +79,7 @@ const benefits = [
     points: [
       'NATS and Nebula initiate all connections outbound from the device',
       'Automatic NAT traversal handles LTE, 5G, satellite, and restrictive corporate networks',
-      'Identity-based firewall rules — "admins can SSH to gateways, sensors can only talk to gateways"'
+      'Identity-based firewall rules: "admins can SSH to gateways, sensors can only talk to gateways"'
     ],
     color: '#10b981'
   },
@@ -88,9 +88,9 @@ const benefits = [
     title: 'Sites Keep Running When Internet Fails',
     description: 'Leaf Nodes provide true local autonomy, not just a "retry later" queue:',
     points: [
-      'Local NATS cluster at each site — devices keep communicating during outages',
+      'Local NATS server or cluster at each site so things keep communicating during outages',
       'Edge Rule-Router instances process alerts locally with zero cloud dependency',
-      'Automatic sync when connectivity restores — no data gaps, no manual intervention'
+      'Automatic sync when connectivity restores. No data gaps, no manual intervention'
     ],
     color: '#f59e0b'
   }
