@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="section-title text-center">How It All Fits Together</h2>
       <p class="section-subtitle text-center">
-        From device registration to historical analytics — follow the data through the platform
+        From device registration to historical analytics, follow the data through the platform
       </p>
 
       <!-- Phases -->
@@ -100,7 +100,7 @@
 const phases = [
   {
     title: 'Connect',
-    subtitle: 'Get devices online with zero-touch provisioning',
+    subtitle: 'Get things online with one-touch provisioning',
     color: '#3b82f6',
     steps: [
       {
@@ -108,12 +108,12 @@ const phases = [
         tag: 'Control Plane',
         color: '#3b82f6',
         description: 'Create a Thing in the console. PocketBase generates credentials. The Thing can then fetch its NATS .creds and/or Nebula certificate via the REST API.',
-        highlight: 'Zero-touch provisioning'
+        highlight: 'One-touch provisioning'
       },
       {
         title: 'Connect & Publish',
         tag: 'Data Plane',
-        color: '#8b5cf6',
+		color: '#8b5cf6',
         description: 'Things connect outbound to NATS. Telemetry publishes to subject-namespaced topics with per-user JWT permissions enforcing what each thing or user can see and do.',
         highlight: 'Native MQTT support via NATS JetStream'
       },
@@ -121,7 +121,7 @@ const phases = [
         title: 'Edge Autonomy',
         tag: 'Leaf Nodes',
         color: '#10b981',
-        description: 'Deploy NATS Leaf Nodes at customer sites. Things keep communicating during internet outages. Data syncs automatically when connectivity returns.',
+        description: 'Deploy NATS Leaf Nodes at the extreme edge. Things keep communicating during internet outages. Data syncs automatically when connectivity returns.',
         highlight: 'Runs on cellular routers and gateways'
       }
     ]

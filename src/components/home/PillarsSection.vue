@@ -9,7 +9,7 @@
           Think of a digital radio network. You build the towers, 
           assign private channels to each organization, and hand out radios to utilize 
 	  the infrastructure. 
-          Stone-Age.io applies this concept as a modern IoT Framework or Event-Driven Architecture .
+          Stone-Age.io applies this concept to modern Event-Driven Architecture.
         </p>
       </div>
 
@@ -26,10 +26,10 @@
       <!-- Three Pillars -->
       <div class="text-center mb-10">
         <h3 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
-          Three Pillars, One Binary
+          Three Pillars, One Cohesive Framework 
         </h3>
         <p class="text-lg max-w-3xl mx-auto" :style="{ color: 'var(--color-content-secondary)' }">
-          The management platform (database, identity, API, and UI) ships as a single executable
+          The Platform (database, identity, API, and UI) ships as a single executable control plane for PocketBase, NATS and Nebula.
         </p>
       </div>
 
@@ -111,7 +111,7 @@ const pillars = [
     icon: 'pi pi-database',
     title: 'Management',
     subtitle: 'PocketBase',
-    description: 'A monolithic backend providing Identity, Inventory, and an embedded UI. The single-binary foundation that orchestrates everything.',
+    description: 'A control plane providing Identity, Inventory, and an embedded UI. The single-binary foundation that orchestrates everything.',
     features: [
       'User & device identity management',
       'Organization & location hierarchy',

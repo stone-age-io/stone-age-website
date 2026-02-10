@@ -12,9 +12,9 @@
          Your IoT Infrastructure Made Simple.          
         </h1>
         <p class="text-lg sm:text-xl mb-6 sm:mb-8 text-gray-100">
-          A single-binary platform that orchestrates NATS, Nebula, and PocketBase. 
-          Deploy private IoT infrastructure without vendor lock-in.
-        </p>
+        A composable IoT framework built on single-binary simplicity.
+	Orchestrate NATS, Nebula, and PocketBase without the complexity or cloud lock-in.
+	</p>
         <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
           <button 
             @click="scrollToSection('cta')" 

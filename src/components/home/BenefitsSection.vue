@@ -63,18 +63,18 @@ const benefits = [
   },
   {
     icon: 'pi pi-box',
-    title: 'Deploy in Minutes, Not Weeks',
-    description: 'No microservices to orchestrate. No database servers to maintain:',
+    title: 'The Unix Philosophy for IoT',
+    description: 'Every component used in the stack ships as a lightweight, static binary:',
     points: [
-      'Single binary includes database, API, and UI. Just download and run',
-      'SQLite embedded. No PostgreSQL, no Redis, no connection strings',
-      'Works on FreeBSD, Linux, Windows. Bare metal, Docker, or VMs.'
+      'Run the Platform, NATS, and the Agent directly on bare metal, VMs, or existing industrial routers.',
+      'Use the built-in SQLite for the control plane, and easily pipe telemetry to other single-binary tools like VictoriaMetrics for history.',
+      'Works on FreeBSD, Linux, Windows. If you can copy a file, you can deploy this stack'
     ],
     color: '#8b5cf6'
   },
   {
     icon: 'pi pi-lock',
-    title: 'Devices Connect Out, Attackers Stay Out',
+    title: 'Things Connect Out, Attackers Stay Out',
     description: 'No open ports on your edge network. No port forwarding conversations with IT:',
     points: [
       'NATS and Nebula initiate all connections outbound from the device',
