@@ -11,7 +11,7 @@
         <button
           v-for="(tab, index) in tabs"
           :key="`tab-${index}`"
-          @click="activeTab = index"
+          @click="switchTab(index)"
           class="tab-button"
           :class="{ 'tab-button-active': activeTab === index }"
           :aria-label="`View ${tab.label} screenshot`"
@@ -38,20 +38,31 @@
             </div>
           </div>
 
-          <!-- Screenshot image area -->
+          <!-- Screenshot viewport — fixed aspect ratio prevents layout shift -->
           <div class="screenshot-viewport" @click="openLightbox">
-            <transition name="screenshot-fade" mode="out-in">
-              <div :key="activeTab" class="screenshot-content">
-                  <img
-                    :src="tabs[activeTab].image"
-                    :alt="tabs[activeTab].alt"
-                    class="w-full h-auto"
-                    loading="lazy"
-                  />
-              </div>
-            </transition>
+            <!-- Skeleton loader shown until image is ready -->
+            <div v-if="!loadedTabs[activeTab]" class="screenshot-skeleton">
+              <div class="skeleton-shimmer"></div>
+            </div>
 
-            <!-- Tap to expand hint -->
+            <!-- Crossfade: render all visited tabs, show only active -->
+            <div
+              v-for="(tab, index) in tabs"
+              :key="`img-${index}`"
+              class="screenshot-layer"
+              :class="{ 'screenshot-layer-active': activeTab === index && loadedTabs[index] }"
+            >
+              <img
+                v-if="visitedTabs[index]"
+                :src="tab.image"
+                :alt="tab.alt"
+                class="w-full h-auto"
+                loading="lazy"
+                @load="onImageLoad(index)"
+              />
+            </div>
+
+            <!-- Expand hint -->
             <div class="expand-hint">
               <i class="pi pi-expand text-xs mr-1"></i>
               <span>Tap to expand</span>
@@ -81,7 +92,6 @@
         aria-modal="true"
         aria-label="Expanded screenshot view"
       >
-        <!-- Close button -->
         <button
           class="lightbox-close"
           @click.stop="closeLightbox"
@@ -90,7 +100,6 @@
           <i class="pi pi-times"></i>
         </button>
 
-        <!-- Navigation arrows -->
         <button
           v-if="tabs.length > 1"
           class="lightbox-nav lightbox-nav-prev"
@@ -109,33 +118,39 @@
           <i class="pi pi-chevron-right"></i>
         </button>
 
-        <!-- Expanded image -->
+        <!-- Lightbox image — same crossfade pattern -->
         <div class="lightbox-content" @click.stop>
           <div class="lightbox-image-container">
+            <div
+              v-for="(tab, index) in tabs"
+              :key="`lb-${index}`"
+              class="lightbox-layer"
+              :class="{ 'lightbox-layer-active': activeTab === index && loadedTabs[index] }"
+            >
               <img
-                :src="tabs[activeTab].image"
-                :alt="tabs[activeTab].alt"
+                v-if="visitedTabs[index]"
+                :src="tab.image"
+                :alt="tab.alt"
                 class="lightbox-image"
               />
-            <div class="screenshot-placeholder lightbox-placeholder">
-              <i :class="`pi ${tabs[activeTab].icon}`" class="text-6xl mb-4 opacity-30"></i>
-              <p class="text-xl font-medium opacity-40">{{ tabs[activeTab].label }}</p>
+            </div>
+            <!-- Lightbox skeleton -->
+            <div v-if="!loadedTabs[activeTab]" class="lightbox-skeleton">
+              <div class="skeleton-shimmer"></div>
             </div>
           </div>
 
-          <!-- Caption -->
           <div class="lightbox-caption">
             <h3 class="text-lg font-semibold text-white">{{ tabs[activeTab].title }}</h3>
             <p class="text-sm text-gray-300 mt-1">{{ tabs[activeTab].description }}</p>
           </div>
         </div>
 
-        <!-- Dot indicators -->
         <div class="lightbox-dots">
           <button
             v-for="(tab, index) in tabs"
             :key="`dot-${index}`"
-            @click.stop="activeTab = index"
+            @click.stop="switchTab(index)"
             class="lightbox-dot"
             :class="{ 'lightbox-dot-active': activeTab === index }"
             :aria-label="`View ${tab.label}`"
@@ -147,20 +162,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
 
 /**
  * Screenshot Tour component
- * Tabbed screenshot viewer with browser chrome frame and fullscreen lightbox.
  *
- * To add real screenshots:
- * 1. Capture at 1280x800 (or 2560x1600 for retina)
- * 2. Save to /public/images/screenshots/
- * 3. Uncomment the <img> tags and remove the placeholder divs
+ * Performance optimizations:
+ * - Fixed aspect-ratio container prevents layout shift
+ * - Crossfade (no out-in) avoids blank frames between tabs
+ * - Skeleton shimmer while images load
+ * - Adjacent tab preloading via Image() constructor
+ * - Images only mount in DOM once their tab has been visited
  */
 
 const activeTab = ref(0);
 const lightboxOpen = ref(false);
+
+// Track which tabs have been visited (triggers DOM mount of <img>)
+const visitedTabs = reactive({});
+// Track which images have fully loaded (triggers fade-in)
+const loadedTabs = reactive({});
 
 const tabs = [
   {
@@ -210,29 +231,57 @@ const tabs = [
   }
 ];
 
-/** Open lightbox */
+/**
+ * Switch to a tab and preload its neighbors
+ */
+const switchTab = (index) => {
+  activeTab.value = index;
+  visitedTabs[index] = true;
+  preloadNeighbors(index);
+};
+
+/**
+ * Called when an image finishes loading
+ */
+const onImageLoad = (index) => {
+  loadedTabs[index] = true;
+};
+
+/**
+ * Preload adjacent tab images in the background
+ */
+const preloadNeighbors = (index) => {
+  const neighbors = [index - 1, index + 1];
+  neighbors.forEach((n) => {
+    if (n >= 0 && n < tabs.length && !visitedTabs[n]) {
+      visitedTabs[n] = true;
+      // Also prefetch via Image() for browser cache
+      const img = new Image();
+      img.src = tabs[n].image;
+    }
+  });
+};
+
 const openLightbox = () => {
   lightboxOpen.value = true;
   document.body.style.overflow = 'hidden';
 };
 
-/** Close lightbox */
 const closeLightbox = () => {
   lightboxOpen.value = false;
   document.body.style.overflow = '';
 };
 
-/** Navigate to previous tab */
 const prevTab = () => {
-  activeTab.value = activeTab.value === 0 ? tabs.length - 1 : activeTab.value - 1;
+  const idx = activeTab.value === 0 ? tabs.length - 1 : activeTab.value - 1;
+  switchTab(idx);
 };
 
-/** Navigate to next tab */
 const nextTab = () => {
-  activeTab.value = activeTab.value === tabs.length - 1 ? 0 : activeTab.value + 1;
+  const idx = activeTab.value === tabs.length - 1 ? 0 : activeTab.value + 1;
+  switchTab(idx);
 };
 
-/** Handle keyboard navigation in lightbox */
 const handleKeydown = (e) => {
   if (!lightboxOpen.value) return;
   if (e.key === 'Escape') closeLightbox();
@@ -240,7 +289,12 @@ const handleKeydown = (e) => {
   if (e.key === 'ArrowRight') nextTab();
 };
 
-onMounted(() => document.addEventListener('keydown', handleKeydown));
+onMounted(() => {
+  // Mark first tab as visited and start preloading
+  switchTab(0);
+  document.addEventListener('keydown', handleKeydown);
+});
+
 onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown);
   document.body.style.overflow = '';
@@ -248,7 +302,9 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-/* Tab button styling */
+/* ==============================
+   Tab buttons
+   ============================== */
 .tab-button {
   @apply inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-sm font-medium transition-all;
   color: var(--color-content-secondary);
@@ -272,14 +328,15 @@ onBeforeUnmount(() => {
   background-color: var(--color-primary-800);
 }
 
-/* Browser frame */
+/* ==============================
+   Browser frame
+   ============================== */
 .screenshot-frame {
   @apply rounded-lg overflow-hidden;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--color-border-primary);
 }
 
-/* Chrome bar — compact on mobile */
 .screenshot-chrome {
   @apply flex items-center gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5;
   background-color: #1f2937;
@@ -289,7 +346,6 @@ onBeforeUnmount(() => {
   background-color: #111827;
 }
 
-/* Hide traffic light dots on very small screens */
 .chrome-dots {
   @apply hidden sm:flex items-center gap-1.5 flex-shrink-0;
 }
@@ -298,7 +354,6 @@ onBeforeUnmount(() => {
   @apply w-2.5 h-2.5 rounded-full;
 }
 
-/* URL bar — always truncate, never wrap */
 .chrome-url {
   @apply flex items-center text-gray-400 rounded px-2.5 py-1 min-w-0 flex-1;
   font-size: 0.6875rem;
@@ -309,24 +364,67 @@ onBeforeUnmount(() => {
   @apply truncate;
 }
 
-/* Screenshot viewport */
+/* ==============================
+   Screenshot viewport
+   ============================== */
 .screenshot-viewport {
   @apply relative overflow-hidden cursor-pointer;
-  background-color: var(--color-surface-primary);
+  background-color: #0f172a;
+  /* Fixed aspect ratio prevents layout shift */
+  aspect-ratio: 16 / 8;
 }
 
-.screenshot-content {
-  @apply w-full;
+/* ==============================
+   Crossfade layers — all stacked, only active is visible
+   ============================== */
+.screenshot-layer {
+  @apply absolute inset-0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.screenshot-content img {
-  @apply block w-full h-auto;
-  object-fit: contain;
+.screenshot-layer-active {
+  opacity: 1;
 }
 
-/* Expand hint — visible on hover/touch devices */
+.screenshot-layer img {
+  @apply block w-full h-full object-contain;
+}
+
+/* ==============================
+   Skeleton loader
+   ============================== */
+.screenshot-skeleton {
+  @apply absolute inset-0 overflow-hidden;
+  background-color: #1e293b;
+}
+
+.lightbox-skeleton {
+  @apply absolute inset-0 overflow-hidden rounded-lg;
+  background-color: #1e293b;
+}
+
+.skeleton-shimmer {
+  @apply absolute inset-0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ==============================
+   Expand hint
+   ============================== */
 .expand-hint {
-  @apply absolute bottom-2 right-2 flex items-center px-2 py-1 rounded text-white text-xs opacity-0 transition-opacity pointer-events-none;
+  @apply absolute bottom-2 right-2 flex items-center px-2 py-1 rounded text-white text-xs opacity-0 transition-opacity pointer-events-none z-10;
   background-color: rgba(0, 0, 0, 0.6);
   font-size: 0.625rem;
 }
@@ -335,33 +433,14 @@ onBeforeUnmount(() => {
   opacity: 1;
 }
 
-/* Always show on touch devices (no hover) */
 @media (hover: none) {
   .expand-hint {
     opacity: 0.7;
   }
 }
 
-/* Placeholder styling — remove when real screenshots are added */
-.screenshot-placeholder {
-  @apply flex flex-col items-center justify-center;
-  color: var(--color-content-secondary);
-  aspect-ratio: 16 / 10;
-}
-
-/* Fade transition between screenshots */
-.screenshot-fade-enter-active,
-.screenshot-fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.screenshot-fade-enter-from,
-.screenshot-fade-leave-to {
-  opacity: 0;
-}
-
 /* ==============================
-   Lightbox overlay
+   Lightbox
    ============================== */
 .lightbox-overlay {
   @apply fixed inset-0 z-50 flex flex-col items-center justify-center;
@@ -369,7 +448,6 @@ onBeforeUnmount(() => {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
-/* Close button */
 .lightbox-close {
   @apply absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full text-white transition-colors;
   background-color: rgba(255, 255, 255, 0.15);
@@ -379,7 +457,6 @@ onBeforeUnmount(() => {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Navigation arrows */
 .lightbox-nav {
   @apply absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full text-white transition-colors;
   background-color: rgba(255, 255, 255, 0.1);
@@ -397,37 +474,38 @@ onBeforeUnmount(() => {
   @apply right-1 sm:right-2;
 }
 
-/* Image container — fill viewport with minimal gutters */
 .lightbox-content {
   @apply flex flex-col items-center w-full px-3 sm:px-6;
   max-height: calc(100vh - 80px);
 }
 
 .lightbox-image-container {
-  @apply w-full overflow-hidden rounded-lg;
+  @apply w-full overflow-hidden rounded-lg relative;
+  /* Same fixed aspect ratio as inline viewport */
+  aspect-ratio: 16 / 8;
   max-height: calc(100vh - 140px);
+  background-color: #0f172a;
 }
 
-.lightbox-image-container img {
+/* Lightbox crossfade layers */
+.lightbox-layer {
+  @apply absolute inset-0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-layer-active {
+  opacity: 1;
+}
+
+.lightbox-image {
   @apply block w-full h-full object-contain;
 }
 
-.lightbox-image-container .lightbox-placeholder {
-  @apply w-full h-auto;
-}
-
-.lightbox-placeholder {
-  @apply rounded-lg;
-  background-color: #1f2937;
-  aspect-ratio: 16 / 10;
-}
-
-/* Caption below image */
 .lightbox-caption {
   @apply text-center mt-3 px-4;
 }
 
-/* Dot indicators at bottom */
 .lightbox-dots {
   @apply absolute bottom-4 sm:bottom-6 flex items-center gap-2;
 }
@@ -447,7 +525,6 @@ onBeforeUnmount(() => {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-/* Lightbox fade transition */
 .lightbox-fade-enter-active,
 .lightbox-fade-leave-active {
   transition: opacity 0.25s ease;
