@@ -5,15 +5,18 @@
         <div>
           <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
           <p class="text-gray-300">
-            A single-binary platform that orchestrates NATS, Nebula, and PocketBase. Deploy private IoT infrastructure without vendor lock-in.
+            A single-binary platform that orchestrates NATS, Nebula, and PocketBase. 
+            Deploy private IoT infrastructure without vendor lock-in.
           </p>
         </div>
         <div>
           <h4 class="text-lg font-semibold mb-4">Product</h4>
           <ul class="space-y-3">
             <li v-for="(link, index) in productLinks" :key="`product-${index}`">
-              <a :href="link.href" 
-                 class="text-gray-300 hover:text-white transition-colors block py-1">
+              <a
+                :href="link.href"
+                class="text-gray-300 hover:text-white transition-colors block py-1"
+              >
                 {{ link.text }}
               </a>
             </li>
@@ -23,8 +26,10 @@
           <h4 class="text-lg font-semibold mb-4">Resources</h4>
           <ul class="space-y-3">
             <li v-for="(link, index) in resourceLinks" :key="`resource-${index}`">
-              <a :href="link.href" 
-                 class="text-gray-300 hover:text-white transition-colors block py-1">
+              <a
+                :href="link.href"
+                class="text-gray-300 hover:text-white transition-colors block py-1"
+              >
                 {{ link.text }}
               </a>
             </li>
@@ -34,8 +39,10 @@
           <h4 class="text-lg font-semibold mb-4">Contact</h4>
           <ul class="space-y-3">
             <li v-for="(link, index) in contactLinks" :key="`contact-${index}`">
-              <a :href="link.href" 
-                 class="text-gray-300 hover:text-white transition-colors block py-1">
+              <a
+                :href="link.href"
+                class="text-gray-300 hover:text-white transition-colors block py-1"
+              >
                 {{ link.text }}
               </a>
             </li>
@@ -50,9 +57,14 @@
 </template>
 
 <script setup>
-// Footer navigation links
+/**
+ * Footer — updated links to match new page sections
+ */
+
 const productLinks = [
   { text: 'Architecture', href: '#architecture' },
+  { text: 'Platform', href: '#platform-tour' },
+  { text: 'How It Works', href: '#how-it-works' },
   { text: 'Benefits', href: '#benefits' },
   { text: 'Pricing', href: '#cta' }
 ];

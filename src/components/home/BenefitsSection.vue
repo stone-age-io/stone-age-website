@@ -3,89 +3,94 @@
     <div class="container">
       <h2 class="section-title text-center">Why Choose Stone-Age.io?</h2>
       <p class="section-subtitle text-center">
-        Built specifically for MSPs and System Integrators who need to deploy reliable, private IoT infrastructure 
-        for their customers without vendor lock-in or architectural complexity.
+        Built for MSPs and System Integrators who deploy infrastructure for their customers — 
+        not for hobbyists running a single Raspberry Pi.
       </p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-12 md:mt-16">
-    <div v-for="(benefit, index) in benefits" :key="`benefit-${index}`" 
-         class="tech-card">
-      <div class="tech-card-header">
-        <div class="flex items-center">
-          <div class="rounded-full p-2 mr-3 flex items-center justify-center w-10 h-10"
-             :style="{ backgroundColor: benefit.color }">
-            <i :class="benefit.icon" class="text-white"></i>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-12 md:mt-16">
+        <div
+          v-for="(benefit, index) in benefits"
+          :key="`benefit-${index}`"
+          class="tech-card"
+        >
+          <div class="tech-card-header">
+            <div class="flex items-center">
+              <div
+                class="rounded-full p-2 mr-3 flex items-center justify-center w-10 h-10"
+                :style="{ backgroundColor: benefit.color }"
+              >
+                <i :class="benefit.icon" class="text-white"></i>
+              </div>
+              <h3 class="text-xl font-semibold">{{ benefit.title }}</h3>
+            </div>
           </div>
-          <h3 class="text-xl font-semibold">{{ benefit.title }}</h3>
+          <div class="tech-card-body">
+            <p class="mb-4 opacity-75">{{ benefit.description }}</p>
+            <ul class="space-y-3">
+              <li
+                v-for="(point, pIdx) in benefit.points"
+                :key="`point-${index}-${pIdx}`"
+                class="flex items-start py-1"
+              >
+                <i class="pi pi-check mr-2 mt-1 flex-shrink-0" style="color: #4CAF50;"></i>
+                <span>{{ point }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="tech-card-body">
-        <p class="mb-4 opacity-75">{{ benefit.description }}</p>
-        <ul class="space-y-3">
-          <li v-for="(point, pointIndex) in benefit.points" :key="`point-${index}-${pointIndex}`" 
-              class="flex items-start py-1">
-            <i class="pi pi-check mr-2 mt-1 flex-shrink-0" style="color: #4CAF50;"></i>
-            <span>{{ point }}</span>
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
-</div>
-
   </section>
 </template>
 
 <script setup>
 /**
- * Benefits section component
- * Highlights the key advantages for MSPs and System Integrators
- * Emphasizes multi-tenancy, simplicity, security, and the radio network analogy
+ * Benefits section — sharpened copy for MSP/SI audience
+ * Each benefit leads with a concrete outcome, not a feature name
  */
 
-// Benefits data with MSP/SI focus - reduced to 3 items each
 const benefits = [
   {
     icon: 'pi pi-building',
-    title: 'Built for MSPs & System Integrators',
-    description: 'Deploy and manage infrastructure for hundreds of customers from a single platform:',
+    title: 'Hundreds of Customers, One Deployment',
+    description: 'Multi-tenancy is infrastructure-enforced, not just a database filter:',
     points: [
-      'Cryptographic isolation per organization with dedicated NATS Accounts',
-      'White-label ready with customizable branding and domains',
-      'Leaf Nodes enable local autonomy during network outages'
+      'Each organization gets its own NATS Account with cryptographic isolation — a compromised device in Org A has zero path to Org B',
+      'Dedicated Nebula Certificate Authority per org for network-level separation',
+      'White-label ready — your brand, your domains, your customer-facing experience'
     ],
     color: '#3b82f6'
   },
   {
     icon: 'pi pi-box',
-    title: 'Single Binary Simplicity',
-    description: 'No Docker-compose hell, no database migrations, no microservices complexity:',
+    title: 'Deploy in Minutes, Not Weeks',
+    description: 'No microservices to orchestrate. No database servers to maintain:',
     points: [
-      'One executable includes database, API, and UI (built on PocketBase)',
-      'SQLite embedded - no separate database server to manage',
-      'Deploy on FreeBSD, Linux, Windows, or containers'
+      'Single binary includes database, API, and UI — just download and run',
+      'SQLite embedded — no PostgreSQL, no Redis, no connection strings',
+      'Works on FreeBSD, Linux, Windows. Bare metal, Docker, or VMs.'
     ],
     color: '#8b5cf6'
   },
   {
     icon: 'pi pi-lock',
-    title: 'Outbound-Only Security',
-    description: 'Devices connect outbound to your infrastructure - no open ports or port forwarding:',
+    title: 'Devices Connect Out, Attackers Stay Out',
+    description: 'No open ports on your edge network. No port forwarding conversations with IT:',
     points: [
-      'NATS and Nebula connections initiated from device to server',
-      'Automatic NAT traversal and hole punching',
-      'Identity-based firewall rules instead of IP-based rules'
+      'NATS and Nebula initiate all connections outbound from the device',
+      'Automatic NAT traversal handles LTE, 5G, satellite, and restrictive corporate networks',
+      'Identity-based firewall rules — "admins can SSH to gateways, sensors can only talk to gateways"'
     ],
     color: '#10b981'
   },
   {
-    icon: 'pi pi-code',
-    title: 'Open Source & Commercial Support',
-    description: 'Transparent development with professional backing for production:',
+    icon: 'pi pi-wifi',
+    title: 'Sites Keep Running When Internet Fails',
+    description: 'Leaf Nodes provide true local autonomy, not just a "retry later" queue:',
     points: [
-      'Core platform under permissive licenses',
-      'Full visibility into all system operations',
-      'Commercial support and training available'
+      'Local NATS cluster at each site — devices keep communicating during outages',
+      'Edge Rule-Router instances process alerts locally with zero cloud dependency',
+      'Automatic sync when connectivity restores — no data gaps, no manual intervention'
     ],
     color: '#f59e0b'
   }
