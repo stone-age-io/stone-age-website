@@ -15,7 +15,7 @@
     <ThemeToggle class="mr-2" />
 
     <button
-      @click="scrollToSection('cta')"
+      @click="scrollToSection('pricing')"
       class="btn btn-primary"
       aria-label="Get Started with Stone-Age.io"
     >
@@ -81,7 +81,7 @@
 
           <div class="pt-4 mt-2">
             <button
-              @click="scrollToSectionAndCloseMenu('cta')"
+              @click="scrollToSectionAndCloseMenu('pricing')"
               class="btn btn-primary w-full justify-center"
               aria-label="Get Started with Stone-Age.io"
             >

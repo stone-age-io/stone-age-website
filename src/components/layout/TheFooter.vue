@@ -66,13 +66,12 @@ const productLinks = [
   { text: 'Platform', href: '#platform-tour' },
   { text: 'How It Works', href: '#how-it-works' },
   { text: 'Benefits', href: '#benefits' },
-  { text: 'Pricing', href: '#cta' }
+  { text: 'Pricing', href: '#pricing' }
 ];
 
 const resourceLinks = [
   { text: 'GitHub', href: 'https://github.com/stone-age-io/' },
-  { text: 'Documentation', href: 'https://docs.stone-age.io' },
-  { text: 'Blog', href: 'https://blog.stone-age.io' }
+  { text: 'Documentation', href: 'https://docs.stone-age.io' }
 ];
 
 const contactLinks = [

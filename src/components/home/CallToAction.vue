@@ -1,5 +1,5 @@
 <template>
-  <section id="cta" class="py-16 md:py-24 dark-section" :style="{ backgroundColor: 'var(--color-primary)' }">
+  <section id="pricing" class="py-16 md:py-24 dark-section" :style="{ backgroundColor: 'var(--color-primary)' }">
     <div class="container text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Choose Your Deployment Model</h2>
       <p class="text-lg sm:text-xl mb-10 max-w-2xl mx-auto text-white">
