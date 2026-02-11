@@ -135,7 +135,7 @@ const phases = [
         title: 'Route & Automate',
         tag: 'Rule-Router',
         color: '#f59e0b',
-        description: 'Stateless YAML-based rules evaluate messages using Trigger-Condition-Action logic. KV-based stateful alarms prevent notification fatigue. Thousands of messages per second.',
+	description: 'Stateless YAML-based rules evaluate messages using Trigger-Condition-Action logic (e.g. "if temp > 90, send a Slack message"). KV-based stateful alarms prevent notification fatigue. Thousands of messages per second.',
         highlight: 'Dynamic thresholds, signature verification, batch processing'
       },
       {

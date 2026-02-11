@@ -53,7 +53,7 @@
               <i class="pi pi-shield mr-2 text-blue-400"></i> Nebula Mesh VPN
             </div>
             <div class="flex items-center">
-              <i class="pi pi-database mr-2 text-amber-400"></i> PocketBase Backend
+              <i class="pi pi-database mr-2 text-amber-400"></i> PocketBase API & UI 
             </div>
           </div>
         </div>
