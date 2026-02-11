@@ -80,7 +80,7 @@
             Built-in Resilience
           </h4>
           <p class="text-xs leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            TSDB goes down? Data stays safe in JetStream. Site loses internet?
+            TSDB goes down? A configurable, finite amount of data stays safe in JetStream. Site loses internet?
             Leaf Nodes cache locally and sync when restored. No data gaps, no manual recovery.
           </p>
         </div>
@@ -170,7 +170,7 @@ const phases = [
         title: 'Historical Storage',
         tag: 'Bring Your Own',
         color: '#ef4444',
-        description: 'Telegraf consumes JetStream and pushes to your TSDB of choice. Stone-Age stays fast by not storing time-series data. Switch TSDBs without changing platform code.',
+        description: 'Telegraf consumes JetStream and pushes to your Timeseries Database of choice. Stone-Age remains lightweight by offloading heavy storage to purpose-built TSDB targets.',
         highlight: 'VictoriaMetrics, InfluxDB, Postgres, or whatever you prefer'
       }
     ]
