@@ -113,7 +113,7 @@ const pillars = [
     subtitle: 'PocketBase',
     description: 'A control plane providing Identity, Inventory, and an embedded UI. The single-binary foundation that orchestrates everything.',
     features: [
-      'User & device identity management',
+      'User & thing identity management',
       'Organization & location hierarchy',
       'Embedded SQLite database',
       'Built-in REST API & admin UI'
