@@ -62,7 +62,7 @@
           <div class="flex items-start">
             <i class="pi pi-info-circle text-blue-500 text-2xl mr-4 mt-1 flex-shrink-0"></i>
             <div>
-              <h4 class="text-lg font-semibold mb-2">No Complex Docker-Compose Required</h4>
+              <h4 class="text-lg font-semibold mb-2">Flexible Deployments</h4>
               <p class="text-sm opacity-90">
                 Download the binary, run <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">./stone-age serve</code>, 
                 and open your browser. The embedded SQLite database, REST API, and reactive UI are all included. 
