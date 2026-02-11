@@ -29,7 +29,7 @@
           Three Pillars, One Cohesive Framework 
         </h3>
         <p class="text-lg max-w-3xl mx-auto" :style="{ color: 'var(--color-content-secondary)' }">
-          The Platform (database, identity, API, and UI) ships as a single executable control plane for PocketBase, NATS and Nebula.
+          The Platform (database, identity, API, and UI) ships as a single-binary control plane using PocketBase to orchestrate NATS and Nebula.
         </p>
       </div>
 

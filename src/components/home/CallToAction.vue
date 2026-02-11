@@ -103,8 +103,8 @@ const actionButtons = [
 // Pricing plans - Deployment model focused
 const pricingPlans = [
   {
-    name: 'Community',
-    subtitle: 'Self-hosted',
+    name: 'Self-hosted',
+    subtitle: 'Open Source',
     headerBgColor: '#1f2937',
     subtitleClass: 'text-gray-300',
     price: 'Free',
@@ -120,7 +120,7 @@ const pricingPlans = [
     isPopular: false
   },
   {
-    name: 'Shared',
+    name: 'Shared Hosting',
     subtitle: 'Pay per organization',
     headerBgColor: '#1f2937',
     subtitleClass: 'text-gray-300',
@@ -137,7 +137,7 @@ const pricingPlans = [
     isPopular: false
   },
   {
-    name: 'Dedicated',
+    name: 'Dedicated Hosting',
     subtitle: 'Your private instance',
     headerBgColor: '#f59e0b',
     subtitleClass: 'text-amber-100',

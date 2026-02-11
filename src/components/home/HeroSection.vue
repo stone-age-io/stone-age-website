@@ -14,8 +14,8 @@
         </h1>
         
         <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl">
-          Securely connect, manage, and automate your edge without the cloud lock-in. 
-          Stone-Age.io orchestrates <strong>NATS</strong>, <strong>Nebula</strong>, and <strong>PocketBase</strong> into a unified, cohesive framework.
+          Securely connect, manage, and automate your edge without the cloud lock-in.
+	  Stone-Age.io orchestrates professional messaging, mesh networking, and identity management into a unified framework.
         </p>
 
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">

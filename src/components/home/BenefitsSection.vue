@@ -67,8 +67,8 @@ const benefits = [
     description: 'Every component used in the stack ships as a lightweight, static binary:',
     points: [
       'Run the Platform, NATS, and the Agent directly on bare metal, VMs, or existing industrial routers.',
-      'Use the built-in SQLite for the control plane, and easily pipe telemetry to other single-binary tools like VictoriaMetrics for history.',
-      'Works on FreeBSD, Linux, Windows. If you can copy a file, you can deploy this stack'
+      'SQLite for management, NATS streams high-throughput telemetry. Pipe data to tools like VictoriaMetrics for history. Do one thing well and do it well.',
+      'BSD, Linux, Windows. If you can copy a file, you can deploy this stack'
     ],
     color: '#8b5cf6'
   },
