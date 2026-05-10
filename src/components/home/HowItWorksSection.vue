@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="section-title text-center">How It All Fits Together</h2>
       <p class="section-subtitle text-center">
-        From device registration to historical analytics, follow the data through the platform
+        Composable tiers that each do one job well — adopt only what you need today and grow into the rest without rewrites.
       </p>
 
       <!-- Phases -->
@@ -113,7 +113,7 @@ const phases = [
       {
         title: 'Connect & Publish',
         tag: 'Data Plane',
-		color: '#8b5cf6',
+        color: '#8b5cf6',
         description: 'Things connect outbound to NATS. Telemetry publishes to subject-namespaced topics with per-user JWT permissions enforcing what each thing or user can see and do.',
         highlight: 'Native MQTT support via NATS JetStream'
       },
@@ -128,22 +128,22 @@ const phases = [
   },
   {
     title: 'Process',
-    subtitle: 'Route, transform, and act on data in real-time',
+    subtitle: 'Route, react, and analyze data in real-time',
     color: '#f59e0b',
     steps: [
       {
-        title: 'Route & Automate',
-        tag: 'Rule-Router',
+        title: 'Rule Engine',
+        tag: 'Reflexes',
         color: '#f59e0b',
-	description: 'Stateless YAML-based rules evaluate messages using Trigger-Condition-Action logic (e.g. "if temp > 90, send a Slack message"). KV-based stateful alarms prevent notification fatigue. Thousands of messages per second.',
-        highlight: 'Dynamic thresholds, signature verification, batch processing'
+        description: 'A unified rule engine handles NATS routing, inbound and outbound HTTP webhooks, and cron-driven publishes — all expressed as declarative YAML with the same Trigger-Condition-Action syntax. KV-backed state enables alarm deduplication, presence tracking, and rate limiting.',
+        highlight: 'Router, gateway, and scheduler — one binary, one syntax'
       },
       {
-        title: 'Bridge External Systems',
-        tag: 'HTTP Gateway',
+        title: 'Stream Processing',
+        tag: 'Analytics',
         color: '#06b6d4',
-        description: 'Bidirectional HTTP-NATS bridge. Inbound webhooks fire-and-forget into NATS. Outbound events trigger Slack, Teams, PagerDuty, or any REST API.',
-        highlight: 'Same rule engine as Rule-Router'
+        description: 'When questions involve windowed aggregations, stream joins, or anomaly detection, graduate to a stream processor. eKuiper, Benthos, or a custom service consumes from NATS, runs the heavy analytics, and publishes results back. The rule engine reacts to those results.',
+        highlight: 'Sliding windows, joins, and continuous queries over event streams'
       }
     ]
   },

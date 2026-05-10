@@ -6,9 +6,8 @@
       <div class="text-center mb-12 md:mb-16">
         <h2 class="section-title">The Modern Radio Network</h2>
         <p class="section-subtitle">
-          Think of a digital radio network. You build the towers, 
-          assign private channels to each organization, and hand out radios to utilize 
-	  the infrastructure. 
+          Think of a digital radio network. You build the towers,
+          assign private channels to each organization, and hand out radios that use the infrastructure.
           Stone-Age.io applies this concept to modern Event-Driven Architecture.
         </p>
       </div>
@@ -29,8 +28,8 @@
           Three Pillars, One Cohesive Framework 
         </h3>
         <p class="text-lg max-w-3xl mx-auto" :style="{ color: 'var(--color-content-secondary)' }">
-        The Platform ships as a single-binary control plane. It uses PocketBase to seamlessly orchestrate NATS and Nebula, wrapping them into a unified interface.
-	</p>
+          Stone-Age.io is a small set of independent components — each a self-contained binary with no runtime dependencies. They wire themselves together over NATS, so the same architecture works on a single server or scales to hundreds.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -64,9 +63,10 @@
             <div>
               <h4 class="text-lg font-semibold mb-2">Flexible Deployments</h4>
               <p class="text-sm opacity-90">
-                Download the binary, run <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">./stone-age serve</code>, 
-                and open your browser. The embedded SQLite database, REST API, and reactive UI are all included. 
-                Deploy on bare metal, containers, or VMs (FreeBSD, Linux, or Windows)
+                Start with the Control Plane binary — run <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">./stone-age serve</code>
+                and open your browser. The embedded SQLite database, REST API, and reactive UI are all included.
+                Add NATS, Nebula, the rule engine, and the Agent as separate single-binary components alongside it.
+                Deploy on bare metal, containers, or VMs (FreeBSD, Linux, or Windows).
               </p>
             </div>
           </div>

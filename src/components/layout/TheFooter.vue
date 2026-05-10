@@ -5,8 +5,8 @@
         <div>
           <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
           <p class="text-gray-300">
-            A single-binary platform that orchestrates NATS, Nebula, and PocketBase. 
-            Deploy private IoT infrastructure without vendor lock-in.
+            A toolkit for distributed event-driven applications on infrastructure you own.
+            Independent single-binary components, unified by a real-time messaging fabric — without vendor lock-in.
           </p>
         </div>
         <div>

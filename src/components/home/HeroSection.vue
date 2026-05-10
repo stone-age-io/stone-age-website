@@ -9,13 +9,13 @@
     <div class="container relative z-10">
       <div class="max-w-4xl">
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          Your IoT Infrastructure <br class="hidden md:block" />
+          Distributed Infrastructure, <br class="hidden md:block" />
           Made Simple.
         </h1>
-        
+
         <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl">
-          Securely connect, manage, and automate your edge without the cloud lock-in.
-	  Stone-Age.io orchestrates professional messaging, mesh networking, and identity management into a unified framework.
+          Run your distributed applications and connected devices on infrastructure you own.
+          Stone-Age.io unifies identity management, real-time messaging, and an encrypted mesh network — multi-tenant by design, with no cloud lock-in.
         </p>
 
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">
