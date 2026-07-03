@@ -4,10 +4,10 @@
     <a
       v-for="(item, index) in navItems"
       :key="`nav-desktop-${index}`"
-      :href="`#${item.id}`"
-      @click.prevent="scrollToSection(item.id)"
+      :href="item.href || `/#${item.id}`"
+      @click="item.id && handleNavClick($event, item.id)"
       class="text-base hover:text-primary font-medium py-2 px-3 rounded-md transition-colors"
-      :aria-label="`Go to ${item.label} section`"
+      :aria-label="`Go to ${item.label}`"
     >
       {{ item.label }}
     </a>
@@ -71,10 +71,10 @@
           <a
             v-for="(item, index) in navItems"
             :key="`nav-mobile-${index}`"
-            :href="`#${item.id}`"
-            @click.prevent="scrollToSectionAndCloseMenu(item.id)"
+            :href="item.href || `/#${item.id}`"
+            @click="item.id ? handleNavClickAndCloseMenu($event, item.id) : closeMobileMenu()"
             class="mobile-nav-item hover:bg-surface-alt"
-            :aria-label="`Go to ${item.label} section`"
+            :aria-label="`Go to ${item.label}`"
           >
             {{ item.label }}
           </a>
@@ -104,12 +104,14 @@ import StoneLogo from '../common/StoneLogo.vue';
  * Simplified to match the new section structure
  */
 
-// Navigation items matching the page sections
+// Navigation items: `id` entries are home-page sections (smooth-scrolled
+// when the section exists, otherwise navigate to /#id); `href` entries are
+// standalone pages.
 const navItems = [
-  { id: 'architecture', label: 'Architecture' },
   { id: 'platform-tour', label: 'Platform' },
+  { id: 'architecture', label: 'Architecture' },
   { id: 'how-it-works', label: 'How It Works' },
-  { id: 'benefits', label: 'Benefits' }
+  { href: '/built-on', label: 'Built On' }
 ];
 
 // Reactive state
@@ -139,7 +141,8 @@ const restoreBodyScroll = () => {
 };
 
 /**
- * Smooth scroll to section
+ * Smooth scroll to a home-page section. On other pages the section
+ * doesn't exist, so navigate to the home page with the hash instead.
  * @param {string} sectionId - ID of the target section
  */
 const scrollToSection = (sectionId) => {
@@ -150,13 +153,26 @@ const scrollToSection = (sectionId) => {
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }, 100);
+  } else {
+    window.location.href = `/#${sectionId}`;
   }
 };
 
-/** Scroll to section and close mobile menu */
-const scrollToSectionAndCloseMenu = (sectionId) => {
+/**
+ * Nav link click: smooth-scroll when the section is on this page,
+ * otherwise fall through to the link's /#id href (cross-page).
+ */
+const handleNavClick = (event, sectionId) => {
+  if (document.getElementById(sectionId)) {
+    event.preventDefault();
+    scrollToSection(sectionId);
+  }
+};
+
+/** Mobile variant: also close the menu */
+const handleNavClickAndCloseMenu = (event, sectionId) => {
   closeMobileMenu();
-  scrollToSection(sectionId);
+  handleNavClick(event, sectionId);
 };
 
 /** Handle escape key to close mobile menu */

@@ -3,8 +3,8 @@
     <div class="container">
       <h2 class="section-title text-center">Why Choose Stone-Age.io?</h2>
       <p class="section-subtitle text-center">
-        Built for MSPs and System Integrators who deploy infrastructure for their customers,  
-         or even hobbyists who self-host running a single Raspberry Pi.
+        Built for MSPs and System Integrators who deploy infrastructure for their customers.
+        Starts on a single Raspberry Pi — scales to hundreds of sites.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-12 md:mt-16">

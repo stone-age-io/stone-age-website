@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="section-title text-center">See It In Action</h2>
       <p class="section-subtitle text-center">
-        A single pane of glass for your entire distributed infrastructure
+        One console for the substrate — identity, tenants, live state, and networks across every site
       </p>
 
       <!-- Tab buttons -->

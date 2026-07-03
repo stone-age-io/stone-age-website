@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col">
     <TheHeader />
     <main class="flex-grow">
-      <HomeView />
+      <slot />
     </main>
     <TheFooter />
   </div>
@@ -10,13 +10,12 @@
 
 <script setup>
 /**
- * Root application component
- * Defines the main layout structure of the application
+ * PageShell — shared layout for every page (MPA).
+ * Header + page content slot + footer, with theme initialization.
  */
-import TheHeader from './components/layout/TheHeader.vue';
-import HomeView from './views/HomeView.vue';
-import TheFooter from './components/layout/TheFooter.vue';
-import { useTheme } from './composables/useTheme';
+import TheHeader from './TheHeader.vue';
+import TheFooter from './TheFooter.vue';
+import { useTheme } from '../../composables/useTheme';
 
 // Initialize the theme system
 const { isDarkMode } = useTheme();

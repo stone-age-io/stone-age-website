@@ -4,11 +4,11 @@
 
       <!-- Radio Network Analogy — conceptual anchor first -->
       <div class="text-center mb-12 md:mb-16">
-        <h2 class="section-title">The Modern Radio Network</h2>
+        <h2 class="section-title">Like a Private Radio Network for Your Operations</h2>
         <p class="section-subtitle">
-          Think of a digital radio network. You build the towers,
-          assign private channels to each organization, and hand out radios that use the infrastructure.
-          Stone-Age.io applies this concept to modern Event-Driven Architecture.
+          You build the towers, assign private channels to each organization,
+          and hand out radios that use the infrastructure.
+          Stone-Age.io applies this concept to modern event-driven systems.
         </p>
       </div>
 

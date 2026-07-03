@@ -9,13 +9,14 @@
     <div class="container relative z-10">
       <div class="max-w-4xl">
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          Distributed Infrastructure, <br class="hidden md:block" />
-          Made Simple.
+          Connected Operations, <br class="hidden md:block" />
+          On Infrastructure You Own.
         </h1>
 
         <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl">
-          Run your distributed applications and connected devices on infrastructure you own.
-          Stone-Age.io unifies identity management, real-time messaging, and an encrypted mesh network — multi-tenant by design, with no cloud lock-in.
+          Stone-Age.io is the open-source control plane for MSPs and system integrators:
+          identity, real-time messaging, and an encrypted mesh network — multi-tenant by design,
+          shipped as small static binaries. Starts on a Raspberry Pi. Scales to hundreds of sites.
         </p>
 
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">

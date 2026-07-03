@@ -1,11 +1,11 @@
 <template>
   <footer class="py-12 sm:py-16" style="background-color: #1a1a1a; color: white;">
     <div class="container">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6">
         <div>
           <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
           <p class="text-gray-300">
-            A toolkit for distributed event-driven applications on infrastructure you own.
+            An open-source control plane for connected operations on infrastructure you own.
             Independent single-binary components, unified by a real-time messaging fabric — without vendor lock-in.
           </p>
         </div>
@@ -13,6 +13,19 @@
           <h4 class="text-lg font-semibold mb-4">Product</h4>
           <ul class="space-y-3">
             <li v-for="(link, index) in productLinks" :key="`product-${index}`">
+              <a
+                :href="link.href"
+                class="text-gray-300 hover:text-white transition-colors block py-1"
+              >
+                {{ link.text }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Built On</h4>
+          <ul class="space-y-3">
+            <li v-for="(link, index) in builtOnLinks" :key="`builton-${index}`">
               <a
                 :href="link.href"
                 class="text-gray-300 hover:text-white transition-colors block py-1"
@@ -62,11 +75,19 @@
  */
 
 const productLinks = [
-  { text: 'Architecture', href: '#architecture' },
-  { text: 'Platform', href: '#platform-tour' },
-  { text: 'How It Works', href: '#how-it-works' },
-  { text: 'Benefits', href: '#benefits' },
-  { text: 'Pricing', href: '#pricing' }
+  { text: 'Platform', href: '/#platform-tour' },
+  { text: 'Architecture', href: '/#architecture' },
+  { text: 'How It Works', href: '/#how-it-works' },
+  { text: 'Benefits', href: '/#benefits' },
+  { text: 'Pricing', href: '/#pricing' }
+];
+
+const builtOnLinks = [
+  { text: 'Built on Stone-Age', href: '/built-on' },
+  { text: 'Access Control', href: '/access-control' },
+  { text: 'Kiosk', href: '/kiosk' },
+  { text: 'Rule-Router', href: '/rule-router' },
+  { text: 'Agent', href: '/agent' }
 ];
 
 const resourceLinks = [
