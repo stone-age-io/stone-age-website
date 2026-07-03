@@ -14,7 +14,7 @@ const project = {
   status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/skeeeon/kiosk',
   description: [
-    'A self-service checkout kiosk for tool cribs and consumable storerooms. One ~40 MB Go binary embeds PocketBase, SQLite, and a touch-friendly Vue UI — deployment is copying a file to the edge box. Workers identify by badge scan; no logins at the kiosk.',
+    'A self-service checkout kiosk for tool cribs and consumable storerooms. One ~40 MB Go binary embeds PocketBase, SQLite, and a touch-friendly Vue UI, so deployment is copying a file to the edge box. Workers identify by badge scan; no logins at the kiosk.',
     'The same binary has three personalities: a standalone kiosk, a central controller that aggregates a fleet of kiosks into one ledger, and a virtual timeclock where workers clock in and out from their phones.',
   ],
   features: [
@@ -28,7 +28,7 @@ const project = {
       icon: 'pi-book',
       color: '#8b5cf6',
       title: 'Append-Only Ledgers',
-      text: 'Checkouts, returns, and time punches are immutable after commit. Open state is derived, auditable, and rebuildable — never edited in place.',
+      text: 'Checkouts, returns, and time punches are immutable after commit. Open state is derived, auditable, and rebuildable, never edited in place.',
     },
     {
       icon: 'pi-sitemap',
@@ -46,7 +46,7 @@ const project = {
       icon: 'pi-wifi',
       color: '#ec4899',
       title: 'Offline-First',
-      text: 'The local database is authoritative. NATS down? The kiosk keeps checking out; events buffer and sync when connectivity returns.',
+      text: 'The local database is authoritative. If NATS goes down, the kiosk keeps checking out; events buffer and sync when connectivity returns.',
     },
     {
       icon: 'pi-wrench',
@@ -60,7 +60,7 @@ const project = {
     points: [
       'Embedded PocketBase per binary — kiosk, controller, and timeclock each own their schema via Go migrations.',
       'JetStream event streams with idempotency anchors, so controller projections survive redelivery as no-ops.',
-      'KV buckets for per-kiosk catalog sync — the controller publishes, each kiosk watches its own slice.',
+      'KV buckets for per-kiosk catalog sync: the controller publishes, each kiosk watches its own slice.',
       'NATS request/reply for admin commands from the controller down to any kiosk in the fleet.',
     ],
   },

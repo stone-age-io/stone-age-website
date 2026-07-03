@@ -28,7 +28,7 @@
           Three Pillars, One Cohesive Framework 
         </h3>
         <p class="text-lg max-w-3xl mx-auto" :style="{ color: 'var(--color-content-secondary)' }">
-          Stone-Age.io is a small set of independent components — each a self-contained binary with no runtime dependencies. They wire themselves together over NATS, so the same architecture works on a single server or scales to hundreds.
+          Stone-Age.io is a small set of independent components, each a self-contained binary with no runtime dependencies. They wire themselves together over NATS, so the same architecture works on a single server or scales to hundreds.
         </p>
       </div>
 

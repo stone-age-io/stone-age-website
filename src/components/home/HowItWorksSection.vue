@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="section-title text-center">How It All Fits Together</h2>
       <p class="section-subtitle text-center">
-        Composable tiers that each do one job well — adopt only what you need today and grow into the rest without rewrites.
+        Composable tiers that each do one job well. Adopt only what you need today and grow into the rest without rewrites.
       </p>
 
       <!-- Phases -->
@@ -80,8 +80,8 @@
             Built-in Resilience
           </h4>
           <p class="text-xs leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            TSDB goes down? A configurable, finite amount of data stays safe in JetStream. Site loses internet?
-            Leaf Nodes cache locally and sync when restored. No data gaps, no manual recovery.
+            If your TSDB goes down, recent data stays safe in JetStream until it comes back. If a site loses
+            internet, Leaf Nodes cache locally and sync when it returns. No data gaps, no manual recovery.
           </p>
         </div>
       </div>
@@ -135,8 +135,8 @@ const phases = [
         title: 'Rule Engine',
         tag: 'Reflexes',
         color: '#f59e0b',
-        description: 'A unified rule engine handles NATS routing, inbound and outbound HTTP webhooks, and cron-driven publishes — all expressed as declarative YAML with the same Trigger-Condition-Action syntax. KV-backed state enables alarm deduplication, presence tracking, and rate limiting.',
-        highlight: 'Router, gateway, and scheduler — one binary, one syntax'
+        description: 'A unified rule engine handles NATS routing, HTTP webhooks in both directions, and cron-driven publishes, all in the same declarative YAML. Durable state in NATS KV lets rules deduplicate alarms, track presence, and rate-limit actions.',
+        highlight: 'Router, gateway, and scheduler: one binary, one syntax'
       },
       {
         title: 'Stream Processing',

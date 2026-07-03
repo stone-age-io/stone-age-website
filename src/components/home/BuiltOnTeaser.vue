@@ -3,8 +3,8 @@
     <div class="container">
       <h2 class="section-title text-center">More Than a Console</h2>
       <p class="section-subtitle text-center">
-        The console runs the substrate. These run on it — real, open-source systems
-        we build and operate on the same primitives you get.
+        The console runs the substrate. These run on it: real, open-source systems
+        we build and operate on the same foundation you get.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
@@ -54,7 +54,7 @@ const teaserItems = [
     href: '/access-control',
     icon: 'pi-id-card',
     color: '#f59e0b',
-    blurb: 'Doors that keep deciding locally when the internet dies.',
+    blurb: 'Doors that keep granting and denying locally, even offline.',
   },
   {
     name: 'Kiosk',
@@ -68,14 +68,14 @@ const teaserItems = [
     href: '/rule-router',
     icon: 'pi-share-alt',
     color: '#8b5cf6',
-    blurb: 'NATS-native automation: one binary, one YAML syntax.',
+    blurb: 'NATS-native automation: declarative YAML rules in a single binary.',
   },
   {
     name: 'Agent',
     href: '/agent',
     icon: 'pi-microchip',
     color: '#10b981',
-    blurb: 'Per-device telemetry and control in under 50 MB of RAM.',
+    blurb: 'Per-device telemetry and control from one lightweight daemon.',
   },
 ];
 </script>

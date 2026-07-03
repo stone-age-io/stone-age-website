@@ -3,8 +3,8 @@
     <div class="container">
       <h2 class="section-title text-center">Why Choose Stone-Age.io?</h2>
       <p class="section-subtitle text-center">
-        Built for MSPs and System Integrators who deploy infrastructure for their customers.
-        Starts on a single Raspberry Pi — scales to hundreds of sites.
+        Built for MSPs and System Integrators who deploy infrastructure for their customers,
+        from a single Raspberry Pi to hundreds of sites.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-12 md:mt-16">
@@ -86,11 +86,11 @@ const benefits = [
   {
     icon: 'pi pi-wifi',
     title: 'Sites Keep Running When Internet Fails',
-    description: 'Leaf Nodes provide true local autonomy, not just a "retry later" queue:',
+    description: 'Leaf Nodes give each site true local autonomy:',
     points: [
-      'Local NATS server or cluster at each site so things keep communicating during outages',
+      'A full NATS server or cluster at each site, so things keep communicating during outages',
       'Edge Rule-Router instances process alerts locally with zero cloud dependency',
-      'Automatic sync when connectivity restores. No data gaps, no manual intervention'
+      'Automatic catch-up sync when connectivity returns'
     ],
     color: '#f59e0b'
   }

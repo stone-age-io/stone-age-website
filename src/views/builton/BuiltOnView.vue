@@ -23,7 +23,7 @@
           Applications
         </h2>
         <p class="mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-          Complete systems built on the platform's patterns — each one a single binary you deploy at the edge.
+          Complete systems built on the platform's patterns, each one a single binary you deploy at the edge.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ProjectCard v-for="(app, index) in applications" :key="`app-${index}`" :item="app" />
@@ -38,7 +38,7 @@
           Components
         </h2>
         <p class="mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-          Parts of the stack itself — deploy them alongside the control plane, centrally or at the edge.
+          Parts of the stack itself. Deploy them alongside the control plane, centrally or at the edge.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ProjectCard v-for="(comp, index) in components" :key="`comp-${index}`" :item="comp" />
@@ -75,7 +75,7 @@ const applications = [
     color: '#f59e0b',
     status: 'In Development',
     blurb:
-      'Badge-in physical access control. Every door decides locally with policy mirrored to NATS KV — doors keep working when the internet dies, and every tap lands in a JetStream audit trail.',
+      'Badge-in physical access control. Every door decides locally against policy mirrored to NATS KV, keeps working through an outage, and logs every tap to a JetStream audit trail.',
   },
   {
     name: 'Kiosk',
@@ -84,7 +84,7 @@ const applications = [
     color: '#3b82f6',
     status: 'In Development',
     blurb:
-      'Self-service checkout for tool cribs and storerooms. Scan a badge, scan items, walk away. Append-only ledgers, fleet aggregation, and a virtual timeclock — one ~40 MB binary.',
+      'Self-service checkout for tool cribs and storerooms: badge in, scan items, go. Append-only ledgers, fleet aggregation, and a virtual timeclock in one ~40 MB binary.',
   },
 ];
 
@@ -103,9 +103,9 @@ const components = [
     href: '/agent',
     icon: 'pi-microchip',
     color: '#10b981',
-    status: 'Production-Shaped',
+    status: 'In Development',
     blurb:
-      'The per-device daemon: heartbeats, system telemetry, service control, and whitelisted commands over NATS. Linux, Windows, and FreeBSD — under 50 MB of RAM.',
+      'The per-device daemon: heartbeats, system telemetry, service control, and whitelisted commands over NATS. Linux, Windows, and FreeBSD in under 50 MB of RAM.',
   },
 ];
 </script>

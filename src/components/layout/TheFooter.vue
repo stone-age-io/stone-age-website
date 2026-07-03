@@ -6,7 +6,7 @@
           <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
           <p class="text-gray-300">
             An open-source control plane for connected operations on infrastructure you own.
-            Independent single-binary components, unified by a real-time messaging fabric — without vendor lock-in.
+            Independent single-binary components, unified by a real-time messaging fabric, without vendor lock-in.
           </p>
         </div>
         <div>

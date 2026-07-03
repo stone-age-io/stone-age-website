@@ -10,11 +10,11 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
   name: 'Agent',
-  tagline: 'A lightweight system service for every device: telemetry, service control, and whitelisted commands — in under 50 MB of RAM.',
-  status: { label: 'Production-Shaped', color: '#10b981' },
+  tagline: 'A lightweight system service for every device: telemetry, service control, and whitelisted commands in under 50 MB of RAM.',
+  status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/stone-age-io/agent',
   description: [
-    'The per-device daemon of the Stone-Age stack. Install it on a gateway, server, or industrial PC and it publishes heartbeats and system telemetry over NATS, controls local services, and executes whitelisted commands — all from a single static Go binary with no runtime dependencies.',
+    'The per-device daemon of the Stone-Age stack. Install it on a gateway, server, or industrial PC and it publishes heartbeats and system telemetry over NATS, controls local services, and executes whitelisted commands, all from a single static Go binary with no runtime dependencies.',
     'Built for the boxes you can’t easily reach: graceful shutdown, panic recovery in every handler, TLS 1.2+ enforced, and command output capped so a runaway process can’t take the agent down with it.',
   ],
   features: [
@@ -34,7 +34,7 @@ const project = {
       icon: 'pi-cog',
       color: '#8b5cf6',
       title: 'Service Control',
-      text: 'Start, stop, and restart services through systemd, Windows SCM, or FreeBSD rc.d — the platform-specific code is behind clean build tags.',
+      text: 'Start, stop, and restart services through systemd, Windows SCM, or FreeBSD rc.d. The platform-specific code stays behind clean build tags.',
     },
     {
       icon: 'pi-lock',
@@ -46,7 +46,7 @@ const project = {
       icon: 'pi-file',
       color: '#10b981',
       title: 'Log Retrieval',
-      text: 'Fetch application logs over NATS from an allowlisted set of paths — no SSH session needed to see what a remote box is doing.',
+      text: 'Fetch application logs over NATS from an allowlisted set of paths, so you can see what a remote box is doing without an SSH session.',
     },
     {
       icon: 'pi-desktop',
@@ -58,7 +58,7 @@ const project = {
   stoneAge: {
     title: 'Role in the Stack',
     points: [
-      'The observability and control arm at the device level — one agent per box, complementing the per-site leaf node.',
+      'The observability and control arm at the device level: one agent per box, complementing the per-site leaf node.',
       'Bootstraps its NATS credentials from the platform control plane, then speaks only NATS.',
       'Heartbeats feed online/offline status; telemetry feeds dashboards and your time-series database of choice.',
       'Pairs with rule-router at the edge: the agent reports and acts, rules decide when.',

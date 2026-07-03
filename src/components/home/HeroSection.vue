@@ -15,7 +15,7 @@
 
         <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl">
           Stone-Age.io is the open-source control plane for MSPs and system integrators:
-          identity, real-time messaging, and an encrypted mesh network — multi-tenant by design,
+          identity, real-time messaging, and an encrypted mesh network. Multi-tenant by design,
           shipped as small static binaries. Starts on a Raspberry Pi. Scales to hundreds of sites.
         </p>
 
@@ -44,7 +44,7 @@
         <!-- Tech Stack Validation (Social Proof of Architecture) -->
         <div class="border-t border-white/10 pt-8">
           <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
-            Powered by Industry Standard Primitives
+            Built on Proven Open-Source Infrastructure
           </p>
           <div class="flex flex-wrap gap-x-8 gap-y-4 text-gray-300 font-mono text-sm opacity-80">
             <div class="flex items-center">
