@@ -64,6 +64,13 @@ const teaserItems = [
     blurb: 'Badge-scan checkout for tool cribs and storerooms.',
   },
   {
+    name: 'Helpdesk',
+    href: '/helpdesk',
+    icon: 'pi-ticket',
+    color: '#14b8a6',
+    blurb: 'Support tickets and field work for MSPs, fed by machine alerts over NATS.',
+  },
+  {
     name: 'Rule-Router',
     href: '/rule-router',
     icon: 'pi-share-alt',

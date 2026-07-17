@@ -86,6 +86,15 @@ const applications = [
     blurb:
       'Self-service checkout for tool cribs and storerooms: badge in, scan items, go. Append-only ledgers, fleet aggregation, and a virtual timeclock in one ~40 MB binary.',
   },
+  {
+    name: 'Helpdesk',
+    href: '/helpdesk',
+    icon: 'pi-ticket',
+    color: '#14b8a6',
+    status: 'In Development',
+    blurb:
+      'A service desk for MSPs: reactive support tickets and proactive field work. Machine-generated tickets stream in over NATS with unforgeable provenance, alongside a staff app, requester portal, visit dispatch, and time tracking.',
+  },
 ];
 
 const components = [

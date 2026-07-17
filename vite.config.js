@@ -16,6 +16,7 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
         builtOn: path.resolve(__dirname, 'built-on.html'),
         accessControl: path.resolve(__dirname, 'access-control.html'),
+        helpdesk: path.resolve(__dirname, 'helpdesk.html'),
         kiosk: path.resolve(__dirname, 'kiosk.html'),
         agent: path.resolve(__dirname, 'agent.html'),
         ruleRouter: path.resolve(__dirname, 'rule-router.html'),

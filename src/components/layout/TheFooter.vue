@@ -86,6 +86,7 @@ const builtOnLinks = [
   { text: 'Built on Stone-Age', href: '/built-on' },
   { text: 'Access Control', href: '/access-control' },
   { text: 'Kiosk', href: '/kiosk' },
+  { text: 'Helpdesk', href: '/helpdesk' },
   { text: 'Rule-Router', href: '/rule-router' },
   { text: 'Agent', href: '/agent' }
 ];
