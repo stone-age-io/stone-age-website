@@ -110,9 +110,9 @@ const pricingPlans = [
     price: 'TBA',
     features: [
       'We run the control plane & NATS',
-      'Per-organization pricing',
-      'Clean migration path from self-hosted',
-      'Early access shapes the roadmap'
+      'One flat price per account — all apps included',
+      'No per-door or per-device metering',
+      'Clean migration path from self-hosted'
     ],
     ctaText: 'Get Notified',
     ctaLink: 'mailto:info@stone-age.io?subject=Managed%20Hosting%20Early%20Access',
@@ -120,19 +120,19 @@ const pricingPlans = [
     isPopular: false
   },
   {
-    name: 'White-Label & Support',
+    name: 'Dedicated',
     subtitle: 'For MSPs and integrators',
     headerBgColor: '#1f2937',
     subtitleClass: 'text-gray-300',
-    price: 'Custom',
+    price: 'From $499/mo',
     features: [
-      'Your brand, your domains',
-      'Deployment assistance',
-      'Custom development',
+      'Your own instance, your brand, your domains',
+      'Your own signing keys and database',
+      'Unlimited customer organizations',
       'Direct line to the maintainers'
     ],
-    ctaText: 'Contact Us',
-    ctaLink: 'mailto:info@stone-age.io?subject=White-Label%20%2F%20Support',
+    ctaText: 'For Integrators',
+    ctaLink: '/for-integrators',
     ctaClass: 'border border-gray-500 bg-gray-700 hover:bg-gray-600 text-white',
     isPopular: false
   }

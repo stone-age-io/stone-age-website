@@ -15,6 +15,8 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         builtOn: path.resolve(__dirname, 'built-on.html'),
+        forIntegrators: path.resolve(__dirname, 'for-integrators.html'),
+        forItTeams: path.resolve(__dirname, 'for-it-teams.html'),
         accessControl: path.resolve(__dirname, 'access-control.html'),
         helpdesk: path.resolve(__dirname, 'helpdesk.html'),
         kiosk: path.resolve(__dirname, 'kiosk.html'),

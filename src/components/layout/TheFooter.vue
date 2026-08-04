@@ -79,7 +79,9 @@ const productLinks = [
   { text: 'Architecture', href: '/#architecture' },
   { text: 'How It Works', href: '/#how-it-works' },
   { text: 'Benefits', href: '/#benefits' },
-  { text: 'Pricing', href: '/#pricing' }
+  { text: 'Pricing', href: '/#pricing' },
+  { text: 'For Integrators', href: '/for-integrators' },
+  { text: 'For IT Teams', href: '/for-it-teams' }
 ];
 
 const builtOnLinks = [
