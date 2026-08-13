@@ -11,7 +11,6 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 const project = {
   name: 'Rule-Router',
   tagline: 'A NATS-native rule engine. Router, HTTP gateway, and cron scheduler in one binary, with one YAML syntax.',
-  status: { label: 'Released', color: '#10b981' },
   github: 'https://github.com/skeeeon/rule-router',
   description: [
     'The automation layer of the Stone-Age stack: a stateless-per-message rule engine that evaluates events in microseconds. Rules are declarative YAML with a single trigger-condition-action shape, whether the trigger is a NATS subject, an inbound webhook, or a cron schedule.',

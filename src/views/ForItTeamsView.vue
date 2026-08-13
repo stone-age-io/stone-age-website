@@ -17,7 +17,7 @@
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
-              href="mailto:info@stone-age.io?subject=Demo%20access%20—%20IT%20team"
+              href="mailto:info@stone-age.io?subject=Demo%20access%20for%20IT%20teams"
               class="btn btn-primary inline-flex items-center justify-center px-6 py-3 rounded-md font-medium"
             >Get demo access</a>
             <a
@@ -149,22 +149,27 @@
           <h2 class="text-2xl sm:text-3xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
             Look at a running system
           </h2>
-          <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
+          <p class="leading-relaxed mb-4" :style="{ color: 'var(--color-content-secondary)' }">
             We'll give you a read-only login to a live reference environment rather than a slide deck.
-            Self-hosting is free and open source if you'd rather stand it up yourself first.
+          </p>
+          <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
+            A hosted account is <strong :style="{ color: 'var(--color-content-primary)' }">$149/month</strong>
+            for every application across up to three sites, and $49/month for each site after that.
+            No per-door, per-camera, or per-device metering. The source is open and the binaries are
+            yours, so nothing you build on top of it depends on us still being here in five years.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:info@stone-age.io?subject=Demo%20access%20—%20IT%20team"
+              href="mailto:info@stone-age.io?subject=Demo%20access%20for%20IT%20teams"
               class="btn btn-primary inline-flex items-center justify-center px-6 py-3 rounded-md font-medium"
             >Get demo access</a>
             <a
-              href="https://github.com/stone-age-io/platform"
+              href="https://docs.stone-age.io"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center px-6 py-3 rounded-md font-medium border"
               :style="{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }"
-            >Self-host it</a>
+            >Read the docs</a>
           </div>
           <p class="text-xs mt-6" :style="{ color: 'var(--color-content-secondary)' }">
             The reference environment's traffic is generated on purpose: a few hundred users and tens of

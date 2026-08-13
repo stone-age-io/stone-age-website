@@ -45,7 +45,7 @@
         </div>
 
         <p class="mt-10 text-sm text-center" :style="{ color: 'var(--color-content-secondary)' }">
-          There's more in the toolbox — the <code class="font-mono text-xs">stone</code> CLI, the
+          There's more in the toolbox: the <code class="font-mono text-xs">stone</code> CLI, the
           <code class="font-mono text-xs">leaf-sync</code> config mirror, and the platform itself.
           <a
             href="https://github.com/stone-age-io"
@@ -73,7 +73,6 @@ const applications = [
     href: '/access-control',
     icon: 'pi-id-card',
     color: '#f59e0b',
-    status: 'In Development',
     blurb:
       'Badge-in physical access control. Every door decides locally against policy mirrored to NATS KV, keeps working through an outage, and logs every tap to a JetStream audit trail.',
   },
@@ -82,7 +81,6 @@ const applications = [
     href: '/kiosk',
     icon: 'pi-shopping-cart',
     color: '#3b82f6',
-    status: 'In Development',
     blurb:
       'Self-service checkout for tool cribs and storerooms: badge in, scan items, go. Append-only ledgers, fleet aggregation, and a virtual timeclock in one ~40 MB binary.',
   },
@@ -91,7 +89,6 @@ const applications = [
     href: '/helpdesk',
     icon: 'pi-ticket',
     color: '#14b8a6',
-    status: 'In Development',
     blurb:
       'A service desk for MSPs: reactive support tickets and proactive field work. Machine-generated tickets stream in over NATS with unforgeable provenance, alongside a staff app, requester portal, visit dispatch, and time tracking.',
   },
@@ -103,7 +100,6 @@ const components = [
     href: '/rule-router',
     icon: 'pi-share-alt',
     color: '#8b5cf6',
-    status: 'Released',
     blurb:
       'A NATS-native rule engine: router, HTTP gateway, and cron scheduler in one binary with one YAML syntax. KV-backed state for dedup, presence, and rate limiting.',
   },
@@ -112,7 +108,6 @@ const components = [
     href: '/agent',
     icon: 'pi-microchip',
     color: '#10b981',
-    status: 'In Development',
     blurb:
       'The per-device daemon: heartbeats, system telemetry, service control, and whitelisted commands over NATS. Linux, Windows, and FreeBSD in under 50 MB of RAM.',
   },

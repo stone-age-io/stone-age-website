@@ -9,14 +9,9 @@
             Built on Stone-Age
           </a>
 
-          <div class="flex flex-wrap items-center gap-3 mb-4">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold" :style="{ color: 'var(--color-content-primary)' }">
-              {{ project.name }}
-            </h1>
-            <span class="status-badge" :style="{ backgroundColor: project.status.color + '20', color: project.status.color }">
-              {{ project.status.label }}
-            </span>
-          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
+            {{ project.name }}
+          </h1>
 
           <p class="text-lg sm:text-xl mb-8 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
             {{ project.tagline }}
@@ -134,10 +129,6 @@ defineProps({
 </script>
 
 <style scoped>
-.status-badge {
-  @apply text-xs font-semibold px-3 py-1 rounded-full inline-block uppercase tracking-wide;
-}
-
 .code-block {
   @apply rounded-lg p-5 overflow-x-auto text-sm leading-relaxed font-mono;
   background-color: #1a1a2e;

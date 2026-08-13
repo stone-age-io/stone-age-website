@@ -85,6 +85,50 @@
           </p>
         </div>
       </div>
+
+      <!-- What it is made of -->
+      <div id="architecture" class="mt-16 max-w-5xl mx-auto scroll-mt-24">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
+          What it is made of
+        </h3>
+        <p class="mb-8 max-w-3xl leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+          Three well-known open-source projects, each doing the job it is good at, plus our own
+          components alongside them. Nothing here is a proprietary protocol you would have to reverse
+          engineer later.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div v-for="(part, index) in stack" :key="`stack-${index}`" class="bottom-card">
+            <div class="flex items-center mb-2">
+              <i :class="`pi ${part.icon}`" class="mr-2" :style="{ color: part.color }"></i>
+              <span class="font-mono text-sm font-semibold" :style="{ color: 'var(--color-content-primary)' }">
+                {{ part.name }}
+              </span>
+            </div>
+            <p class="text-xs leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+              {{ part.role }}
+            </p>
+          </div>
+        </div>
+
+        <div class="callout-box rounded-lg p-6 border-l-4 border-blue-500 mt-6">
+          <div class="flex items-start">
+            <i class="pi pi-info-circle text-blue-500 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+            <div>
+              <h4 class="text-lg font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
+                Every piece is one file
+              </h4>
+              <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+                Start with the control plane binary: run
+                <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">./stone-age serve</code>
+                and open your browser. The database, REST API, and UI are already inside it. Add NATS,
+                Nebula, the rule engine, and the agent alongside it as you need them. Bare metal,
+                containers, or VMs, on FreeBSD, Linux, or Windows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -183,6 +227,31 @@ const protocols = [
   { name: 'HTTP', icon: 'pi-globe', color: '#3b82f6', note: 'Gateway' },
   { name: 'WebSocket', icon: 'pi-bolt', color: '#f59e0b', note: 'Browser' }
 ];
+
+// The underlying stack, stated as supporting detail rather than as a credibility
+// strip in the hero. Naming NATS, Nebula, and PocketBase matters to the two
+// buyers who read repositories; it is not a substitute for saying what the
+// product does.
+const stack = [
+  {
+    name: 'PocketBase',
+    icon: 'pi-database',
+    color: '#3b82f6',
+    role: 'Management: identity, inventory, organizations and locations, an embedded SQLite database, a REST API, and an admin UI in one binary.'
+  },
+  {
+    name: 'NATS.io',
+    icon: 'pi-share-alt',
+    color: '#8b5cf6',
+    role: 'Messaging: pub/sub with native MQTT, JetStream for persistence and replay, key-value buckets for live device state, and leaf nodes for edge autonomy.'
+  },
+  {
+    name: 'Nebula',
+    icon: 'pi-shield',
+    color: '#10b981',
+    role: 'Connectivity: a peer-to-peer mesh with NAT traversal, identity-based firewall rules, and outbound-only connections, so no port opens on an edge network.'
+  }
+];
 </script>
 
 <style scoped>
@@ -239,5 +308,14 @@ const protocols = [
 
 .dark .bottom-card-green {
   border-color: rgba(16, 185, 129, 0.15);
+}
+
+/* Moved here with the single-binary note when PillarsSection was removed. */
+.callout-box {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.dark .callout-box {
+  background-color: rgba(59, 130, 246, 0.1);
 }
 </style>

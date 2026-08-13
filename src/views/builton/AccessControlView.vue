@@ -11,7 +11,6 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 const project = {
   name: 'Access Control',
   tagline: 'Badge-in access control where every door keeps deciding locally, even when the internet dies.',
-  status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/stone-age-io/access-control',
   description: [
     'A NATS-native physical access control system. A central control plane is the system of record for cardholders, roles, access groups, schedules, and doors. Policy is mirrored to NATS KV, and edge controllers make every grant/deny decision locally with a pure, table-tested function. No network round-trip per badge tap.',

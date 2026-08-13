@@ -11,10 +11,9 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 const project = {
   name: 'Helpdesk',
   tagline: 'A service desk for people who run other people’s infrastructure: reactive support tickets and proactive field work in one binary.',
-  status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/stone-age-io/helpdesk',
   description: [
-    'A service desk for MSPs and platform operators. It handles reactive support tickets and the proactive side of running infrastructure: projects, installations, and on-site field work. One Go binary embeds PocketBase and a Vue SPA with two front doors — a staff app for agents and a self-service portal for requesters — so deployment is copying a file to the box.',
+    'A service desk for MSPs and platform operators. It handles reactive support tickets and the proactive side of running infrastructure: projects, installations, and on-site field work. One Go binary embeds PocketBase and a Vue SPA with two front doors, a staff app for agents and a self-service portal for requesters, so deployment is copying a file to the box.',
     'The signature feature is machine-generated tickets. Customer devices and automation publish over NATS and tickets appear with unforgeable, subject-based provenance; humans file through the portal, the staff app, or an authenticated webhook. Every on-site visit, logged hour, and project rolls up to the ticket, which stays the canonical ledger.',
   ],
   features: [
@@ -46,7 +45,7 @@ const project = {
       icon: 'pi-sitemap',
       color: '#ec4899',
       title: 'Projects & Locations',
-      text: 'A planning layer above the ledger groups tickets at a customer location over a target window. Crew and total time are derived at read time, never stored — drop the layer and the app still works.',
+      text: 'A planning layer above the ledger groups tickets at a customer location over a target window. Crew and total time are derived at read time, never stored, so you can drop the layer and the app still works.',
     },
     {
       icon: 'pi-bell',
@@ -59,7 +58,7 @@ const project = {
     title: 'How It Uses Stone-Age',
     points: [
       'Embedded PocketBase as the system of record: collections, access rules, and an admin UI compiled into one binary.',
-      'Two auth collections — staff and requesters — with customer-scoped rules enforced in the database, not the UI.',
+      'Two auth collections, staff and requesters, with customer-scoped rules enforced in the database rather than in the UI.',
       'JetStream ingestion of machine-generated tickets, with org identity read from the operator-signed subject and idempotency anchors that absorb redelivery.',
       'A second, disjoint JetStream channel publishes versioned event envelopes for MSP-internal automation, independent of the email channel.',
     ],

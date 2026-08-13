@@ -3,25 +3,28 @@
     <HeroSection />
     <ScreenshotTour />
     <BuiltOnTeaser />
-    <PillarsSection />
     <HowItWorksSection />
-    <BenefitsSection />
     <CallToAction />
   </div>
 </template>
 
 <script setup>
 /**
- * Home page view — streamlined landing page
+ * Home page view.
  *
- * Section flow (proof before architecture):
- * 1. Hero — Value proposition and CTAs
- * 2. Screenshots — Visual proof of the platform console
- * 3. Built On teaser — Applications/components proof, links to /built-on
- * 4. Pillars — Radio network analogy + three pillars (conceptual foundation)
- * 5. How It Works — Vertical pipeline from registration to observability
- * 6. Benefits — Why MSPs/SIs should choose Stone-Age
- * 7. Pricing/CTA — Deployment models and pricing
+ * Section flow (concrete before architecture):
+ * 1. Hero: what it does, plus the audience split into the two buyer pages
+ * 2. Screenshots: visual proof of the console
+ * 3. Built On teaser: the applications, named as things
+ * 4. How It Works: registration through observability, and the stack underneath
+ * 5. Pricing
+ *
+ * Two sections were removed rather than rewritten. PillarsSection led with a
+ * radio-network analogy and restated the architecture a third time; its only
+ * unique content (the component stack and the single-binary note) now closes
+ * How It Works. BenefitsSection restated isolation, static binaries,
+ * outbound-only connections, and edge autonomy, all of which are covered
+ * better on the two audience pages.
  *
  * Hero is eagerly loaded; everything else lazy-loads for performance.
  */
@@ -50,10 +53,6 @@ onMounted(() => {
 });
 
 // Lazy load below-fold sections
-const PillarsSection = defineAsyncComponent(() =>
-  import('../components/home/PillarsSection.vue')
-);
-
 const ScreenshotTour = defineAsyncComponent(() =>
   import('../components/home/ScreenshotTour.vue')
 );
@@ -64,10 +63,6 @@ const BuiltOnTeaser = defineAsyncComponent(() =>
 
 const HowItWorksSection = defineAsyncComponent(() =>
   import('../components/home/HowItWorksSection.vue')
-);
-
-const BenefitsSection = defineAsyncComponent(() =>
-  import('../components/home/BenefitsSection.vue')
 );
 
 const CallToAction = defineAsyncComponent(() =>

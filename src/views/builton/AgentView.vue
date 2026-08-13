@@ -11,7 +11,6 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 const project = {
   name: 'Agent',
   tagline: 'A lightweight system service for every device: telemetry, service control, and whitelisted commands in under 50 MB of RAM.',
-  status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/stone-age-io/agent',
   description: [
     'The per-device daemon of the Stone-Age stack. Install it on a gateway, server, or industrial PC and it publishes heartbeats and system telemetry over NATS, controls local services, and executes whitelisted commands, all from a single static Go binary with no runtime dependencies.',

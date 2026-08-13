@@ -9,54 +9,36 @@
     <div class="container relative z-10">
       <div class="max-w-4xl">
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          Connected Operations, <br class="hidden md:block" />
-          On Infrastructure You Own.
+          Every site you manage, <br class="hidden md:block" />
+          on one screen.
         </h1>
 
-        <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl">
-          Stone-Age.io is the open-source control plane for MSPs and system integrators:
-          identity, real-time messaging, and an encrypted mesh network. Multi-tenant by design,
-          shipped as small static binaries. Starts on a Raspberry Pi. Scales to hundreds of sites.
+        <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl">
+          One console and one automation layer across the equipment your sites already run: door
+          controllers, cameras, kiosks, sensors, machines, and anything else that speaks HTTP,
+          MQTT, or NATS. Nothing gets ripped out to make room for us.
         </p>
 
-        <div class="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">
-          <button 
-            @click="scrollToSection('pricing')" 
-            class="btn w-full sm:w-auto px-8 py-3.5 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5" 
+        <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
+          Where do you fit?
+        </p>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4">
+          <a
+            href="/for-integrators"
+            class="btn w-full sm:w-auto px-8 py-3.5 text-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
             style="background-color: white; color: var(--color-primary);"
-            aria-label="Get Started with Stone-Age.io"
+            aria-label="For security and technology integrators"
           >
-            Get Started
-          </button>
-          <a 
-            href="https://github.com/stone-age-io/platform" 
-            class="btn btn-outlined w-full sm:w-auto px-8 py-3.5 text-lg" 
-            style="border-color: rgba(255,255,255,0.3); color: white; background-color: rgba(255,255,255,0.05);"
-            aria-label="View Stone-Age.io on GitHub"
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <i class="pi pi-github mr-2 text-xl"></i>
-            View on Github
+            I run an integration business
           </a>
-        </div>
-
-        <!-- Tech Stack Validation (Social Proof of Architecture) -->
-        <div class="border-t border-white/10 pt-8">
-          <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
-            Built on Proven Open-Source Infrastructure
-          </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-4 text-gray-300 font-mono text-sm opacity-80">
-            <div class="flex items-center">
-              <i class="pi pi-share-alt mr-2 text-green-400"></i> NATS.io Messaging
-            </div>
-            <div class="flex items-center">
-              <i class="pi pi-shield mr-2 text-blue-400"></i> Nebula Mesh VPN
-            </div>
-            <div class="flex items-center">
-              <i class="pi pi-database mr-2 text-amber-400"></i> PocketBase API & UI 
-            </div>
-          </div>
+          <a
+            href="/for-it-teams"
+            class="btn btn-outlined w-full sm:w-auto px-8 py-3.5 text-lg"
+            style="border-color: rgba(255,255,255,0.3); color: white; background-color: rgba(255,255,255,0.05);"
+            aria-label="For IT and operations teams"
+          >
+            I run IT or operations for a facility
+          </a>
         </div>
       </div>
     </div>
@@ -65,31 +47,21 @@
 
 <script setup>
 /**
- * Hero section component for the landing page
- * Emphasizes the platform as a "Control Plane" for MSPs and SIs
- * Highlights single-binary simplicity and the "Powered By" stack clearly
+ * Hero section.
+ *
+ * Leads with concrete nouns rather than "control plane" or "integration bus".
+ * Several real prospects could not tell what the product was for when the
+ * abstraction came first; the generality is something a buyer discovers after
+ * the first concrete thing, not before it.
+ *
+ * The equipment list is deliberately an example rather than a definition. This
+ * is the platform site, not the access-control site, so naming door controllers
+ * first and machines and sensors alongside them keeps the range visible. Do not
+ * narrow this to buildings.
+ *
+ * The two buttons are the audience split. Both revenue-bearing buyers have a
+ * page written for them, and this is the only prominent route to either one.
  */
-
-/**
- * Scrolls to the specified section with smooth scrolling
- * @param {string} sectionId - The ID of the section to scroll to
- */
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    // Add a small delay to ensure any UI updates finish first
-    setTimeout(() => {
-      const headerOffset = 80; // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }, 100);
-  }
-};
 </script>
 
 <style scoped>

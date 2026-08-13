@@ -17,7 +17,7 @@
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
-              href="mailto:info@stone-age.io?subject=Demo%20access%20—%20integrator"
+              href="mailto:info@stone-age.io?subject=Demo%20access%20for%20integrators"
               class="btn btn-primary inline-flex items-center justify-center px-6 py-3 rounded-md font-medium"
             >Get demo access</a>
             <a
@@ -172,26 +172,79 @@ stone apply                      # idempotent, batched, performs no deletes</cod
       </div>
     </section>
 
-    <!-- Pricing + CTA -->
+    <!-- What it costs and what you keep -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+      <div class="container">
+        <div class="max-w-3xl mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
+            What it costs, and what you keep
+          </h2>
+          <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            A dedicated instance is <strong>$499/month and includes ten customer organizations</strong>.
+            Each organization after that is <strong>$49/month</strong>, counted from the platform. You set
+            your own price to your own customers. At $149 each, here is the arithmetic you were going to
+            do anyway.
+          </p>
+        </div>
+
+        <div class="max-w-3xl overflow-x-auto rounded-lg" :style="{ border: '1px solid var(--color-border)' }">
+          <table class="w-full text-sm">
+            <thead>
+              <tr :style="{ backgroundColor: 'var(--color-background-alt)' }">
+                <th
+                  v-for="(heading, index) in marginHeadings"
+                  :key="`mh-${index}`"
+                  class="text-left font-semibold px-4 py-3"
+                  :style="{ color: 'var(--color-content-primary)' }"
+                >{{ heading }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(row, index) in marginRows"
+                :key="`mr-${index}`"
+                :style="{ borderTop: '1px solid var(--color-border)' }"
+              >
+                <td
+                  v-for="(cell, cIdx) in row"
+                  :key="`mc-${index}-${cIdx}`"
+                  class="px-4 py-3"
+                  :style="{ color: cIdx === 3 ? 'var(--color-content-primary)' : 'var(--color-content-secondary)' }"
+                  :class="cIdx === 3 ? 'font-semibold' : ''"
+                >{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="max-w-3xl mt-6 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+          The margin holds at every scale, which means you can build a plan on it. There is no tier to
+          graduate into, no renegotiation at a threshold, and no per-door meter underneath it that makes
+          one customer's building more expensive than another's.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section pt-0" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div
           class="max-w-3xl mx-auto text-center p-8 rounded-lg"
           :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
         >
           <h2 class="text-2xl sm:text-3xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
-            Dedicated instance, from $499/month
+            Start with a login, not a slide deck
           </h2>
           <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
-            Your own instance, your own branding, your own keys, unlimited customer organizations.
-            Self-hosting is free and open source if you'd rather run it yourself, and the migration path
-            between the two is the same binary.
+            We will give you read-only access to a live instance running every application, and walk
+            through what your first thirty days would actually look like against the customers you
+            already have.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:info@stone-age.io?subject=Dedicated%20instance%20—%20integrator"
+              href="mailto:info@stone-age.io?subject=Dedicated%20instance%20for%20integrators"
               class="btn btn-primary inline-flex items-center justify-center px-6 py-3 rounded-md font-medium"
-            >Start a conversation</a>
+            >Get demo access</a>
             <a
               href="https://docs.stone-age.io"
               target="_blank"
@@ -259,6 +312,18 @@ const guardrails = [
     title: 'Enforced server-side on every request',
     body: 'Access rules are evaluated server-side on every request. What an identity may do does not depend on how carefully anyone worded an instruction.',
   },
+];
+
+// Channel margin at $149 per customer. $499 covers the first ten organizations,
+// $49 each thereafter. Keep these in sync with the price sheet; the founder-facing
+// business case carries the same table and the two must not drift.
+const marginHeadings = ['Your customer orgs', 'You pay us', 'You collect at $149', 'Your margin'];
+
+const marginRows = [
+  ['10', '$499', '$1,490', '66%'],
+  ['25', '$1,234', '$3,725', '67%'],
+  ['50', '$2,459', '$7,450', '67%'],
+  ['100', '$4,909', '$14,900', '67%'],
 ];
 
 const isolationPoints = [

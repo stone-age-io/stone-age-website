@@ -11,7 +11,6 @@ import ProjectPage from '../../components/builton/ProjectPage.vue';
 const project = {
   name: 'Kiosk',
   tagline: 'Self-service checkout for tool cribs and storerooms. Scan a badge, scan items, walk away.',
-  status: { label: 'In Development', color: '#f59e0b' },
   github: 'https://github.com/skeeeon/kiosk',
   description: [
     'A self-service checkout kiosk for tool cribs and consumable storerooms. One ~40 MB Go binary embeds PocketBase, SQLite, and a touch-friendly Vue UI, so deployment is copying a file to the edge box. Workers identify by badge scan; no logins at the kiosk.',
@@ -58,7 +57,7 @@ const project = {
   stoneAge: {
     title: 'How It Uses Stone-Age',
     points: [
-      'Embedded PocketBase per binary — kiosk, controller, and timeclock each own their schema via Go migrations.',
+      'Embedded PocketBase per binary: kiosk, controller, and timeclock each own their schema via Go migrations.',
       'JetStream event streams with idempotency anchors, so controller projections survive redelivery as no-ops.',
       'KV buckets for per-kiosk catalog sync: the controller publishes, each kiosk watches its own slice.',
       'NATS request/reply for admin commands from the controller down to any kiosk in the fleet.',

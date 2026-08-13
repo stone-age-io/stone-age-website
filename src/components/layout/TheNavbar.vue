@@ -17,9 +17,9 @@
     <button
       @click="scrollToSection('pricing')"
       class="btn btn-primary"
-      aria-label="Get Started with Stone-Age.io"
+      aria-label="See Stone-Age.io pricing"
     >
-      Get Started
+      Pricing
     </button>
   </nav>
 
@@ -83,9 +83,9 @@
             <button
               @click="scrollToSectionAndCloseMenu('pricing')"
               class="btn btn-primary w-full justify-center"
-              aria-label="Get Started with Stone-Age.io"
+              aria-label="See Stone-Age.io pricing"
             >
-              Get Started
+              Pricing
             </button>
           </div>
         </div>
@@ -108,10 +108,10 @@ import StoneLogo from '../common/StoneLogo.vue';
 // when the section exists, otherwise navigate to /#id); `href` entries are
 // standalone pages.
 const navItems = [
-  { id: 'platform-tour', label: 'Platform' },
-  { id: 'architecture', label: 'Architecture' },
-  { id: 'how-it-works', label: 'How It Works' },
-  { href: '/built-on', label: 'Built On' }
+  { href: '/for-integrators', label: 'For Integrators' },
+  { href: '/for-it-teams', label: 'For IT Teams' },
+  { href: '/built-on', label: 'Built On' },
+  { id: 'how-it-works', label: 'How It Works' }
 ];
 
 // Reactive state
