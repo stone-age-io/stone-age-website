@@ -3,7 +3,7 @@
     <div class="container text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Pricing</h2>
       <p class="text-lg sm:text-xl mb-12 max-w-2xl mx-auto text-white">
-        Every application included. No per-door, per-camera, or per-device metering.
+        One price per location, and everything in the building is included.
       </p>
 
       <!-- Pricing cards grid -->
@@ -86,7 +86,7 @@ const pricingPlans = [
     features: [
       'Every application: access control, video, kiosks, monitoring',
       'Up to 3 sites included, $49/mo per additional site',
-      'No per-door, per-camera, or per-device metering',
+      'However many doors, cameras, and devices are in them',
       'Remote support and policy changes included; on-site work quoted'
     ],
     ctaText: 'Get demo access',

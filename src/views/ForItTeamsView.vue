@@ -154,9 +154,9 @@
           </p>
           <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
             A hosted account is <strong :style="{ color: 'var(--color-content-primary)' }">$149/month</strong>
-            for every application across up to three sites, and $49/month for each site after that.
-            No per-door, per-camera, or per-device metering. The source is open and the binaries are
-            yours, so nothing you build on top of it depends on us still being here in five years.
+            for every application across up to three sites, and $49/month for each site after that,
+            however many doors, cameras, and devices are in them. The source is open and the binaries
+            are yours, so nothing you build on top of it depends on us still being here in five years.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
