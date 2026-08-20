@@ -32,8 +32,53 @@
       </div>
     </section>
 
-    <!-- The two structural arguments -->
+    <!--
+      Claim two, and per Sales Messaging it is the one that converts: an integrator
+      can start with the customers they already have. Deliberately scoped to what
+      the gateway and the bus actually do (webhook in, API call out, cron poll,
+      native MQTT). It does NOT claim we administer another vendor's panel or take
+      over its authorization, because we do not. Keep it that way.
+    -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+      <div class="container">
+        <div class="max-w-3xl mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
+            Start with the customers you already have
+          </h2>
+          <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            Their installed base is the asset, not the obstacle. The automation layer speaks HTTP in
+            both directions and MQTT natively, so systems already running in a customer's buildings can
+            put their events on the bus without new hardware. You get one screen across their sites now,
+            and replacing a panel becomes a decision you make later, per door, instead of a precondition
+            for the first invoice.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            v-for="(item, index) in bridgingPoints"
+            :key="`bridge-${index}`"
+            class="p-5 rounded-lg"
+            :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+          >
+            <h3 class="font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
+              {{ item.title }}
+            </h3>
+            <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+              {{ item.body }}
+            </p>
+          </div>
+        </div>
+
+        <p class="max-w-3xl mt-6 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+          Where you do install new hardware, the access control application drives OSDP readers and GPIO
+          or I2C lock hardware directly, so a retrofit and a new build run on the same stack.
+        </p>
+      </div>
+    </section>
+
+    <!-- The two structural arguments -->
+    <section class="section pt-0" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
@@ -348,6 +393,24 @@ stone apply                      # idempotent, batched, performs no deletes</cod
  * Every claim here is backed by shipped behavior. Do not add a capability claim to
  * this page that isn't demonstrable on the reference instance.
  */
+
+// Scoped to shipped behavior: the rule engine's gateway is bidirectional HTTP,
+// MQTT is native to the bus, and the scheduler covers pull-only APIs. Nothing here
+// claims control of another vendor's access decisions.
+const bridgingPoints = [
+  {
+    title: 'Webhooks in',
+    body: 'A system that can post a webhook becomes events on your bus. The gateway verifies the signature, publishes to a subject you choose, and answers the sender immediately so nothing upstream waits on you.',
+  },
+  {
+    title: 'API calls out',
+    body: 'Rules call external APIs with retry and backoff, and a cron schedule polls anything that only offers a pull interface. Both directions, one YAML syntax, one binary.',
+  },
+  {
+    title: 'MQTT and agents',
+    body: 'Devices already speaking MQTT connect straight to the bus, and the edge agent covers the servers and gateways in the closet. Nothing has to be re-flashed to become visible.',
+  },
+];
 
 const structuralArguments = [
   {
