@@ -141,7 +141,8 @@ stone apply                      # idempotent, batched, performs no deletes</cod
           <p class="leading-relaxed mb-4" :style="{ color: 'var(--color-content-secondary)' }">
             The CLI documents its own surface for AI assistants, so provisioning a site can be a
             conversation instead of an afternoon. The obvious question in this trade is whether a
-            language model can be trusted near a door. The answer is structural, not a promise:
+            language model can be trusted near a door. The answer is a short list of boundaries you
+            can check yourself, not a promise:
           </p>
         </div>
 
@@ -150,6 +151,7 @@ stone apply                      # idempotent, batched, performs no deletes</cod
             v-for="(guard, index) in guardrails"
             :key="`guard-${index}`"
             class="p-5 rounded-lg"
+            :class="guard.span ? 'md:col-span-2' : ''"
             :style="{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-border)' }"
           >
             <h3 class="font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
@@ -430,10 +432,28 @@ const iacPoints = [
   'The same CLI reads and writes NATS subjects and JetStream KV, so commissioning and troubleshooting are one tool.',
 ];
 
+// Accuracy constraint, learned the hard way: `stone apply` has no confirmation
+// prompt and no --yes flag. Its only flag is --workspace. An assistant holding a
+// write credential can run it unattended, and any confirmation a reader has seen
+// came from their agent harness asking to run a shell command, not from us. So do
+// not restore the old "it proposes a diff, it does not press the button" card, and
+// do not describe the review step as something the tooling enforces.
+//
+// What the tooling does enforce, and what these cards may therefore claim:
+//   - apply creates and updates only; it never deletes absent records.
+//   - entity delete and the destructive JetStream verbs prompt, and skipping the
+//     prompt requires an explicit -y/--yes.
+//   - auth login is interactive; the skill states an agent cannot supply credentials.
+//   - a read-only role exists and can hold no write capability at all.
+//   - collection rules are evaluated server-side on every request.
 const guardrails = [
   {
-    title: 'It proposes a diff, it does not press the button',
-    body: 'The assistant edits YAML in a working copy. A human reads the diff and runs apply. Nothing reaches a live system between those two steps.',
+    title: 'The change arrives as a diff',
+    body: 'The assistant edits YAML in a git workspace, so what it proposes is reviewable before anything moves: git diff shows exactly which records would change. Running apply is a separate command, and how tightly you gate that is a policy you set in your own agent rather than one we set for you.',
+  },
+  {
+    title: 'apply adds and updates, and never deletes',
+    body: 'Re-running it is safe by design, so the worst case for a bad proposal is a record you correct rather than one you restore. Removing something is a different command, and that one asks before it acts; skipping the prompt takes an explicit flag.',
   },
   {
     title: 'Read-only by default',
@@ -445,7 +465,8 @@ const guardrails = [
   },
   {
     title: 'Enforced server-side on every request',
-    body: 'Access rules are evaluated server-side on every request. What an identity may do does not depend on how carefully anyone worded an instruction.',
+    body: 'Access rules are evaluated server-side on every request. What an identity may do does not depend on how carefully anyone worded an instruction, or on which agent is holding the credential.',
+    span: true,
   },
 ];
 
