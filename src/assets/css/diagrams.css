@@ -1,0 +1,125 @@
+/*
+ * Stone-Age.io Diagram Primitives
+ *
+ * Shared styling for the hand-authored SVG diagrams on the audience pages.
+ * Two rules keep these honest:
+ *   1. Every color is a CSS variable or a stack color, so one asset serves both
+ *      themes. Never export a diagram as a PNG — it will break in dark mode.
+ *   2. If a diagram needs a legend, it is too complex. Meaning is carried by
+ *      solid vs. dashed strokes and by the stack's existing colors (NATS purple,
+ *      Nebula green), which the rest of the site already teaches.
+ */
+
+.dg-scroll {
+  @apply overflow-x-auto;
+}
+
+.dg {
+  @apply block h-auto;
+  /* Below this the labels stop being readable, so scroll rather than shrink —
+     the same tradeoff the code blocks and tables on this site already make. */
+  min-width: 660px;
+  width: 100%;
+}
+
+/* ==============================
+   Boxes
+   ============================== */
+.dg-box {
+  fill: var(--color-background-alt);
+  stroke: var(--color-border-primary);
+  stroke-width: 1.5;
+}
+
+/*
+ * Solid accent: part of the platform. Dashed: tooling the customer chooses and
+ * runs, which integrates over the bus. Never label a diagram half "ours" — the
+ * data is the customer's wherever it sits; only the operator of a component
+ * differs, and that is what solid vs. dashed says.
+ */
+.dg-box-platform {
+  stroke: #3b82f6;
+}
+
+.dg-box-bus {
+  stroke: #8b5cf6;
+}
+
+.dg-box-byo {
+  stroke: var(--color-content-secondary);
+  stroke-dasharray: 5 4;
+}
+
+/* Nested containers: the outer box you own, the tenant boxes inside it. */
+.dg-box-instance {
+  fill: var(--color-background-alt);
+  stroke: var(--color-primary);
+}
+
+.dg-box-org {
+  fill: var(--color-background);
+  stroke: var(--color-border-primary);
+}
+
+/* ==============================
+   Text
+   ============================== */
+.dg-title {
+  fill: var(--color-content-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dg-sub {
+  fill: var(--color-content-secondary);
+  font-size: 11px;
+}
+
+.dg-note {
+  fill: var(--color-error);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ==============================
+   Connectors
+   ============================== */
+.dg-line {
+  stroke: var(--color-content-secondary);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.dg-arrow {
+  fill: var(--color-content-secondary);
+}
+
+/* A path that exists in the reader's head but not in the system. */
+.dg-blocked {
+  stroke: var(--color-content-secondary);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  fill: none;
+}
+
+.dg-x {
+  stroke: var(--color-error);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* Masks the blocked connector behind the X. Matches .dg-box-instance fill. */
+.dg-x-bg {
+  fill: var(--color-background-alt);
+}
+
+/* ==============================
+   Stack-colored markers
+   ============================== */
+.dg-dot-nats {
+  fill: #8b5cf6;
+}
+
+.dg-dot-nebula {
+  fill: #10b981;
+}

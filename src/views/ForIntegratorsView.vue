@@ -133,10 +133,71 @@ stone apply                      # idempotent, batched, performs no deletes</cod
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
             Each customer organization gets its own NATS account and its own Nebula certificate
-            authority. A compromised device in one customer's building has no path into another's. On a
-            dedicated instance you also hold your own signing keys, your own database, and your own
-            encryption key, so the isolation boundary is the machine rather than the correctness of our rules.
+            authority. Accounts start isolated, so absent a grant you created, a compromised device in
+            one customer's building has no path into another's. Where you do want traffic to cross, it is
+            an export and a matching import you can point at: a managed organization exports its
+            application events into your own account, remapped under a prefix carrying the customer's
+            identity in a signed token rather than in a payload. On a dedicated instance you also hold
+            your own signing keys, your own database, and your own encryption key, so the isolation
+            boundary is the machine rather than the correctness of our rules.
           </p>
+        </div>
+
+        <!--
+          Tenancy diagram. The claim in the heading is the one a technical buyer will
+          not take on faith, so the picture shows the two per-customer boundaries by
+          name and strikes out the path a reader is already imagining.
+
+          The strike means "not by default", not "impossible": accounts start isolated,
+          and traffic crosses only where an export and a matching import exist. Do not
+          restore an absolute label here. Managed organizations use exactly that
+          mechanism to export their app events into the operator hub account, so an
+          absolute claim would contradict how Helpdesk receives tickets.
+        -->
+        <div class="dg-scroll mb-10">
+          <svg
+            class="dg"
+            viewBox="0 0 720 234"
+            role="img"
+            aria-label="Your dedicated instance holds each customer in its own organization, with its own NATS account and its own Nebula certificate authority. No path exists between two customers unless you grant one."
+          >
+            <rect x="2" y="2" width="716" height="228" rx="10" class="dg-box-instance" stroke-width="1.5" />
+            <text x="20" y="28" class="dg-title">Your dedicated instance</text>
+            <text x="20" y="46" class="dg-sub">your signing keys, your database, your encryption key</text>
+
+            <!-- Customer A -->
+            <rect x="20" y="62" width="210" height="96" rx="8" class="dg-box-org" stroke-width="1.5" />
+            <text x="36" y="88" class="dg-title">Customer A</text>
+            <circle cx="42" cy="110" r="4" class="dg-dot-nats" />
+            <text x="54" y="114" class="dg-sub">own NATS account</text>
+            <circle cx="42" cy="134" r="4" class="dg-dot-nebula" />
+            <text x="54" y="138" class="dg-sub">own Nebula CA</text>
+
+            <!-- Customer B -->
+            <rect x="255" y="62" width="210" height="96" rx="8" class="dg-box-org" stroke-width="1.5" />
+            <text x="271" y="88" class="dg-title">Customer B</text>
+            <circle cx="277" cy="110" r="4" class="dg-dot-nats" />
+            <text x="289" y="114" class="dg-sub">own NATS account</text>
+            <circle cx="277" cy="134" r="4" class="dg-dot-nebula" />
+            <text x="289" y="138" class="dg-sub">own Nebula CA</text>
+
+            <!-- Customer C -->
+            <rect x="490" y="62" width="210" height="96" rx="8" class="dg-box-org" stroke-width="1.5" />
+            <text x="506" y="88" class="dg-title">Customer C</text>
+            <circle cx="512" cy="110" r="4" class="dg-dot-nats" />
+            <text x="524" y="114" class="dg-sub">own NATS account</text>
+            <circle cx="512" cy="134" r="4" class="dg-dot-nebula" />
+            <text x="524" y="138" class="dg-sub">own Nebula CA</text>
+
+            <!-- The path a reader assumes exists -->
+            <path d="M 125 158 V 192 H 360 V 158" class="dg-blocked" />
+            <circle cx="242" cy="192" r="11" class="dg-x-bg" />
+            <line x1="235" y1="185" x2="249" y2="199" class="dg-x" />
+            <line x1="249" y1="185" x2="235" y2="199" class="dg-x" />
+            <text x="242" y="218" text-anchor="middle" class="dg-note">no path unless you grant one</text>
+
+            <text x="700" y="218" text-anchor="end" class="dg-sub">one account and one CA per customer, however many you add</text>
+          </svg>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div v-for="(item, index) in isolationPoints" :key="`iso-${index}`">
@@ -205,13 +266,24 @@ stone apply                      # idempotent, batched, performs no deletes</cod
                 :key="`mr-${index}`"
                 :style="{ borderTop: '1px solid var(--color-border)' }"
               >
-                <td
-                  v-for="(cell, cIdx) in row"
-                  :key="`mc-${index}-${cIdx}`"
-                  class="px-4 py-3"
-                  :style="{ color: cIdx === 3 ? 'var(--color-content-primary)' : 'var(--color-content-secondary)' }"
-                  :class="cIdx === 3 ? 'font-semibold' : ''"
-                >{{ cell }}</td>
+                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">{{ row.orgs }}</td>
+                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">
+                  {{ money(row.pay) }}
+                  <!-- Fixed-width track, not a percentage of the cell: both columns
+                       have to share one axis or the bars are not comparable. -->
+                  <div class="bar-track">
+                    <div class="bar bar-pay" :style="{ width: barWidth(row.pay) }"></div>
+                  </div>
+                </td>
+                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">
+                  {{ money(row.collect) }}
+                  <div class="bar-track">
+                    <div class="bar bar-collect" :style="{ width: barWidth(row.collect) }"></div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 font-semibold" :style="{ color: 'var(--color-content-primary)' }">
+                  {{ row.margin }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -319,17 +391,26 @@ const guardrails = [
 // business case carries the same table and the two must not drift.
 const marginHeadings = ['Your customer orgs', 'You pay us', 'You collect at $149', 'Your margin'];
 
+// Numbers, not strings, so the bars can be drawn from the same figures the table
+// prints. barMax is the largest value in the set: both columns scale against it,
+// which is what makes the gap between what you pay and what you collect readable.
 const marginRows = [
-  ['10', '$499', '$1,490', '66%'],
-  ['25', '$1,234', '$3,725', '67%'],
-  ['50', '$2,459', '$7,450', '67%'],
-  ['100', '$4,909', '$14,900', '67%'],
+  { orgs: '10', pay: 499, collect: 1490, margin: '66%' },
+  { orgs: '25', pay: 1234, collect: 3725, margin: '67%' },
+  { orgs: '50', pay: 2459, collect: 7450, margin: '67%' },
+  { orgs: '100', pay: 4909, collect: 14900, margin: '67%' },
 ];
+
+const barMax = Math.max(...marginRows.map((row) => row.collect));
+
+const money = (amount) => `$${amount.toLocaleString('en-US')}`;
+
+const barWidth = (amount) => `${(amount / barMax) * 100}%`;
 
 const isolationPoints = [
   {
     title: 'Per-customer NATS account',
-    body: 'Signed credentials scoped to one organization. Cross-tenant reach is unrepresentable rather than merely filtered out.',
+    body: 'Signed credentials scoped to one organization. Reach into another tenant is absent from the credential itself, so crossing accounts takes an export and a matching import you created, not a filter someone can misconfigure.',
   },
   {
     title: 'Per-customer Nebula CA',
@@ -341,3 +422,33 @@ const isolationPoints = [
   },
 ];
 </script>
+
+<style scoped>
+/* Diagram primitives live in assets/css/diagrams.css — two pages use them. */
+
+/*
+ * Margin bars. The track is a fixed width rather than a percentage of the table
+ * cell, so the "you pay" and "you collect" columns share one axis and can be
+ * compared across columns as well as down them.
+ */
+.bar-track {
+  @apply mt-1.5 h-1.5 rounded-full;
+  width: 96px;
+  max-width: 100%;
+  background-color: var(--color-border-primary);
+}
+
+.bar {
+  @apply h-1.5 rounded-full;
+  min-width: 3px;
+}
+
+.bar-pay {
+  background-color: var(--color-content-secondary);
+  opacity: 0.5;
+}
+
+.bar-collect {
+  background-color: var(--color-primary-500);
+}
+</style>

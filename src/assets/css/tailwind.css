@@ -2,6 +2,7 @@
 @import './primevue-theme.css';
 @import './pricing-cards.css';
 @import './technical-cards.css';
+@import './diagrams.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

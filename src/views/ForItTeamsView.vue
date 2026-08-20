@@ -48,6 +48,66 @@
           </p>
         </div>
 
+        <!--
+          Data-path diagram. The point is the fan-out: one bus, and anything can
+          subscribe to it. The lower path is drawn dashed because those three are
+          tooling the customer picks and runs, which the prose below the cards says
+          in words. Deliberately no "ours/yours" labels: the data is the customer's
+          on both paths, so any label of that kind would be wrong. Adapted from the
+          platform docs' observability flowchart; keep the two in agreement.
+        -->
+        <div class="dg-scroll mb-10">
+          <svg
+            class="dg"
+            viewBox="0 40 720 168"
+            role="img"
+            aria-label="Devices publish to NATS JetStream. The bus feeds the console and KV twin for live state, and Telegraf, a time-series database, and Grafana for history."
+          >
+            <defs>
+              <marker
+                id="itArrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" class="dg-arrow" />
+              </marker>
+            </defs>
+
+            <!-- Source -->
+            <rect x="4" y="92" width="108" height="56" rx="6" class="dg-box" />
+            <text x="58" y="116" text-anchor="middle" class="dg-title">Door or sensor</text>
+            <text x="58" y="132" text-anchor="middle" class="dg-sub">or edge agent</text>
+
+            <line x1="112" y1="120" x2="150" y2="120" class="dg-line" marker-end="url(#itArrow)" />
+
+            <!-- The bus -->
+            <rect x="156" y="48" width="116" height="148" rx="8" class="dg-box dg-box-bus" />
+            <text x="214" y="116" text-anchor="middle" class="dg-title">NATS</text>
+            <text x="214" y="134" text-anchor="middle" class="dg-sub">JetStream</text>
+
+            <!-- Live state -->
+            <line x1="272" y1="80" x2="296" y2="80" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="300" y="55" width="196" height="50" rx="6" class="dg-box dg-box-platform" />
+            <text x="398" y="79" text-anchor="middle" class="dg-title">Console + KV twin</text>
+            <text x="398" y="95" text-anchor="middle" class="dg-sub">live state in the browser</text>
+
+            <!-- History: tooling the customer picks -->
+            <line x1="272" y1="171" x2="296" y2="171" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="300" y="146" width="108" height="50" rx="6" class="dg-box dg-box-byo" />
+            <text x="354" y="170" text-anchor="middle" class="dg-title">Telegraf</text>
+            <text x="354" y="186" text-anchor="middle" class="dg-sub">consumer</text>
+
+            <line x1="408" y1="171" x2="432" y2="171" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="436" y="146" width="118" height="50" rx="6" class="dg-box dg-box-byo" />
+            <text x="495" y="170" text-anchor="middle" class="dg-title">Your TSDB</text>
+            <text x="495" y="186" text-anchor="middle" class="dg-sub">VictoriaMetrics</text>
+
+            <line x1="554" y1="171" x2="578" y2="171" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="582" y="146" width="134" height="50" rx="6" class="dg-box dg-box-byo" />
+            <text x="649" y="170" text-anchor="middle" class="dg-title">Grafana / Perses</text>
+            <text x="649" y="186" text-anchor="middle" class="dg-sub">history and trends</text>
+          </svg>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div
             v-for="(path, index) in dataPaths"
@@ -64,6 +124,30 @@
           </div>
         </div>
 
+        <!--
+          One block rather than one per card: at three columns a card is about 200px
+          of text width, narrower than any command worth showing. The comments map
+          1:1 to the three cards above.
+        -->
+        <div
+          class="rounded-lg p-5 overflow-x-auto mt-8"
+          :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+        >
+          <pre class="font-mono text-xs sm:text-sm leading-relaxed" :style="{ color: 'var(--color-content-primary)' }"><code># scrape it: rule-router's metrics listener, :2112 by default
+scrape_configs:
+  - job_name: rule-router
+    static_configs:
+      - targets: ['site-a:2112']
+
+# stream it: every access decision, live off the bus
+$ nats sub 'access.decision.>'
+[#1] access.decision.granted.door-14 {"user":"a.reyes","door":"door-14"}
+
+# query it: current state of one device, straight from KV
+$ stone kv get twins door-14
+{"online":true,"lock":"secured","last_seen":"2026-08-19T14:02:11Z"}</code></pre>
+        </div>
+
         <p class="mt-8 text-sm max-w-3xl" :style="{ color: 'var(--color-content-secondary)' }">
           We don't build the time-series database and we don't build the dashboard. Prometheus,
           VictoriaMetrics, Grafana, and Perses already do those jobs well, and our job is to make sure
@@ -71,7 +155,6 @@
         </p>
       </div>
     </section>
-
     <!-- Runs where you put it -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
@@ -192,6 +275,11 @@
  * catalogue (see its docs/12-observability.md). The platform console does NOT expose
  * one — do not claim otherwise here. Business telemetry reaches a TSDB by subscribing
  * to NATS subjects and forwarding, which is what dataPaths describes.
+ *
+ * The snippet block shows real surfaces, not pseudocode: :2112 is rule-router's default
+ * metrics listener, access.decision.granted.* is what the access rules publish, and
+ * `stone kv get <bucket> <key>` is the CLI's documented KV read. Keep them runnable.
+ * A snippet a reader cannot paste is worse than no snippet.
  */
 
 const dataPaths = [
@@ -208,7 +296,6 @@ const dataPaths = [
     body: 'Device state lives in JetStream key-value buckets you can read directly, and the whole management API is plain REST with an admin UI in front of it. Nothing is hidden behind an integration tier.',
   },
 ];
-
 const deployPoints = [
   {
     title: 'Small static binaries',
