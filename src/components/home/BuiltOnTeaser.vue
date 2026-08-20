@@ -1,11 +1,8 @@
 <template>
   <section id="built-on" class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
     <div class="container">
-      <h2 class="section-title text-center">More Than a Console</h2>
-      <p class="section-subtitle text-center">
-        The console runs the substrate. These run on it: real, open-source systems
-        we build and operate on the same foundation you get.
-      </p>
+      <h2 class="section-title text-center">{{ heading }}</h2>
+      <p class="section-subtitle text-center">{{ subtitle }}</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
         <a
@@ -43,10 +40,25 @@
 
 <script setup>
 /**
- * BuiltOnTeaser — compact home-page strip linking to the Built On hub.
- * Sits directly below the console screenshots: the console manages the
- * substrate, these applications and components run on it.
+ * BuiltOnTeaser — compact strip linking to the Built On hub.
+ *
+ * On the home page it sits below the console screenshots: the console manages
+ * the substrate, these run on it. The audience pages reuse it to answer "what
+ * runs on this", which is why the framing is a prop. The item list is not:
+ * one place to add an application, so the pages cannot drift apart.
  */
+
+defineProps({
+  heading: {
+    type: String,
+    default: 'More Than a Console',
+  },
+  subtitle: {
+    type: String,
+    default:
+      'The console runs the substrate. These run on it: real, open-source systems we build and operate on the same foundation you get.',
+  },
+});
 
 const teaserItems = [
   {

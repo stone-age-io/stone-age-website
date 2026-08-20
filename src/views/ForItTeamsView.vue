@@ -8,12 +8,12 @@
             For IT and operations teams
           </p>
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" :style="{ color: 'var(--color-content-primary)' }">
-            Your building data belongs in the tools your team already uses.
+            The systems your team inherited should run like the systems it chose.
           </h1>
           <p class="text-lg sm:text-xl leading-relaxed mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-            Door events, sensor telemetry, and device state live on an open message bus instead of
-            inside someone's SaaS. Scrape it, stream it, retain it, and graph it next to the rest of
-            your infrastructure.
+            Door controllers, kiosks, cameras, and sensors usually arrive as an appliance with a
+            vendor cloud behind it. Here every event is a message on an open bus, on hardware you
+            own: scrape it, stream it, retain it, and graph it next to the rest of your infrastructure.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
@@ -32,6 +32,11 @@
       </div>
     </section>
 
+    <BuiltOnTeaser
+      heading="What runs on it"
+      subtitle="You do not start from an empty bus. These are the applications and components that run on it, all open source, and a hosted account includes every one of them."
+    />
+
     <!-- The silo contrast -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
@@ -40,8 +45,8 @@
             No silo, no export button
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            Most access control and building systems keep their data inside a vendor's cloud, and the
-            integration story is a CSV download or a paid API tier. Here the event stream is the product
+            Most access control, kiosk, and telemetry systems keep their data inside a vendor's cloud,
+            and the integration story is a CSV download or a paid API tier. Here the event stream is the product
             surface. Everything that happens is a message on a subject you can subscribe to, with
             JetStream retention behind it, so bringing it into your existing observability stack is
             plumbing rather than a procurement exercise.
@@ -184,7 +189,7 @@ $ stone kv get twins door-14
       <div class="container">
         <div class="max-w-3xl">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
-            The building keeps working when the link doesn't
+            Decisions happen on site, not on a network round trip
           </h2>
           <p class="leading-relaxed mb-4" :style="{ color: 'var(--color-content-secondary)' }">
             Every site runs a leaf node with a local mirror of its own configuration and a local copy of
@@ -266,10 +271,20 @@ $ stone kv get twins door-14
 </template>
 
 <script setup>
+import BuiltOnTeaser from '../components/home/BuiltOnTeaser.vue';
+
 /**
  * For IT Teams — audience page for the IT-literate end customer.
  *
- * Lead claim: "your building data belongs in the tools your team already uses."
+ * Lead claim: the appliance contrast. The systems this team inherited should
+ * behave like the ones it chose.
+ *
+ * Do not reframe this page around "building data" again. BMS and smart-building
+ * language files it under a facilities budget, and IT does not buy a BMS while
+ * facilities does not buy a message bus. Doors and badges stay as examples
+ * because they are concrete and they differentiate; they are not the category.
+ * Kiosk and Helpdesk are on this page's strip precisely because neither is a
+ * building system, and both are things an IT team would own.
  *
  * Accuracy note: rule-router exposes a Prometheus endpoint with a documented metric
  * catalogue (see its docs/12-observability.md). The platform console does NOT expose
