@@ -56,6 +56,14 @@ import PricingCard from '../pricing/PricingCard.vue';
  * only expansion-revenue mechanism, and a published "unlimited" cannot be
  * walked back on a quote.
  *
+ * "Customer" means the integrator's customer and belongs only on the Dedicated
+ * card, where a possessive makes that explicit: "your customers". Hosted reads
+ * "for end users" because the buyer there operates the building and is nobody's
+ * customer in this vocabulary. The two used to disagree, with Hosted sold to
+ * "end customers" and Dedicated counting "customer organizations", which left
+ * the word meaning the reader on one card and the reader's client on the next.
+ * The system diagram labels its boundary "Site" for the same reason.
+ *
  * Self-hosted is a card on purpose. Adoption is the only usage signal this
  * business has while it has no customers, and hiding the open-source option
  * from the buyers most likely to read the repository would cost more than it
@@ -79,7 +87,7 @@ import PricingCard from '../pricing/PricingCard.vue';
 const pricingPlans = [
   {
     name: 'Hosted account',
-    subtitle: 'For end customers',
+    subtitle: 'For end users',
     headerBgColor: '#1f2937',
     subtitleClass: 'text-gray-300',
     price: '$149<span class="text-base font-normal">/mo</span>',
@@ -102,7 +110,7 @@ const pricingPlans = [
     features: [
       'Your own instance, your brand, your domains',
       'Your own signing keys, database, and encryption key',
-      'Includes 10 customer organizations, $49/mo each after',
+      'Includes 10 organizations, $49/mo each after',
       'A service desk your customers see under your logo'
     ],
     ctaText: 'For integrators',

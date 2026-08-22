@@ -1,13 +1,16 @@
 /*
  * Stone-Age.io Diagram Primitives
  *
- * Shared styling for the hand-authored SVG diagrams on the audience pages.
+ * Shared styling for the hand-authored SVG diagrams on the home and audience pages.
  * Two rules keep these honest:
  *   1. Every color is a CSS variable or a stack color, so one asset serves both
  *      themes. Never export a diagram as a PNG — it will break in dark mode.
  *   2. If a diagram needs a legend, it is too complex. Meaning is carried by
  *      solid vs. dashed strokes and by the stack's existing colors (NATS purple,
  *      Nebula green), which the rest of the site already teaches.
+ *      The lens buttons on the home-page diagram replace a legend rather than
+ *      adding one: a reader who clicks learns a path through the system, which
+ *      is not something a color key can tell them.
  */
 
 .dg-scroll {
@@ -122,4 +125,90 @@
 
 .dg-dot-nebula {
   fill: #10b981;
+}
+
+/* ==============================
+   Setup connectors
+   ============================== */
+/*
+ * A connector that carries setup rather than traffic. Dashed because it runs
+ * once at bootstrap and then goes quiet, and because nothing on the data path
+ * depends on it staying up. Distinct from .dg-blocked on purpose: that one
+ * denies a path, this one is a path that exists and is simply not hot.
+ */
+.dg-line-setup {
+  stroke: var(--color-content-secondary);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  fill: none;
+}
+
+/* ==============================
+   Lenses (interactive highlighting)
+   ============================== */
+/*
+ * One picture, several paths through it. A lens dims what it does not touch
+ * rather than recoloring what it does: the stroke colors above carry meaning
+ * (NATS purple, platform blue, dashed = you run it), so a highlight that
+ * repainted a box would overwrite the vocabulary the rest of the site teaches.
+ *
+ * Dimmed is 0.28 rather than 0 because the reader needs the whole system to
+ * stay on screen. A part that vanishes reads as "not there"; a part that fades
+ * reads as "not this time". With no lens selected nothing is dimmed, so the
+ * diagram is complete and correct before anyone clicks and if nobody ever does.
+ */
+.dg-group {
+  transition: opacity 0.25s ease;
+}
+
+.dg-dim {
+  opacity: 0.28;
+}
+
+/* Weight, not hue: markers default to markerUnits="strokeWidth", so the
+   arrowheads thicken with the line and stay the color they already were. */
+.dg-hot .dg-line,
+.dg-hot .dg-line-setup {
+  stroke-width: 2.25;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-group {
+    transition: none;
+  }
+}
+
+/* Lens buttons. Same shape as the screenshot tour's tabs so the two reading
+   controls on the home page behave alike. */
+.dg-lens {
+  @apply inline-flex items-center px-2 py-1.5 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all;
+  color: var(--color-content-secondary);
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-primary);
+}
+
+.dg-lens:hover {
+  color: var(--color-content-primary);
+  background-color: var(--color-surface-hover);
+}
+
+.dg-lens-active {
+  color: white;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.dg-lens-active:hover {
+  color: white;
+  background-color: var(--color-primary-800);
+}
+
+/*
+ * Portrait variant. A landscape diagram on a phone is a 660px canvas behind a
+ * scrollbar, which is a worse reading experience than no diagram at all, so the
+ * small-screen layout is drawn separately and rendered at its natural size.
+ * Vertical scrolling is what a phone is for.
+ */
+.dg-portrait {
+  min-width: 0;
 }
