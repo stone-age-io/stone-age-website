@@ -1,12 +1,5 @@
 <template>
-  <!--
-    On a phone the caption comes first. The portrait picture is taller than the
-    remaining screen either way, and the sentence explaining the job you just
-    picked is the part that has to be next to the button you picked it with. On
-    a wide screen the whole picture fits, so the caption reads as a legend under
-    it instead.
-  -->
-  <div class="flex flex-col max-w-3xl mx-auto">
+  <div class="max-w-3xl mx-auto">
     <!--
       Two layouts, one set of claims. Landscape below reads left to right and
       wants 660px; portrait reads top to bottom and fits a phone at 1:1, which
@@ -20,7 +13,7 @@
       container width the picture is over 500px tall, which pushes everything
       that responds to a lens off the bottom of the screen.
     -->
-    <div class="hidden sm:block dg-scroll order-2">
+    <div class="hidden sm:block dg-scroll">
       <svg
         class="dg"
         viewBox="0 0 720 366"
@@ -145,11 +138,14 @@
       </svg>
     </div>
 
-    <!-- Portrait: the same system as a spine with its clients hanging off it. -->
-    <div class="sm:hidden order-2">
+    <!-- Portrait: the same system as a spine with its clients hanging off it. The
+         canvas ends 2 units under the control plane box rather than 6: that margin
+         is what puts the whole picture inside a phone screen once the sticky site
+         header and these controls have taken their share. -->
+    <div class="sm:hidden">
       <svg
         class="dg dg-portrait"
-        viewBox="0 0 340 638"
+        viewBox="0 0 340 634"
         role="img"
         :aria-label="diagramLabel"
       >
@@ -253,10 +249,19 @@
       </svg>
     </div>
 
-    <!-- The caption carries what a highlight cannot, and carries it as text, so
-         the diagram never makes a claim by color alone. -->
+    <!--
+      The caption carries what a highlight cannot, and carries it as text, so the
+      diagram never makes a claim by color alone.
+
+      It sits below the picture at every size, including phones. It was above on
+      mobile for a while, so the words explaining the job would land next to the
+      button that picked it, but that cost a fifth of the picture: with the
+      caption below, the whole portrait diagram fits one phone screen under the
+      pinned controls. The status line in those controls already reports the
+      click, so the reader is not waiting on this paragraph to know it worked.
+    -->
     <p
-      class="order-1 sm:order-3 text-sm sm:text-base leading-relaxed mb-5 sm:mb-0 sm:mt-5 text-center"
+      class="text-sm sm:text-base leading-relaxed mt-5 text-center"
       :style="{ color: 'var(--color-content-secondary)' }"
       aria-live="polite"
     >

@@ -1,90 +1,99 @@
 <template>
   <section id="how-it-works" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
     <div class="container">
-      <h2 class="section-title text-center">How It All Fits Together</h2>
-      <p class="section-subtitle text-center">
-        Composable pieces that each do one job well. Adopt only what you need today and grow into the rest without rewrites.
-      </p>
-    </div>
+      <!--
+        Heading, controls, picture, and pieces in one container. Below lg the
+        controls are a bar above the diagram; from lg they are a column beside
+        it, which is where the vertical space comes from: the diagram never
+        wanted the full width, and the bar was spending a whole horizontal band
+        on four buttons. The subheading moves into that column for the same
+        reason, and the bar's divider rule went with it.
+      -->
+      <div class="lg:max-w-6xl lg:mx-auto">
+        <h2 class="section-title text-center">How It All Fits Together</h2>
+        <p class="section-subtitle text-center lg:hidden">{{ SUBTITLE }}</p>
 
-    <!--
-      The explorer: controls, the picture, and the pieces. The whole thing is
-      taller than a screen at any size worth drawing the diagram at, so the
-      controls are sticky and carry a status line. Wherever a reader is in here,
-      something visible answers a click: the diagram if they are near the top,
-      the cards if they have scrolled past it, and the status line either way.
-      The sticky range has to end with the cards, which is what this wrapper is
-      for; without it the bar would follow the reader into the sections below,
-      which it has nothing to do with.
-    -->
-    <div class="mt-8">
-      <div class="lens-bar sticky top-0 z-20">
-        <div class="container">
-          <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3">
-            <button
-              v-for="item in LENSES"
-              :key="item.id"
-              class="dg-lens"
-              :class="{ 'dg-lens-active': lens === item.id }"
-              :aria-pressed="lens === item.id"
-              @click="toggle(item.id)"
+        <div class="lg:flex lg:gap-8">
+          <!--
+            Sticky either way. As a bar it needs an opaque background because the
+            diagram scrolls under it; as a rail it sits in its own column and
+            nothing passes behind it. self-start keeps it from stretching to the
+            row height, which would leave it nothing to stick within. The sticky
+            offset lives in CSS because it has to clear the site header, which is
+            itself sticky at a higher z-index.
+          -->
+          <div class="lens-controls sticky z-20 lg:w-56 lg:shrink-0 lg:self-start">
+            <p
+              class="hidden lg:block text-sm leading-relaxed mb-5"
+              :style="{ color: 'var(--color-content-secondary)' }"
             >
-              <i :class="`pi ${item.icon}`" class="hidden sm:inline-block sm:mr-2"></i>
-              {{ item.label }}
-            </button>
+              {{ SUBTITLE }}
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 lg:flex-col lg:items-stretch lg:gap-2">
+              <button
+                v-for="item in LENSES"
+                :key="item.id"
+                class="dg-lens lg:w-full lg:justify-start"
+                :class="{ 'dg-lens-active': lens === item.id }"
+                :aria-pressed="lens === item.id"
+                @click="toggle(item.id)"
+              >
+                <i :class="`pi ${item.icon}`" class="hidden sm:inline-block sm:mr-2"></i>
+                {{ item.label }}
+              </button>
+            </div>
+
+            <!-- The status line answers the two questions a filter raises when its
+                 result is off screen: what is applied, and what did it hide. -->
+            <p
+              class="text-xs sm:text-sm text-center mt-2.5 min-h-[2rem] sm:min-h-0 lg:mt-4 lg:text-left"
+              :style="{ color: 'var(--color-content-secondary)' }"
+            >
+              <template v-if="activeLens">
+                <span
+                  class="inline-block w-2 h-2 rounded-full mr-1.5 align-middle"
+                  :style="{ backgroundColor: activeLens.color }"
+                ></span>
+                <span class="font-semibold" :style="{ color: 'var(--color-content-primary)' }">{{ activeLens.label }}</span>
+                is highlighted, with {{ visibleCards.length }} of the {{ cards.length }} pieces below.
+                <button
+                  class="underline hover:no-underline ml-1"
+                  :style="{ color: 'var(--color-primary)' }"
+                  @click="lens = null"
+                >
+                  Show all
+                </button>
+              </template>
+              <template v-else>
+                Pick a job to trace it through the system and see which pieces it uses.
+              </template>
+            </p>
           </div>
 
-          <!-- The status line answers the two questions a filter raises when its
-               result is off screen: what is applied, and what did it hide. -->
-          <p
-            class="text-xs sm:text-sm text-center mt-2.5 min-h-[2rem] sm:min-h-0"
-            :style="{ color: 'var(--color-content-secondary)' }"
-          >
-            <template v-if="activeLens">
-              <span
-                class="inline-block w-2 h-2 rounded-full mr-1.5 align-middle"
-                :style="{ backgroundColor: activeLens.color }"
-              ></span>
-              <span class="font-semibold" :style="{ color: 'var(--color-content-primary)' }">{{ activeLens.label }}</span>
-              is highlighted, with {{ visibleCards.length }} of the {{ cards.length }} pieces below.
-              <button
-                class="underline hover:no-underline ml-1"
-                :style="{ color: 'var(--color-primary)' }"
-                @click="lens = null"
-              >
-                Show all
-              </button>
-            </template>
-            <template v-else>
-              Pick a job to trace it through the system and see which pieces it uses.
-            </template>
-          </p>
-        </div>
-      </div>
+          <div class="lg:flex-1 lg:min-w-0">
+            <SystemDiagram :lens="lens" class="mt-3 sm:mt-6 lg:mt-0" />
 
-      <div class="container">
-        <SystemDiagram :lens="lens" class="mt-8" />
+            <!-- The pieces, tagged with the job each one serves. -->
+            <div class="grid gap-4 mt-10" :class="gridClass">
+              <div v-for="card in visibleCards" :key="card.title" class="step-card">
+                <div class="step-card-header" :style="{ borderBottomColor: cardColor(card) + '25' }">
+                  <span class="step-tag" :style="{ backgroundColor: cardColor(card) + '18', color: cardColor(card) }">
+                    {{ cardTag(card) }}
+                  </span>
+                  <h4 class="text-base font-semibold mt-2" :style="{ color: 'var(--color-content-primary)' }">
+                    {{ card.title }}
+                  </h4>
+                </div>
 
-        <!-- The pieces, tagged with the job each one serves. -->
-        <div class="mt-10 max-w-5xl mx-auto">
-          <div class="grid gap-4" :class="gridClass">
-            <div v-for="card in visibleCards" :key="card.title" class="step-card">
-              <div class="step-card-header" :style="{ borderBottomColor: cardColor(card) + '25' }">
-                <span class="step-tag" :style="{ backgroundColor: cardColor(card) + '18', color: cardColor(card) }">
-                  {{ cardTag(card) }}
-                </span>
-                <h4 class="text-base font-semibold mt-2" :style="{ color: 'var(--color-content-primary)' }">
-                  {{ card.title }}
-                </h4>
-              </div>
+                <p class="text-sm leading-relaxed mt-3" :style="{ color: 'var(--color-content-secondary)' }">
+                  {{ card.description }}
+                </p>
 
-              <p class="text-sm leading-relaxed mt-3" :style="{ color: 'var(--color-content-secondary)' }">
-                {{ card.description }}
-              </p>
-
-              <div v-if="card.highlight" class="step-highlight mt-3">
-                <i class="pi pi-check-circle mr-1.5" :style="{ color: cardColor(card) }"></i>
-                <span>{{ card.highlight }}</span>
+                <div v-if="card.highlight" class="step-highlight mt-3">
+                  <i class="pi pi-check-circle mr-1.5" :style="{ color: cardColor(card) }"></i>
+                  <span>{{ card.highlight }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -183,6 +192,12 @@ import { computed, ref } from 'vue';
 import SystemDiagram from './SystemDiagram.vue';
 import { LENSES, lensById } from './systemLenses';
 
+// Rendered above the heading below lg and inside the control rail from lg, so it
+// is declared here rather than written twice in the template.
+const SUBTITLE =
+  'Composable pieces that each do one job well. Adopt only what you need today ' +
+  'and grow into the rest without rewrites.';
+
 const lens = ref(null);
 
 const toggle = (id) => {
@@ -257,7 +272,9 @@ const gridClass = computed(() => {
   const count = visibleCards.value.length;
   if (count === 1) return 'grid-cols-1 max-w-md mx-auto';
   if (count === 2) return 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto';
-  return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+  // Three across only from xl. At lg the control rail has taken 256px off the
+  // row, so a third column would leave each card about 224px wide.
+  return 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3';
 });
 
 const cardTag = (card) => lensById(card.lens).label;
@@ -297,13 +314,26 @@ const stack = [
 </script>
 
 <style scoped>
-/* The sticky control bar. Opaque and full width because the diagram scrolls
-   under it, and bordered so it reads as a toolbar for what is below rather than
-   as text floating over the page. */
-.lens-bar {
-  @apply py-3;
+/* The controls, sticky in both of their shapes. As a bar the diagram scrolls
+   under it, so it needs an opaque background and its own padding. As a rail it
+   has its own column and nothing passes behind it, so both come off: a panel
+   there would read as a second card next to the picture. */
+.lens-controls {
+  @apply py-2 sm:py-3;
+  /* Clear the site header, which is sticky at z-30 and owns the top of the
+     viewport. Without this the controls pin underneath it and the subheading
+     disappears behind the logo. */
+  top: var(--header-height);
   background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-border-primary);
+}
+
+@media (min-width: 1024px) {
+  .lens-controls {
+    top: calc(var(--header-height) + 2rem);
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+  }
 }
 
 /* Cards — clean layout with structured header */

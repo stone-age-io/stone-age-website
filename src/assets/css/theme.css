@@ -4,6 +4,17 @@
  */
 
 :root {
+  /*
+   * Height of the sticky site header, which owns the top of the viewport at
+   * z-30. Anything else that sticks has to clear it or it scrolls underneath.
+   *
+   * These two are only the first-frame fallback. The real height varies with
+   * the nav row as well as the breakpoint, so TheHeader measures itself and
+   * overwrites this variable on the root element. Read the variable; do not
+   * hardcode a number against it.
+   */
+  --header-height: 72px;
+
   /* Brand Colors */
   --color-primary-50: #f0f9ff;
   --color-primary-100: #e0f2fe;
@@ -50,6 +61,12 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 84px;
+  }
 }
 
 /* Dark mode overrides */
