@@ -3,7 +3,11 @@
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6">
         <div>
-          <h3 class="text-xl font-bold mb-4">Stone-Age.io</h3>
+          <h3 class="text-xl font-bold mb-4">
+            <HomeLink class="hover:text-gray-300 transition-colors" aria-label="Stone-Age.io home">
+              Stone-Age.io
+            </HomeLink>
+          </h3>
           <p class="text-gray-300">
             An open-source control plane for connected operations on infrastructure you own.
             Independent single-binary components, unified by a real-time messaging fabric, without vendor lock-in.
@@ -70,6 +74,8 @@
 </template>
 
 <script setup>
+import HomeLink from '../common/HomeLink.vue';
+
 /**
  * Footer — updated links to match new page sections
  */

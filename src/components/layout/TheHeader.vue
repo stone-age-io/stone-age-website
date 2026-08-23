@@ -2,9 +2,9 @@
   <header ref="root" class="sticky top-0 z-30 shadow-sm" :style="{ backgroundColor: 'var(--color-surface)' }">
     <div class="container py-4 md:py-5 flex items-center justify-between">
       <div class="flex items-center">
-        <a href="#" class="flex items-center transition-colors">
+        <HomeLink class="flex items-center transition-colors" aria-label="Stone-Age.io home">
           <StoneLogo />
-        </a>
+        </HomeLink>
       </div>
       <TheNavbar />
     </div>
@@ -32,6 +32,7 @@
  */
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import TheNavbar from './TheNavbar.vue';
+import HomeLink from '../common/HomeLink.vue';
 import StoneLogo from '../common/StoneLogo.vue';
 
 const root = ref(null);

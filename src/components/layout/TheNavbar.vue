@@ -57,7 +57,9 @@
           class="flex justify-between items-center mb-8 pb-4 border-b"
           :style="{ borderBottomColor: 'var(--color-border)' }"
         >
-          <StoneLogo size="sm" />
+          <HomeLink class="flex items-center" aria-label="Stone-Age.io home" @click="closeMobileMenu">
+            <StoneLogo size="sm" />
+          </HomeLink>
           <button
             class="p-2 rounded-full h-10 w-10 flex items-center justify-center"
             aria-label="Close menu"
@@ -98,6 +100,7 @@
 import { ref, onBeforeUnmount, onMounted } from 'vue';
 
 import { scrollToElement } from '../../anchorScroll';
+import HomeLink from '../common/HomeLink.vue';
 import ThemeToggle from '../common/ThemeToggle.vue';
 import StoneLogo from '../common/StoneLogo.vue';
 
