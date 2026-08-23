@@ -111,6 +111,14 @@ body {
   @apply py-12 md:py-20 lg:py-24;
 }
 
+/*
+ * Anchor targets: land below the sticky header rather than under it. Pairs
+ * with --header-height, so it follows the header instead of guessing at it.
+ */
+.scroll-below-header {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
 .section-title {
   @apply text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8;
   color: var(--color-content-primary);

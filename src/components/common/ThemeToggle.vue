@@ -18,7 +18,7 @@
     </button>
     
     <!-- Theme label (optional, hidden on mobile) -->
-    <span class="text-sm hidden md:inline" aria-hidden="true">{{ themeLabel }}</span>
+    <span class="text-sm hidden xl:inline" aria-hidden="true">{{ themeLabel }}</span>
   </div>
 </template>
 

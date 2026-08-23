@@ -45,6 +45,9 @@ const { isDarkMode } = useTheme();
 }
 
 .logo-text {
+  /* The header is sticky and publishes its own height, so a wrapping brand
+     name would change that height at whatever width the row gets tight. */
+  white-space: nowrap;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 1.25rem;

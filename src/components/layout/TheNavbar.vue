@@ -1,12 +1,12 @@
 <template>
   <!-- Desktop Navigation -->
-  <nav class="hidden md:flex items-center space-x-6">
+  <nav class="hidden lg:flex items-center space-x-3 xl:space-x-6">
     <a
       v-for="(item, index) in navItems"
       :key="`nav-desktop-${index}`"
       :href="item.href || `/#${item.id}`"
       @click="item.id && handleNavClick($event, item.id)"
-      class="text-base hover:text-primary font-medium py-2 px-3 rounded-md transition-colors"
+      class="text-sm xl:text-base hover:text-primary font-medium py-2 px-2 xl:px-3 rounded-md transition-colors whitespace-nowrap"
       :aria-label="`Go to ${item.label}`"
     >
       {{ item.label }}
@@ -16,7 +16,7 @@
 
     <button
       @click="scrollToSection('pricing')"
-      class="btn btn-primary"
+      class="btn btn-primary text-sm xl:text-base whitespace-nowrap"
       aria-label="See Stone-Age.io pricing"
     >
       Pricing
@@ -24,7 +24,7 @@
   </nav>
 
   <!-- Mobile Navigation -->
-  <div class="flex items-center space-x-3 md:hidden">
+  <div class="flex items-center space-x-3 lg:hidden">
     <ThemeToggle />
     <button
       class="p-2 rounded-full h-10 w-10 flex items-center justify-center"
@@ -96,6 +96,8 @@
 
 <script setup>
 import { ref, onBeforeUnmount, onMounted } from 'vue';
+
+import { scrollToElement } from '../../anchorScroll';
 import ThemeToggle from '../common/ThemeToggle.vue';
 import StoneLogo from '../common/StoneLogo.vue';
 
@@ -148,11 +150,7 @@ const restoreBodyScroll = () => {
 const scrollToSection = (sectionId) => {
   const el = document.getElementById(sectionId);
   if (el) {
-    setTimeout(() => {
-      const offset = 80; // Fixed header height
-      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }, 100);
+    setTimeout(() => scrollToElement(el), 100);
   } else {
     window.location.href = `/#${sectionId}`;
   }

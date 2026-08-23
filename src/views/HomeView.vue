@@ -30,6 +30,8 @@
  */
 import { defineAsyncComponent, onMounted } from 'vue';
 
+import { scrollToId } from '../anchorScroll';
+
 // Eagerly load hero for immediate display
 import HeroSection from '../components/home/HeroSection.vue';
 
@@ -41,11 +43,8 @@ onMounted(() => {
   if (!id) return;
   let attempts = 0;
   const tryScroll = () => {
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    } else if (++attempts < 20) {
+    if (scrollToId(id)) return;
+    if (++attempts < 20) {
       setTimeout(tryScroll, 150);
     }
   };

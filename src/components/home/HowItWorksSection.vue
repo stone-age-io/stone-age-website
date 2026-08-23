@@ -119,7 +119,7 @@
       </div>
 
       <!-- What it is made of -->
-      <div id="architecture" class="mt-16 max-w-5xl mx-auto scroll-mt-24">
+      <div id="architecture" class="mt-16 max-w-5xl mx-auto scroll-below-header">
         <h3 class="text-xl sm:text-2xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
           What it is made of
         </h3>
