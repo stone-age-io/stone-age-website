@@ -1,7 +1,7 @@
 <template>
   <section id="pricing" class="py-16 md:py-24 dark-section" :style="{ backgroundColor: 'var(--color-primary)' }">
     <div class="container text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Pricing</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Get Started</h2>
       <p class="text-lg sm:text-xl mb-12 max-w-2xl mx-auto text-white">
         One price per location, and everything in the building is included.
       </p>
@@ -48,7 +48,15 @@
 import PricingCard from '../pricing/PricingCard.vue';
 
 /**
- * Pricing section.
+ * Pricing section, headed "Get Started".
+ *
+ * The heading names the job rather than the artefact: the section carries three
+ * plans, a demo request, the integrator page, GitHub, the docs, and a contact
+ * link, which is more than a price list. Two things keep the rename from
+ * reading as price-hiding. The anchor stays `pricing`, so /#pricing links and
+ * the footer's literal "Pricing" entry still land here; and the price framing
+ * is the first line under the heading, because the buyers here are integrators
+ * and MSPs who came to find a number and resent being made to hunt for it.
  *
  * Prices match the price sheet exactly: $149 direct with a $49 per-site step,
  * $499 Dedicated with a $49 per-customer-organization step. Do not reintroduce

@@ -83,10 +83,12 @@ import HomeLink from '../common/HomeLink.vue';
 const productLinks = [
   { text: 'For Integrators', href: '/for-integrators' },
   { text: 'For IT Teams', href: '/for-it-teams' },
+  // "Pricing", not "Get Started", even though that is the section's heading
+  // now. This is the one place a reader scans for the literal word, and the
+  // section leads with the price, so the link keeps its promise.
   { text: 'Pricing', href: '/#pricing' },
   { text: 'Platform', href: '/#platform-tour' },
-  { text: 'How It Works', href: '/#how-it-works' },
-  { text: 'Architecture', href: '/#architecture' }
+  { text: 'What It Is', href: '/#what-it-is' }
 ];
 
 const builtOnLinks = [

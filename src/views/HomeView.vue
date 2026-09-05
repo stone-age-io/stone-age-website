@@ -3,7 +3,7 @@
     <HeroSection />
     <ScreenshotTour />
     <BuiltOnTeaser />
-    <HowItWorksSection />
+    <WhatItIsSection />
     <CallToAction />
   </div>
 </template>
@@ -16,15 +16,17 @@
  * 1. Hero: what it does, plus the audience split into the two buyer pages
  * 2. Screenshots: visual proof of the console
  * 3. Built On teaser: the applications, named as things
- * 4. How It Works: registration through observability, and the stack underneath
- * 5. Pricing
+ * 4. What It Is: the one-paragraph definition and the stack underneath
+ * 5. Get Started: pricing and the ways in
  *
- * Two sections were removed rather than rewritten. PillarsSection led with a
+ * Three sections were removed rather than rewritten. PillarsSection led with a
  * radio-network analogy and restated the architecture a third time; its only
- * unique content (the component stack and the single-binary note) now closes
- * How It Works. BenefitsSection restated isolation, static binaries,
+ * unique content (the component stack and the single-binary note) survives in
+ * What It Is. BenefitsSection restated isolation, static binaries,
  * outbound-only connections, and edge autonomy, all of which are covered
- * better on the two audience pages.
+ * better on the two audience pages. HowItWorksSection was an interactive
+ * architecture explorer that outgrew a home page; What It Is keeps its parts
+ * list, and the nav now links to the docs for anyone who wants the depth.
  *
  * Hero is eagerly loaded; everything else lazy-loads for performance.
  */
@@ -60,8 +62,8 @@ const BuiltOnTeaser = defineAsyncComponent(() =>
   import('../components/home/BuiltOnTeaser.vue')
 );
 
-const HowItWorksSection = defineAsyncComponent(() =>
-  import('../components/home/HowItWorksSection.vue')
+const WhatItIsSection = defineAsyncComponent(() =>
+  import('../components/home/WhatItIsSection.vue')
 );
 
 const CallToAction = defineAsyncComponent(() =>

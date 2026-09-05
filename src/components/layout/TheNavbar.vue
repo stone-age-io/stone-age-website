@@ -12,15 +12,29 @@
       {{ item.label }}
     </a>
 
-    <ThemeToggle class="mr-2" />
+    <!-- Docs leaves the site, so it does not look like the section links: a
+         boxed, quieter link with the external-link glyph browsers have trained
+         people to read as "this opens somewhere else". -->
+    <a
+      :href="DOCS_URL"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="nav-docs text-sm xl:text-base"
+      aria-label="Read the Stone-Age.io documentation (opens in a new tab)"
+    >
+      Docs
+      <i class="pi pi-external-link ml-1.5 text-[0.65em]" aria-hidden="true"></i>
+    </a>
 
     <button
       @click="scrollToSection('pricing')"
       class="btn btn-primary text-sm xl:text-base whitespace-nowrap"
-      aria-label="See Stone-Age.io pricing"
+      aria-label="Get started with Stone-Age.io"
     >
-      Pricing
+      Get Started
     </button>
+
+    <ThemeToggle />
   </nav>
 
   <!-- Mobile Navigation -->
@@ -81,13 +95,25 @@
             {{ item.label }}
           </a>
 
+          <a
+            :href="DOCS_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mobile-nav-item hover:bg-surface-alt flex items-center justify-between"
+            aria-label="Read the Stone-Age.io documentation (opens in a new tab)"
+            @click="closeMobileMenu"
+          >
+            Docs
+            <i class="pi pi-external-link text-xs opacity-60" aria-hidden="true"></i>
+          </a>
+
           <div class="pt-4 mt-2">
             <button
               @click="scrollToSectionAndCloseMenu('pricing')"
               class="btn btn-primary w-full justify-center"
-              aria-label="See Stone-Age.io pricing"
+              aria-label="Get started with Stone-Age.io"
             >
-              Pricing
+              Get Started
             </button>
           </div>
         </div>
@@ -111,13 +137,15 @@ import StoneLogo from '../common/StoneLogo.vue';
 
 // Navigation items: `id` entries are home-page sections (smooth-scrolled
 // when the section exists, otherwise navigate to /#id); `href` entries are
-// standalone pages.
+// standalone pages. Docs is not in this list because it leaves the site and is
+// styled to say so.
 const navItems = [
   { href: '/for-integrators', label: 'For Integrators' },
   { href: '/for-it-teams', label: 'For IT Teams' },
-  { href: '/built-on', label: 'Built On' },
-  { id: 'how-it-works', label: 'How It Works' }
+  { href: '/built-on', label: 'Built On' }
 ];
+
+const DOCS_URL = 'https://docs.stone-age.io';
 
 // Reactive state
 const showMobileMenu = ref(false);
@@ -191,6 +219,21 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* Docs: an off-site link between the section links and the primary button, so
+   it has to read as neither. A hairline box and secondary text colour give it
+   less weight than a nav link at rest, and the border picks up the primary on
+   hover so it still behaves like something you can click. */
+.nav-docs {
+  @apply inline-flex items-center font-medium py-1.5 px-3 rounded-md border whitespace-nowrap transition-colors;
+  color: var(--color-content-secondary);
+  border-color: var(--color-border-primary);
+}
+
+.nav-docs:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 /* Mobile menu transition */
 .mobile-menu-enter-active,
 .mobile-menu-leave-active {
