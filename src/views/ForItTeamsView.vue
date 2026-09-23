@@ -144,13 +144,13 @@ scrape_configs:
     static_configs:
       - targets: ['site-a:2112']
 
-# stream it: every access decision, live off the bus
-$ nats sub 'access.decision.>'
-[#1] access.decision.granted.door-14 {"user":"a.reyes","door":"door-14"}
+# stream it: every badge tap and its decision, live off the bus
+$ nats sub 'acc.*.*.*.evt.tap'
+[#1] acc.hq.door.lobby-main.evt.tap {"user":"Alice Example","allow":true,"reason":"allow_grant"}
 
-# query it: current state of one device, straight from KV
-$ stone kv get twins door-14
-{"online":true,"lock":"secured","last_seen":"2026-08-19T14:02:11Z"}</code></pre>
+# query it: current state of one door, straight from KV
+$ stone kv get ACC_STATUS portal.lobby-main
+{"code":"lobby-main","location":"hq","door":"closed","posture":"secure","held":false}</code></pre>
         </div>
 
         <p class="mt-8 text-sm max-w-3xl" :style="{ color: 'var(--color-content-secondary)' }">
@@ -160,6 +160,54 @@ $ stone kv get twins door-14
         </p>
       </div>
     </section>
+
+    <!--
+      The vendor-cloud section. The hero argues against the appliance with a
+      vendor cloud behind it, so this states the position precisely: against
+      silos, not against clouds. Scoped to shipped behavior: the gateway takes
+      webhooks, the scheduler polls APIs, and nats-auth-manager refreshes tokens
+      into the tenant's own KV. Categories only until a recipe ships.
+    -->
+    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
+      <div class="container">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
+            Keep the vendor clouds. Lose the silos.
+          </h2>
+          <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            Your fleet telematics, drone and energy platforms each come with their own dashboard and
+            their own API. The automation layer polls those APIs on a schedule and receives their
+            webhooks, so their events land on the same bus as your doors and sensors, and one rule can
+            act on both. API tokens refresh themselves and are stored in your organization's own
+            account on the bus, readable only by the identities you give access to.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      The governance claim. True only when each integration runs as a Thing with
+      its own NATS user, which is how the tenant bundle and recipes provision it:
+      deactivating the Thing revokes that user. It says "access to your bus" and
+      no more, because the vendor-side API secret stays valid until someone
+      rotates it at the vendor. Do not widen it to "the integration stops".
+    -->
+    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+      <div class="container">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
+            Every integration has an owner and an off switch
+          </h2>
+          <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            Each connection to an outside service runs under its own registered identity, with a
+            credential limited to the subjects it needs. It is listed in the inventory beside the
+            doors and cameras, and changes to it appear in the activity feed. Deactivating it revokes
+            its access to your bus at once.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Runs where you put it -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
@@ -292,9 +340,17 @@ import BuiltOnTeaser from '../components/home/BuiltOnTeaser.vue';
  * to NATS subjects and forwarding, which is what dataPaths describes.
  *
  * The snippet block shows real surfaces, not pseudocode: :2112 is rule-router's default
- * metrics listener, access.decision.granted.* is what the access rules publish, and
+ * metrics listener, acc.{location}.{type}.{thing}.evt.tap is what access controllers
+ * publish per tap, and ACC_STATUS holds one portal.{code} key per door (both from
+ * access-control docs/protocol.md; the sample values match its demo rules).
  * `stone kv get <bucket> <key>` is the CLI's documented KV read. Keep them runnable.
- * A snippet a reader cannot paste is worse than no snippet.
+ * A snippet a reader cannot paste is worse than no snippet. An earlier version showed
+ * `access.decision.>` and a `twins` bucket, neither of which exists.
+ *
+ * "No inbound connections from the internet", not "nothing listens": rule-router
+ * listens on :2112 (the snippet above scrapes it) and the agent on 127.0.0.1:9100.
+ * A webhook receiver DOES need a public endpoint, so run the gateway that takes
+ * SaaS webhooks beside the platform, not on the site network, or this claim breaks.
  */
 
 const dataPaths = [
@@ -321,8 +377,8 @@ const deployPoints = [
     body: 'Configuration and identity live in one embedded database that is trivial to back up. High-volume telemetry never touches it.',
   },
   {
-    title: 'Nothing listens on your edge network',
-    body: 'Devices and sites initiate every connection outbound. No port forwarding, no inbound firewall exceptions, and NAT traversal handles LTE, 5G, and restrictive corporate networks.',
+    title: 'No inbound connections from the internet',
+    body: 'Devices and sites initiate every connection to the platform outbound. No port forwarding, no inbound firewall exceptions, and NAT traversal handles LTE, 5G, and restrictive corporate networks. Local listeners, such as a metrics endpoint, stay on your own network.',
   },
   {
     title: 'Self-host or hosted, same binary',

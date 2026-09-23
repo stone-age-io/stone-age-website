@@ -14,9 +14,9 @@
         </h1>
 
         <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl">
-          One console and one automation layer across the equipment your sites already run: door
-          controllers, cameras, kiosks, sensors, machines, and anything else that speaks HTTP,
-          MQTT, or NATS. Nothing gets ripped out to make room for us.
+          One console and one automation layer across what your sites already run: door
+          controllers, cameras, kiosks, sensors and machines on site, and the fleet, drone and
+          energy platforms beside them. Nothing gets ripped out to make room for us.
         </p>
 
         <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
@@ -58,6 +58,12 @@
  * is the platform site, not the access-control site, so naming door controllers
  * first and machines and sensors alongside them keeps the range visible. Do not
  * narrow this to buildings.
+ *
+ * The second half names the cloud services a site already reports to, by
+ * CATEGORY. A vendor name (Samsara, Victron, Skydio) belongs on this site only
+ * once a recipe for it ships, so the claim is something a reader can install.
+ * The protocol list moved out of this sentence; the "What it is" section below
+ * carries it.
  *
  * The two buttons are the audience split. Both revenue-bearing buyers have a
  * page written for them, and this is the only prominent route to either one.

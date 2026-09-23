@@ -47,14 +47,15 @@
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
             Their installed base is the asset, not the obstacle. The automation layer speaks HTTP in
-            both directions and MQTT natively, so systems already running in a customer's buildings can
-            put their events on the bus without new hardware. You get one screen across their sites now,
+            both directions and MQTT natively, so systems already running in a customer's buildings, and
+            the cloud platforms beside them, can put their events on the bus without new hardware. You
+            get one screen across their sites now,
             and replacing a panel becomes a decision you make later, per door, instead of a precondition
             for the first invoice.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div
             v-for="(item, index) in bridgingPoints"
             :key="`bridge-${index}`"
@@ -399,6 +400,11 @@ stone apply                      # idempotent, batched, performs no deletes</cod
 // Scoped to shipped behavior: the rule engine's gateway is bidirectional HTTP,
 // MQTT is native to the bus, and the scheduler covers pull-only APIs. Nothing here
 // claims control of another vendor's access decisions.
+//
+// "Cloud platforms too" is the same gateway and scheduler pointed at a SaaS API,
+// plus nats-auth-manager refreshing its tokens into the tenant's own KV. Four
+// cards, so the grid is two by two rather than three plus an orphan. Categories
+// only: name a vendor here once a recipe for it ships, not before.
 const bridgingPoints = [
   {
     title: 'Webhooks in',
@@ -411,6 +417,10 @@ const bridgingPoints = [
   {
     title: 'MQTT and agents',
     body: 'Devices already speaking MQTT connect straight to the bus, and the edge agent covers the servers and gateways in the closet. Nothing has to be re-flashed to become visible.',
+  },
+  {
+    title: 'Cloud platforms too',
+    body: 'The fleet, drone and energy platforms your customers already pay for become subjects on the same bus. The gateway takes their webhooks, the scheduler polls their APIs, and their tokens refresh themselves. One screen across the building and the trucks that serve it.',
   },
 ];
 
