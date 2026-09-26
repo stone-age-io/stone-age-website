@@ -33,12 +33,13 @@
     </section>
 
     <BuiltOnTeaser
+      background="var(--color-background)"
       heading="What runs on it"
       subtitle="You do not start from an empty bus. These are the applications and components that run on it, all open source, and a hosted account includes every one of them."
     />
 
     <!-- The silo contrast -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
         <div class="max-w-3xl mb-10">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -118,7 +119,7 @@
             v-for="(path, index) in dataPaths"
             :key="`path-${index}`"
             class="p-6 rounded-lg"
-            :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+            :style="{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-border)' }"
           >
             <h3 class="font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
               {{ path.title }}
@@ -136,7 +137,7 @@
         -->
         <div
           class="rounded-lg p-5 overflow-x-auto mt-8"
-          :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+          :style="{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-border)' }"
         >
           <pre class="font-mono text-xs sm:text-sm leading-relaxed" :style="{ color: 'var(--color-content-primary)' }"><code># scrape it: rule-router's metrics listener, :2112 by default
 scrape_configs:
@@ -168,7 +169,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
       webhooks, the scheduler polls APIs, and nats-auth-manager refreshes tokens
       into the tenant's own KV. Categories only until a recipe ships.
     -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div class="max-w-3xl">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -192,7 +193,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
       no more, because the vendor-side API secret stays valid until someone
       rotates it at the vendor. Do not widen it to "the integration stops".
     -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
         <div class="max-w-3xl">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -209,7 +210,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
     </section>
 
     <!-- Runs where you put it -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div class="max-w-3xl mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -233,7 +234,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
     </section>
 
     <!-- Keeps working -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
         <div class="max-w-3xl">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -255,7 +256,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
     </section>
 
     <!-- Your own model -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div class="max-w-3xl">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -276,11 +277,11 @@ $ stone kv get ACC_STATUS portal.lobby-main
     </section>
 
     <!-- CTA -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
       <div class="container">
         <div
           class="max-w-3xl mx-auto text-center p-8 rounded-lg"
-          :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+          :style="{ backgroundColor: 'var(--color-background)', border: '1px solid var(--color-border)' }"
         >
           <h2 class="text-2xl sm:text-3xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
             Look at a running system

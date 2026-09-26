@@ -1,5 +1,5 @@
 <template>
-  <section id="built-on" class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
+  <section id="built-on" class="section" :style="{ backgroundColor: background }">
     <div class="container">
       <h2 class="section-title text-center">{{ heading }}</h2>
       <p class="section-subtitle text-center">{{ subtitle }}</p>
@@ -57,6 +57,12 @@ defineProps({
     type: String,
     default:
       'The console runs the substrate. These run on it: real, open-source systems we build and operate on the same foundation you get.',
+  },
+  // Sections alternate between the two page backgrounds, so the page that
+  // places the teaser says which one it gets.
+  background: {
+    type: String,
+    default: 'var(--color-background-alt)',
   },
 });
 

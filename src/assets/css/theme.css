@@ -57,6 +57,7 @@
   --color-primary-rgb: 79, 70, 229;
   --color-secondary: #64748B;
   --color-accent: #0D9488;
+  --color-neutral: #1F2733; /* dark bands such as the footer */
   --color-text: var(--color-content-primary);
   --color-text-light: var(--color-content-secondary);
   --color-text-inverse: #FFFFFF;
@@ -101,6 +102,7 @@
   --color-primary-rgb: 99, 102, 241;
   --color-secondary: #94A3B8;
   --color-accent: #2DD4BF;
+  --color-neutral: #232A35;
   --color-success: #22C55E;
   --color-error: #EF4444;
 

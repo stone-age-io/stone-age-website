@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-12 sm:py-16" style="background-color: #0D1017; color: white;">
+  <footer class="py-12 sm:py-16" style="background-color: var(--color-neutral); color: white;">
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6">
         <div>
