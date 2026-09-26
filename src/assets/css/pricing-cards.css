@@ -16,7 +16,7 @@
 
 /* Dark section override */
 .dark-section .pricing-card {
-  background-color: #1a1d36; /* Dark blue background */
+  background-color: #12161D; /* platform dark base-100 */
 }
 
 /* Card header styling */
@@ -27,8 +27,8 @@
 }
 
 .dark-section .pricing-card-header {
-  background-color: #131631; /* Darker header for dark sections */
-  border-color: rgba(75, 85, 99, 0.4);
+  background-color: #0D1017; /* platform dark base-200 */
+  border-color: #232A35;
 }
 
 /* Card body styling */
@@ -38,7 +38,7 @@
 }
 
 .dark-section .pricing-card-body {
-  color: #e5e7eb; /* Light gray text for dark sections */
+  color: #E7EBF2; /* platform dark base-content */
 }
 
 /* Price styling */

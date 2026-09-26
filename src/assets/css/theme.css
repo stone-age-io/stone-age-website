@@ -15,35 +15,48 @@
    */
   --header-height: 72px;
 
-  /* Brand Colors */
-  --color-primary-50: #f0f9ff;
-  --color-primary-100: #e0f2fe;
-  --color-primary-200: #bae6fd;
-  --color-primary-300: #7dd3fc;
-  --color-primary-400: #38bdf8;
-  --color-primary-500: #0ea5e9;
-  --color-primary-600: #0284c7;
-  --color-primary-700: #0369a1;
-  --color-primary-800: #075985;
-  --color-primary-900: #0c4a6e;
-  --color-primary-950: #082f49;
-  
-  /* UI Colors - Light Mode */
-  --color-surface-primary: #ffffff;
-  --color-surface-secondary: #f9fafb;
-  --color-surface-tertiary: #f3f4f6;
-  --color-surface-hover: #f3f3f6;
-  
-  --color-content-primary: #111827;
-  --color-content-secondary: #4b5563;
-  
-  --color-border-primary: #e5e7eb;
-  --color-border-secondary: #f3f4f6;
-  
+  /*
+   * Palette — the Stone-Age platform console's, so the site and the product
+   * read as one. Values come from the light/dark daisyUI themes in
+   * platform/ui/tailwind.config.js; keep them in step with that file rather
+   * than adapting them here. The platform's primary is indigo-600 (light) and
+   * indigo-500 (dark), so the primary scale is Tailwind's indigo; its
+   * neutrals are cool slate greys; semantic colours are for state only.
+   *
+   * Categorical colours (feature icons, protocol badges, diagram series)
+   * stay in their components on purpose: like the platform's chart ramp,
+   * they tell things apart and are not part of the theme.
+   */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+  --color-primary-950: #1e1b4b;
+
+  /* UI Colors - Light Mode (platform base-100 / base-200 / base-300) */
+  --color-surface-primary: #FFFFFF;
+  --color-surface-secondary: #F4F6FA;
+  --color-surface-tertiary: #E4E8EF;
+  --color-surface-hover: #F4F6FA;
+
+  --color-content-primary: #1B2330;
+  --color-content-secondary: #64748B;
+
+  --color-border-primary: #E4E8EF;
+  --color-border-secondary: #F4F6FA;
+
   /* Legacy variables for compatibility */
-  --color-primary: var(--color-primary-700);
-  --color-secondary: var(--color-primary-500);
-  --color-accent: #FFB81C;
+  --color-primary: var(--color-primary-600);
+  --color-primary-hover: var(--color-primary-700);
+  --color-primary-rgb: 79, 70, 229;
+  --color-secondary: #64748B;
+  --color-accent: #0D9488;
   --color-text: var(--color-content-primary);
   --color-text-light: var(--color-content-secondary);
   --color-text-inverse: #FFFFFF;
@@ -54,8 +67,8 @@
   --color-border: var(--color-border-primary);
   
   /* Success/Error states */
-  --color-success: #22C55E;
-  --color-error: #EF4444;
+  --color-success: #16A34A;
+  --color-error: #DC2626;
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -71,18 +84,26 @@
 
 /* Dark mode overrides */
 .dark {
-  /* UI Colors - Dark Mode */
-  --color-surface-primary: #1f2937;
-  --color-surface-secondary: #111827;
-  --color-surface-tertiary: #374151;
-  --color-surface-hover: #374151;
-  
-  --color-content-primary: #f9fafb;
-  --color-content-secondary: #9ca3af;
-  
-  --color-border-primary: #4b5563;
-  --color-border-secondary: #374151;
-  
+  /* UI Colors - Dark Mode (platform dark base-100 / base-200 / base-300) */
+  --color-surface-primary: #12161D;
+  --color-surface-secondary: #0D1017;
+  --color-surface-tertiary: #232A35;
+  --color-surface-hover: #232A35;
+
+  --color-content-primary: #E7EBF2;
+  --color-content-secondary: #94A3B8;
+
+  --color-border-primary: #232A35;
+  --color-border-secondary: #232A35;
+
+  --color-primary: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-600);
+  --color-primary-rgb: 99, 102, 241;
+  --color-secondary: #94A3B8;
+  --color-accent: #2DD4BF;
+  --color-success: #22C55E;
+  --color-error: #EF4444;
+
   /* Legacy variables for compatibility */
   --color-text: var(--color-content-primary);
   --color-text-light: var(--color-content-secondary);
@@ -131,7 +152,7 @@ body {
 
 /* Card Styles */
 .card {
-  @apply rounded-lg overflow-hidden;
+  @apply rounded-xl overflow-hidden;
   background-color: var(--color-surface-primary);
   box-shadow: var(--shadow-md);
   transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
@@ -154,7 +175,7 @@ body {
 
 /* Feature Card */
 .feature-card {
-  @apply p-5 sm:p-6 rounded-lg hover:shadow-lg;
+  @apply p-5 sm:p-6 rounded-xl hover:shadow-lg;
   background-color: var(--color-surface-primary);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
@@ -167,7 +188,7 @@ body {
 
 /* Button Styles */
 .btn {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-all;
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all;
   min-height: 44px;
 }
 
@@ -178,7 +199,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-800);
+  background-color: var(--color-primary-hover);
 }
 
 .btn-outlined {
@@ -246,7 +267,7 @@ body {
 
 /* Pricing cards */
 .pricing-card {
-  @apply rounded-lg overflow-hidden transition-all;
+  @apply rounded-xl overflow-hidden transition-all;
   background-color: var(--color-surface-primary);
   box-shadow: var(--shadow-md);
 }
@@ -268,7 +289,7 @@ body {
 }
 
 .pricing-card-popular .pricing-card-header {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   color: var(--color-text-inverse);
 }
 

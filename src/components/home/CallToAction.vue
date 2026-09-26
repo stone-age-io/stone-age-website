@@ -96,7 +96,7 @@ const pricingPlans = [
   {
     name: 'Hosted account',
     subtitle: 'For end users',
-    headerBgColor: '#1f2937',
+    headerBgColor: '#1F2733',
     subtitleClass: 'text-gray-300',
     price: '$149<span class="text-base font-normal">/mo</span>',
     features: [
@@ -112,8 +112,8 @@ const pricingPlans = [
   {
     name: 'Dedicated',
     subtitle: 'For integrators and MSPs',
-    headerBgColor: '#f59e0b',
-    subtitleClass: 'text-amber-100',
+    headerBgColor: '#0D9488', // platform accent
+    subtitleClass: 'text-teal-100',
     price: '$499<span class="text-base font-normal">/mo</span>',
     features: [
       'Your own instance, your brand, your domains',
@@ -123,12 +123,12 @@ const pricingPlans = [
     ],
     ctaText: 'For integrators',
     ctaLink: '/for-integrators',
-    ctaClass: 'bg-white hover:bg-gray-100 text-amber-700'
+    ctaClass: 'bg-white hover:bg-gray-100 text-teal-700'
   },
   {
     name: 'Self-hosted',
     subtitle: 'Open source',
-    headerBgColor: '#1f2937',
+    headerBgColor: '#1F2733',
     subtitleClass: 'text-gray-300',
     price: 'Free',
     features: [

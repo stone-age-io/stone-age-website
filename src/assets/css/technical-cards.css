@@ -5,7 +5,7 @@
 
 /* Base technical card styling */
 .tech-card {
-  @apply rounded-lg overflow-hidden shadow-md flex flex-col h-full;
+  @apply rounded-xl overflow-hidden shadow-md flex flex-col h-full;
   background-color: var(--color-surface-primary);
   transition: all 0.3s ease;
 }
@@ -33,7 +33,7 @@
 
 .feature-icon {
   @apply mr-4 mt-1 flex-shrink-0 rounded-full w-10 h-10 flex items-center justify-center text-white font-bold;
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
 }
 
 .feature-content {
@@ -52,13 +52,13 @@
 /* Code block styling */
 .code-block {
   @apply font-mono text-xs sm:text-sm p-4 overflow-auto;
-  background-color: #131631;
+  background-color: #0D1017;
   color: #f8f8f2;
   max-height: 400px;
 }
 
 .dark .code-block {
-  background-color: #0d1117;
+  background-color: #0D1017;
 }
 
 .topic-structure {
@@ -72,7 +72,7 @@
 
 /* Small feature cards */
 .tech-feature-card {
-  @apply p-5 sm:p-6 rounded-lg flex flex-col h-full;
+  @apply p-5 sm:p-6 rounded-xl flex flex-col h-full;
   background-color: var(--color-surface-primary);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;

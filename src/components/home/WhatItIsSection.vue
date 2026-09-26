@@ -163,10 +163,10 @@ const stack = [
 
 /* Moved here with the single-binary note when PillarsSection was removed. */
 .callout-box {
-  background-color: rgba(59, 130, 246, 0.05);
+  background-color: rgba(var(--color-primary-rgb), 0.05);
 }
 
 .dark .callout-box {
-  background-color: rgba(59, 130, 246, 0.1);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
 }
 </style>

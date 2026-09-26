@@ -339,11 +339,11 @@ onBeforeUnmount(() => {
 
 .screenshot-chrome {
   @apply flex items-center gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5;
-  background-color: #1f2937;
+  background-color: #232A35;
 }
 
 .dark .screenshot-chrome {
-  background-color: #111827;
+  background-color: #12161D;
 }
 
 .chrome-dots {
@@ -369,7 +369,7 @@ onBeforeUnmount(() => {
    ============================== */
 .screenshot-viewport {
   @apply relative overflow-hidden cursor-pointer;
-  background-color: #0f172a;
+  background-color: #0D1017;
   /* Fixed aspect ratio prevents layout shift */
   aspect-ratio: 16 / 8;
 }
@@ -396,12 +396,12 @@ onBeforeUnmount(() => {
    ============================== */
 .screenshot-skeleton {
   @apply absolute inset-0 overflow-hidden;
-  background-color: #1e293b;
+  background-color: #232A35;
 }
 
 .lightbox-skeleton {
   @apply absolute inset-0 overflow-hidden rounded-lg;
-  background-color: #1e293b;
+  background-color: #232A35;
 }
 
 .skeleton-shimmer {
@@ -484,7 +484,7 @@ onBeforeUnmount(() => {
   /* Same fixed aspect ratio as inline viewport */
   aspect-ratio: 16 / 8;
   max-height: calc(100vh - 140px);
-  background-color: #0f172a;
+  background-color: #0D1017;
 }
 
 /* Lightbox crossfade layers */

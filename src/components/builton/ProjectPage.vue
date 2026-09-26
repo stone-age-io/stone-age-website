@@ -131,8 +131,8 @@ defineProps({
 <style scoped>
 .code-block {
   @apply rounded-lg p-5 overflow-x-auto text-sm leading-relaxed font-mono;
-  background-color: #1a1a2e;
-  color: #d4d4e4;
+  background-color: #12161D;
+  color: #E7EBF2;
   border: 1px solid var(--color-border-primary);
 }
 </style>

@@ -105,7 +105,7 @@ defineProps({
    */
   headerBgColor: {
     type: String,
-    default: '#1f2937' // Default dark gray
+    default: '#1F2733' // platform neutral
   },
   
   /**
