@@ -8,15 +8,18 @@
     
     <div class="container relative z-10">
       <div class="max-w-4xl">
+        <!-- Each beat is unbreakable, so a line can only end at a period. A
+             fixed <br> stranded a single word once the headline grew. Keep the
+             spans on one line: Vue drops whitespace between tags when it holds
+             a newline, which leaves no space to break at. -->
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          Every site you manage, <br class="hidden md:block" />
-          on one screen.
+          <span class="whitespace-nowrap">Every site.</span> <span class="whitespace-nowrap">Every vendor cloud.</span> <span class="whitespace-nowrap">One screen.</span>
         </h1>
 
-        <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl">
-          One console and one automation layer across what your sites already run: door
-          controllers, cameras, kiosks, sensors and machines on site, and the fleet, drone and
-          energy platforms beside them. Nothing gets ripped out to make room for us.
+        <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl text-pretty">
+          One console and one automation layer for everything from the door controllers, sensors
+          and machines on your sites to the cloud platforms you log into separately today. Nothing
+          gets ripped out to make room for us.
         </p>
 
         <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
@@ -59,11 +62,27 @@
  * first and machines and sensors alongside them keeps the range visible. Do not
  * narrow this to buildings.
  *
- * The second half names the cloud services a site already reports to, by
- * CATEGORY. A vendor name (Samsara, Victron, Skydio) belongs on this site only
- * once a recipe for it ships, so the claim is something a reader can install.
- * The protocol list moved out of this sentence; the "What it is" section below
- * carries it.
+ * The headline is three beats and names both halves: the sites, and the vendor
+ * clouds the automation layer pulls in beside them. "One screen", not "one
+ * place": a screen is a promise a reader can check by opening the console.
+ * When it said only "every site you manage", the SaaS side read as an
+ * afterthought in the subhead, and that combination is the part nobody else
+ * sells: an iPaaS cannot open a door and an access-control vendor cannot read a
+ * telematics feed. Do not merge the two into one abstract noun ("every system
+ * you run"); that is the abstraction problem above again. "Vendor cloud" is the
+ * IT page's term too ("Keep the vendor clouds. Lose the silos."), so the two
+ * pages say it the same way.
+ *
+ * The subhead is a range ("everything from ... to ..."), not two lists. It used
+ * to list five kinds of equipment and then fleet, drone and energy platforms,
+ * and a list reads as the whole scope: three verticals under "every vendor
+ * cloud" narrowed the headline it sat beneath. The equipment end keeps concrete
+ * nouns, because that is where a first-time reader needs them; the cloud end is
+ * described by the silo ("you log into separately today") rather than by
+ * industry. The verticals live on the audience pages, which have room to say
+ * what the automation layer does with them. A vendor name (Samsara, Victron,
+ * Skydio) belongs on this site only once a recipe for it ships. The protocol
+ * list moved out of this sentence; the "What it is" section below carries it.
  *
  * The two buttons are the audience split. Both revenue-bearing buyers have a
  * page written for them, and this is the only prominent route to either one.

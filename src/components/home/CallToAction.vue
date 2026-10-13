@@ -3,7 +3,7 @@
     <div class="container text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Get Started</h2>
       <p class="text-lg sm:text-xl mb-12 max-w-2xl mx-auto text-white">
-        One price per location, and everything in the building is included.
+        One price per site. Everything in it is included, and so is every vendor cloud you connect.
       </p>
 
       <!-- Pricing cards grid -->
@@ -24,6 +24,11 @@
       </div>
 
       <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white/90">
+        A site is a place where equipment connects to the platform directly. Anything that arrives
+        through a vendor's cloud counts as part of that cloud, not as a site.
+      </p>
+
+      <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
         All three run the same binaries, so you can start on your own hardware and move to a hosted
         instance later without rebuilding anything.
       </p>
@@ -71,6 +76,24 @@ import PricingCard from '../pricing/PricingCard.vue';
  * "end customers" and Dedicated counting "customer organizations", which left
  * the word meaning the reader on one card and the reader's client on the next.
  * The system diagram labels its boundary "Site" for the same reason.
+ *
+ * The meter is "site", in the framing line and on the card alike. The line
+ * used to say "per location" and "everything in the building", three words
+ * for one unit, and Location is a record in the console that can be a single
+ * room, so "per location" read as per room. A site has no record of its own,
+ * so the plain-English definition under the cards is the contract: a place
+ * where equipment connects directly. Anything that reaches the platform only
+ * through a vendor's cloud is part of that cloud, not a site. Without that,
+ * every truck in a fleet, or each of forty single-inverter solar installs,
+ * could be read as a site at $49 apiece, and the buyer connecting their SaaS
+ * silos is exactly the one who would stop reading there.
+ *
+ * The definition states the rule and lists nothing, for the same reason the
+ * hero subhead is a range: a list reads as the whole scope. It used to name
+ * "a building, a campus, a yard" and "vehicles, drones and energy systems",
+ * which told a pump station it was not a site and a telematics buyer that
+ * only three kinds of cloud were covered. Keep examples like those in quotes
+ * and in this comment, not on the page.
  *
  * Self-hosted is a card on purpose. Adoption is the only usage signal this
  * business has while it has no customers, and hiding the open-source option
