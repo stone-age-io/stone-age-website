@@ -208,24 +208,14 @@ const tabs = [
     description: 'Build custom views with gauges, charts, maps, and live message feeds. Widgets subscribe directly to NATS, so data flows from things to the browser without touching a database.'
   },
   {
-    label: 'Digital Twin',
-    icon: 'pi-bolt',
-    url: 'console.stone-age.io/things/791106vcjkb1b3l',
-    image: '/images/screenshots/digital-twin.png',
-    imageLight: '/images/screenshots/digital-twin-light.png',
-    alt: 'Live state of a door: reported and desired values with revision history',
-    title: 'Live state management',
-    description: 'View and edit the live state of any thing or location in real-time. Change a setpoint in the UI and the update is published to NATS instantly for the thing to receive.'
-  },
-  {
     label: 'Things',
     icon: 'pi-server',
-    url: 'console.stone-age.io/things',
+    url: 'console.stone-age.io/things/3h8ae5r4r0phhv7',
     image: '/images/screenshots/things.png',
     imageLight: '/images/screenshots/things-light.png',
-    alt: 'Thing management list view',
+    alt: "An access controller's thing page: inventory details, its NATS user and role, its Nebula host and overlay IP, and its subjects",
     title: 'Thing registry and management',
-    description: 'Manage your entire fleet from one interface. Each thing is a first-class auth record with NATS credentials, Nebula certificates, and metadata.'
+    description: 'Each thing is one record: its inventory entry, its NATS login and credentials, its Nebula host on the private network, and the subjects it publishes. Regenerate or revoke from the same page.'
   },
   {
     label: 'Floor Plans',
