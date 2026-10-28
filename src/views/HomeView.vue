@@ -15,7 +15,7 @@
  * Section flow (concrete before architecture):
  * 1. Hero: what it does, plus the audience split into the two buyer pages
  * 2. Screenshots: visual proof of the console
- * 3. Built On teaser: the applications, named as things
+ * 3. Built On teaser: the components around the console, named as things
  * 4. What It Is: the one-paragraph definition and the stack underneath
  * 5. Get Started: pricing and the ways in
  *

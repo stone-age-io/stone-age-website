@@ -9,6 +9,13 @@
             Built on Stone-Age
           </a>
 
+          <p
+            v-if="project.kind"
+            class="text-sm font-semibold uppercase tracking-wide mb-3"
+            :style="{ color: 'var(--color-primary)' }"
+          >
+            {{ project.kind }}
+          </p>
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
             {{ project.name }}
           </h1>
@@ -57,6 +64,25 @@
             {{ paragraph }}
           </p>
         </div>
+
+        <!-- Optional demo: a recording of the project in use -->
+        <figure v-if="project.demo" class="demo-figure mt-10">
+          <img
+            :src="project.demo.src"
+            :alt="project.demo.alt"
+            :width="project.demo.width"
+            :height="project.demo.height"
+            loading="lazy"
+            class="block w-full h-auto"
+          />
+          <figcaption
+            v-if="project.demo.caption"
+            class="text-xs px-4 py-3"
+            :style="{ color: 'var(--color-content-secondary)' }"
+          >
+            {{ project.demo.caption }}
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -129,6 +155,13 @@ defineProps({
 </script>
 
 <style scoped>
+/* The recording is a dark terminal in both themes, like the code block below. */
+.demo-figure {
+  @apply rounded-lg overflow-hidden max-w-4xl;
+  background-color: #11161f;
+  border: 1px solid var(--color-border-primary);
+}
+
 .code-block {
   @apply rounded-lg p-5 overflow-x-auto text-sm leading-relaxed font-mono;
   background-color: #12161D;

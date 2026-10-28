@@ -21,6 +21,7 @@ export default defineConfig({
         helpdesk: path.resolve(__dirname, 'helpdesk.html'),
         kiosk: path.resolve(__dirname, 'kiosk.html'),
         agent: path.resolve(__dirname, 'agent.html'),
+        stoneCli: path.resolve(__dirname, 'stone-cli.html'),
         ruleRouter: path.resolve(__dirname, 'rule-router.html'),
       },
     },

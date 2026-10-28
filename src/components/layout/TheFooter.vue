@@ -93,11 +93,12 @@ const productLinks = [
 
 const builtOnLinks = [
   { text: 'Built on Stone-Age', href: '/built-on' },
+  { text: 'Rule-Router', href: '/rule-router' },
+  { text: 'Agent', href: '/agent' },
+  { text: 'stone CLI', href: '/stone-cli' },
   { text: 'Access Control', href: '/access-control' },
   { text: 'Kiosk', href: '/kiosk' },
-  { text: 'Helpdesk', href: '/helpdesk' },
-  { text: 'Rule-Router', href: '/rule-router' },
-  { text: 'Agent', href: '/agent' }
+  { text: 'Helpdesk', href: '/helpdesk' }
 ];
 
 const resourceLinks = [

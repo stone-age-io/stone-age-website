@@ -9,6 +9,7 @@
 import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
+  kind: 'Reference application',
   name: 'Helpdesk',
   tagline: 'A service desk for people who run other people’s infrastructure: reactive support tickets and proactive field work in one binary.',
   github: 'https://github.com/stone-age-io/helpdesk',

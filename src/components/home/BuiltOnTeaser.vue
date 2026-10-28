@@ -4,7 +4,7 @@
       <h2 class="section-title text-center">{{ heading }}</h2>
       <p class="section-subtitle text-center">{{ subtitle }}</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
         <a
           v-for="(item, index) in teaserItems"
           :key="`teaser-${index}`"
@@ -28,9 +28,9 @@
         <a
           href="/built-on"
           class="inline-flex items-center font-medium text-primary hover:underline"
-          aria-label="See everything built on Stone-Age"
+          aria-label="See the components and reference applications"
         >
-          See everything built on Stone-Age
+          Components and reference applications
           <i class="pi pi-arrow-right ml-2 text-xs"></i>
         </a>
       </div>
@@ -40,23 +40,26 @@
 
 <script setup>
 /**
- * BuiltOnTeaser — compact strip linking to the Built On hub.
+ * BuiltOnTeaser — compact strip of the stack's own components, linking to the
+ * Built On hub.
  *
- * On the home page it sits below the console screenshots: the console manages
- * the substrate, these run on it. The audience pages reuse it to answer "what
- * runs on this", which is why the framing is a prop. The item list is not:
- * one place to add an application, so the pages cannot drift apart.
+ * It lists components, not the applications. Access Control, Kiosk, and
+ * Helpdesk are reference applications: open source and usable, but examples of
+ * the patterns rather than supported products, so they live on the hub under
+ * that name and are not sold here. The audience pages reuse the strip, which is
+ * why the framing is a prop. The item list is not: one place to add a
+ * component, so the pages cannot drift apart.
  */
 
 defineProps({
   heading: {
     type: String,
-    default: 'More than a console',
+    default: 'Around the console',
   },
   subtitle: {
     type: String,
     default:
-      'The console runs the substrate. These run on it: real, open-source systems we build and operate on the same foundation you get.',
+      'The open-source components you run with it: at the edge, beside the control plane, and from your own terminal.',
   },
   // Sections alternate between the two page backgrounds, so the page that
   // places the teaser says which one it gets.
@@ -68,39 +71,25 @@ defineProps({
 
 const teaserItems = [
   {
-    name: 'Access Control',
-    href: '/access-control',
-    icon: 'pi-id-card',
-    color: '#f59e0b',
-    blurb: 'Doors that keep granting and denying locally, even offline.',
-  },
-  {
-    name: 'Kiosk',
-    href: '/kiosk',
-    icon: 'pi-shopping-cart',
-    color: '#3b82f6',
-    blurb: 'Badge-scan checkout for tool cribs and storerooms.',
-  },
-  {
-    name: 'Helpdesk',
-    href: '/helpdesk',
-    icon: 'pi-ticket',
-    color: '#14b8a6',
-    blurb: 'Support tickets and field work for MSPs, fed by machine alerts over NATS.',
-  },
-  {
     name: 'Rule-Router',
     href: '/rule-router',
     icon: 'pi-share-alt',
     color: '#8b5cf6',
-    blurb: 'NATS-native automation: declarative YAML rules in a single binary.',
+    blurb: 'Automation as declarative YAML: NATS rules, webhooks in, API calls out, and cron, in one binary.',
   },
   {
     name: 'Agent',
     href: '/agent',
     icon: 'pi-microchip',
     color: '#10b981',
-    blurb: 'Per-device telemetry and control from one lightweight daemon.',
+    blurb: 'Per-device telemetry, service control, and allowlisted commands from one lightweight daemon.',
+  },
+  {
+    name: 'stone CLI',
+    href: '/stone-cli',
+    icon: 'pi-code',
+    color: '#3b82f6',
+    blurb: 'The platform from a terminal: tenant resources, NATS, and KV, with config kept as YAML in git.',
   },
 ];
 </script>

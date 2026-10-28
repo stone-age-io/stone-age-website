@@ -9,6 +9,7 @@
 import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
+  kind: 'Component',
   name: 'Rule-Router',
   tagline: 'A NATS-native rule engine. Router, HTTP gateway, and cron scheduler in one binary, with one YAML syntax.',
   github: 'https://github.com/skeeeon/rule-router',

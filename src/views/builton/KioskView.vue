@@ -9,6 +9,7 @@
 import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
+  kind: 'Reference application',
   name: 'Kiosk',
   tagline: 'Self-service checkout for tool cribs and storerooms. Scan a badge, scan items, walk away.',
   github: 'https://github.com/skeeeon/kiosk',

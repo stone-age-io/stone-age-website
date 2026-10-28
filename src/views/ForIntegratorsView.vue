@@ -11,7 +11,7 @@
             The platform you'd otherwise have to build yourself.
           </h1>
           <p class="text-lg sm:text-xl leading-relaxed mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-            Multi-tenant identity, an event bus, an encrypted mesh, and a service desk, running on
+            Multi-tenant identity, an event bus, an encrypted mesh, and automation, running on
             hardware you control, under your brand, with your customers as organizations. You keep the
             customer relationship and the recurring revenue.
           </p>
@@ -72,8 +72,9 @@
         </div>
 
         <p class="max-w-3xl mt-6 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-          Where you do install new hardware, the access control application drives OSDP readers and GPIO
-          or I2C lock hardware directly, so a retrofit and a new build run on the same stack.
+          Where you do install new hardware, the open-source access control reference application shows
+          the same stack driving OSDP readers and GPIO or I2C lock hardware directly, so a retrofit and a
+          new build can share one bus.
         </p>
       </div>
     </section>
@@ -260,29 +261,8 @@ stone apply                      # idempotent, batched, performs no deletes</cod
       </div>
     </section>
 
-    <!-- Service desk -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
-      <div class="container">
-        <div class="max-w-3xl">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
-            A service desk that already knows about the equipment
-          </h2>
-          <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
-            Helpdesk runs on the same stack: a staff app, a customer-facing portal under your logo,
-            visit dispatch, and a billable time ledger. Devices and automation open their own tickets
-            over the bus, and the customer they belong to is read from a signed subject rather than a
-            payload, so a ticket's origin can't be spoofed. Field work, projects, and hours roll up to
-            the same ledger you invoice from.
-          </p>
-          <a href="/helpdesk" class="font-medium underline hover:no-underline" :style="{ color: 'var(--color-primary)' }">
-            See how Helpdesk works
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- What it costs and what you keep -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section pt-0" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <div class="max-w-3xl mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
@@ -358,7 +338,7 @@ stone apply                      # idempotent, batched, performs no deletes</cod
             Start with a login, not a slide deck
           </h2>
           <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
-            We will give you read-only access to a live instance running every application, and walk
+            We will give you read-only access to a live instance, and walk
             through what your first thirty days would actually look like against the customers you
             already have.
           </p>
@@ -393,7 +373,10 @@ stone apply                      # idempotent, batched, performs no deletes</cod
  * Lead claim: "the platform you'd otherwise have to build yourself."
  * Supporting order is deliberate: ownership/durability first (the two arguments a
  * manufacturer-backed competitor cannot make), then labor savings, then AI with the
- * guardrails stated BEFORE the capability, then isolation, then the service desk.
+ * guardrails stated BEFORE the capability, then isolation, then the arithmetic.
+ *
+ * No application is sold here. Access Control, Kiosk, and Helpdesk are reference
+ * applications (see BuiltOnView); mention one only as an example, and say so.
  *
  * Every claim here is backed by shipped behavior. Do not add a capability claim to
  * this page that isn't demonstrable on the reference instance.

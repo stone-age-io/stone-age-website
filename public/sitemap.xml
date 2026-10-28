@@ -36,4 +36,8 @@
     <loc>https://stone-age.io/agent</loc>
     <lastmod>2026-07-02</lastmod>
   </url>
+  <url>
+    <loc>https://stone-age.io/stone-cli</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
 </urlset>

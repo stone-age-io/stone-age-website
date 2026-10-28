@@ -36,7 +36,7 @@
     <BuiltOnTeaser
       background="var(--color-background)"
       heading="What runs on it"
-      subtitle="You do not start from an empty bus. These are the applications and components that run on it, all open source, and a hosted account includes every one of them."
+      subtitle="You do not start from an empty bus. These open-source components run on it: automation at each site, an agent on each box, and a CLI for your own scripts and pipelines."
     />
 
     <!-- The silo contrast -->
@@ -324,7 +324,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
           </p>
           <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
             A hosted account is <strong :style="{ color: 'var(--color-content-primary)' }">$149/month</strong>
-            for every application across up to three sites, and $49/month for each site after that,
+            for the full platform across up to three sites, and $49/month for each site after that,
             with no per-door or per-device licensing fees to penalize adding equipment. The source is
             open and the binaries are yours, so nothing you build on top of it depends on us still being
             here in five years.
@@ -366,8 +366,8 @@ import BuiltOnTeaser from '../components/home/BuiltOnTeaser.vue';
  * language files it under a facilities budget, and IT does not buy a BMS while
  * facilities does not buy a message bus. Doors and badges stay as examples
  * because they are concrete and they differentiate; they are not the category.
- * Kiosk and Helpdesk are on this page's strip precisely because neither is a
- * building system, and both are things an IT team would own.
+ * The strip shows components, not applications: the applications are reference
+ * projects, and a hosted account is not sold as including them.
  *
  * Accuracy note: rule-router exposes a Prometheus endpoint with a documented metric
  * catalogue (see its docs/12-observability.md). The platform console does NOT expose
@@ -381,7 +381,7 @@ import BuiltOnTeaser from '../components/home/BuiltOnTeaser.vue';
  * helpdesk.tickets.create and its payload fields are Helpdesk's ingest subject (its
  * docs/protocol.md). `stone kv get <bucket> <key>` is the CLI's documented KV read.
  * Keep them runnable, and keep the ticket example on Helpdesk rather than a
- * third-party desk: it is our own product and the integration actually ships.
+ * third-party desk: it is our own reference application and its ingest ships.
  * A snippet a reader cannot paste is worse than no snippet. An earlier version showed
  * `access.decision.>` and a `twins` bucket, neither of which exists.
  *

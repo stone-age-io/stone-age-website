@@ -9,6 +9,7 @@
 import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
+  kind: 'Component',
   name: 'Agent',
   tagline: 'A lightweight system service for every device: telemetry, service control, and whitelisted commands in under 50 MB of RAM.',
   github: 'https://github.com/stone-age-io/agent',

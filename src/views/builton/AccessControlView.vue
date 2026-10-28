@@ -9,6 +9,7 @@
 import ProjectPage from '../../components/builton/ProjectPage.vue';
 
 const project = {
+  kind: 'Reference application',
   name: 'Access Control',
   tagline: 'Badge-in access control where every door keeps deciding locally, even when the internet dies.',
   github: 'https://github.com/stone-age-io/access-control',

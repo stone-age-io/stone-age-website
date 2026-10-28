@@ -8,45 +8,49 @@
             Built on Stone-Age
           </h1>
           <p class="text-lg sm:text-xl leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            The best proof of a platform is what ships on it. These are real, open-source
-            systems we build and run on the same primitives you get: small static binaries,
+            The platform is a control plane and a few small components around it. Below are those
+            components, then the reference applications we built with them to show the patterns end
+            to end. All of it is open source, on the same primitives you get: small static binaries,
             embedded PocketBase, and NATS everywhere.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Applications -->
-    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
-      <div class="container">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-2" :style="{ color: 'var(--color-content-primary)' }">
-          Applications
-        </h2>
-        <p class="mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-          Complete systems built on the platform's patterns, each one a single binary you deploy at the edge.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ProjectCard v-for="(app, index) in applications" :key="`app-${index}`" :item="app" />
-        </div>
-      </div>
-    </section>
-
     <!-- Components -->
-    <section class="section pt-0" :style="{ backgroundColor: 'var(--color-background)' }">
+    <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
         <h2 class="text-2xl sm:text-3xl font-bold mb-2" :style="{ color: 'var(--color-content-primary)' }">
           Components
         </h2>
-        <p class="mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-          Parts of the stack itself. Deploy them alongside the control plane, centrally or at the edge.
+        <p class="mb-8 max-w-3xl" :style="{ color: 'var(--color-content-secondary)' }">
+          Parts of the stack itself, and part of the platform you run or we host. Deploy them beside
+          the control plane, at the edge, or on your own machine.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ProjectCard v-for="(comp, index) in components" :key="`comp-${index}`" :item="comp" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Reference applications -->
+    <section class="section pt-0" :style="{ backgroundColor: 'var(--color-background)' }">
+      <div class="container">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2" :style="{ color: 'var(--color-content-primary)' }">
+          Reference applications
+        </h2>
+        <p class="mb-8 max-w-3xl" :style="{ color: 'var(--color-content-secondary)' }">
+          Complete systems we built to show the patterns end to end: each one a single binary with its
+          own data model, running on the same bus. They are open source and you can run them as they
+          are, but they are examples to learn from and build on, not supported products.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <ProjectCard v-for="(app, index) in applications" :key="`app-${index}`" :item="app" />
         </div>
 
         <p class="mt-10 text-sm text-center" :style="{ color: 'var(--color-content-secondary)' }">
-          There's more in the toolbox: the <code class="font-mono text-xs">stone</code> CLI, the
-          <code class="font-mono text-xs">leaf-sync</code> config mirror, and the platform itself.
+          There's more in the toolbox: the
+          <code class="font-mono text-xs">leaf-sync</code> config mirror and the platform itself.
           <a
             href="https://github.com/stone-age-io"
             class="underline hover:no-underline"
@@ -61,11 +65,43 @@
 
 <script setup>
 /**
- * BuiltOnView — hub page for applications and components built on Stone-Age.
- * Applications = complete systems built on the platform's patterns.
- * Components = parts of the stack itself.
+ * BuiltOnView — hub page for the components and reference applications.
+ *
+ * Components come first because they are the product: parts of the stack that
+ * a hosted account or a self-hosted install actually runs. The applications are
+ * reference projects. They are real and usable, but no pricing card or audience
+ * page sells them, and this page must not either: keep "reference" in the
+ * heading and the not-a-supported-product sentence under it.
  */
 import ProjectCard from '../../components/builton/ProjectCard.vue';
+
+
+const components = [
+  {
+    name: 'Rule-Router',
+    href: '/rule-router',
+    icon: 'pi-share-alt',
+    color: '#8b5cf6',
+    blurb:
+      'A NATS-native rule engine: router, HTTP gateway, and cron scheduler in one binary with one YAML syntax. KV-backed state for dedup, presence, and rate limiting.',
+  },
+  {
+    name: 'Agent',
+    href: '/agent',
+    icon: 'pi-microchip',
+    color: '#10b981',
+    blurb:
+      'The per-device daemon: heartbeats, system telemetry, service control, and whitelisted commands over NATS. Linux, Windows, and FreeBSD in under 50 MB of RAM.',
+  },
+  {
+    name: 'stone CLI',
+    href: '/stone-cli',
+    icon: 'pi-code',
+    color: '#3b82f6',
+    blurb:
+      'The command-line client: tenant resources with typed flags, NATS publish and subscribe, KV reads, and a tenant pulled down as YAML you review in git and apply back.',
+  },
+];
 
 const applications = [
   {
@@ -90,26 +126,7 @@ const applications = [
     icon: 'pi-ticket',
     color: '#14b8a6',
     blurb:
-      'A service desk for MSPs: reactive support tickets and proactive field work. Machine-generated tickets stream in over NATS with unforgeable provenance, alongside a staff app, requester portal, visit dispatch, and time tracking.',
-  },
-];
-
-const components = [
-  {
-    name: 'Rule-Router',
-    href: '/rule-router',
-    icon: 'pi-share-alt',
-    color: '#8b5cf6',
-    blurb:
-      'A NATS-native rule engine: router, HTTP gateway, and cron scheduler in one binary with one YAML syntax. KV-backed state for dedup, presence, and rate limiting.',
-  },
-  {
-    name: 'Agent',
-    href: '/agent',
-    icon: 'pi-microchip',
-    color: '#10b981',
-    blurb:
-      'The per-device daemon: heartbeats, system telemetry, service control, and whitelisted commands over NATS. Linux, Windows, and FreeBSD in under 50 MB of RAM.',
+      'A service desk for MSPs: support tickets and field work. Machine-generated tickets arrive over NATS with their customer read from a signed subject, alongside a staff app, requester portal, visit dispatch, and time tracking.',
   },
 ];
 </script>

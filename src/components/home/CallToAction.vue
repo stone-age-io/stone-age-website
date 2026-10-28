@@ -143,7 +143,7 @@ const pricingPlans = [
     subtitleClass: 'text-gray-300',
     price: '$149<span class="text-base font-normal">/mo</span>',
     features: [
-      'Every application: access control, video, kiosks, monitoring',
+      'The full platform: console, dashboards, automation, and device agent',
       'Up to 3 sites included, $49/mo per additional site',
       'No per-door or per-device licensing; generous fair-use capacity included',
       'Event retention and digital twin state; capacity expands as you grow',
@@ -164,7 +164,7 @@ const pricingPlans = [
       'Your own signing keys, database, and encryption key',
       'Includes 10 customer organizations ($49/mo each after)',
       'Capacity sized for your whole fleet, with more added as it grows',
-      'A service desk your customers see under your logo'
+      'Each customer in its own NATS account and Nebula CA'
     ],
     ctaText: 'For integrators',
     ctaLink: '/for-integrators',

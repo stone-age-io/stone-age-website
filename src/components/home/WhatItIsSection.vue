@@ -104,8 +104,8 @@
  * section only has to make the product legible.
  *
  * The heading avoids "built on" on purpose. That phrase is taken: Built On is
- * the applications-built-on-Stone-Age hub, linked from the nav and teased in
- * the section directly above this one.
+ * the hub for the components and reference applications, linked from the nav
+ * and teased, components only, in the section directly above this one.
  *
  * No docs link closes this section. The nav carries one permanently and the
  * Get Started section a screen below has "Read Documentation" as a button;
@@ -148,7 +148,7 @@ const stack = [
     name: 'Stone-Age',
     icon: 'pi-box',
     color: '#f59e0b',
-    role: 'Ours: the console you run the fleet from, Rule-Router for declarative YAML automation across NATS, HTTP, and cron, and a lightweight agent that reports and controls a single device.',
+    role: 'Ours: the console you run the fleet from, plus the components in the strip above. Rule-Router automates across NATS, HTTP, and cron, the agent reports and controls a single device, and the stone CLI drives it all from a terminal.',
   },
 ];
 </script>
