@@ -230,12 +230,12 @@ const tabs = [
   {
     label: 'Organizations',
     icon: 'pi-building',
-    url: 'console.stone-age.io/organizations',
+    url: 'console.stone-age.io/organizations/9xnip8ckvjwv687',
     image: '/images/screenshots/organizations.png',
     imageLight: '/images/screenshots/organizations-light.png',
-    alt: 'Multi-tenant organization management',
+    alt: "An organization's page: its details, counts of things, locations and members, and its own NATS account and Nebula certificate authority",
     title: 'Multi-tenant management',
-    description: 'Each organization gets isolated NATS accounts and Nebula CAs. Manage hundreds of customers from a single deployment with cryptographic data separation.'
+    description: "Each organization gets its own NATS account and its own Nebula CA, so one tenant's certificates can't be trusted by another. Its size and both identity boundaries are on one page."
   }
 ];
 
