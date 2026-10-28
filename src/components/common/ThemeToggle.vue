@@ -11,7 +11,7 @@
     >
       <!-- Icon transition -->
       <transition name="theme-toggle" mode="out-in">
-        <i v-if="isDarkMode" class="pi pi-moon text-xl" aria-hidden="true"></i>
+        <i v-if="currentTheme === 'dark'" class="pi pi-moon text-xl" aria-hidden="true"></i>
         <i v-else-if="currentTheme === 'light'" class="pi pi-sun text-xl" aria-hidden="true"></i>
         <i v-else class="pi pi-desktop text-xl" aria-hidden="true"></i>
       </transition>
