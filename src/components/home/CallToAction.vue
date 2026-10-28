@@ -24,9 +24,16 @@
         />
       </div>
 
-      <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white/90">
+      <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white">
+        Running it yourself in a regulated or air-gapped environment? Support subscriptions with
+        SLAs are available for self-hosted deployments.
+        <a href="mailto:info@stone-age.io?subject=Self-hosted%20support" class="underline font-medium hover:text-white/80">Talk to us</a>.
+      </p>
+
+      <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
         A site is a place where equipment connects to the platform directly. Anything that arrives
-        through a vendor's cloud counts as part of that cloud, not as a site.
+        through a vendor's cloud counts as part of that cloud, not as a site. On Dedicated, every
+        organization counts as at least one site.
       </p>
 
       <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
@@ -70,11 +77,28 @@ import PricingCard from '../pricing/PricingCard.vue';
  * is the first line under the heading, because the buyers here are integrators
  * and MSPs who came to find a number and resent being made to hunt for it.
  *
- * Prices match the price sheet exactly: $149 direct with a $49 per-site step,
- * $499 Dedicated with a $49 per-customer-organization step. Do not reintroduce
- * "unlimited organizations" on Dedicated. The per-org step is the platform's
- * only expansion-revenue mechanism, and a published "unlimited" cannot be
- * walked back on a quote.
+ * Prices match the price sheet exactly: $149 Hosted with 3 sites and a $49
+ * per-site step, $499 Dedicated with 10 sites pooled across the instance and a
+ * $29 per-site step. Site is the meter on every tier. Dedicated used to charge
+ * per customer organization, which priced a 40-site customer the same as a
+ * 1-site one while capacity cost grew with sites, and let any end user past 10
+ * sites buy Dedicated for less than Hosted. Charging both tiers by site makes
+ * revenue follow cost, and makes Dedicated the deliberate upgrade for a large
+ * single estate rather than a leak.
+ *
+ * Organizations on Dedicated are unlimited, which reverses an earlier rule
+ * against publishing that. The rule existed because the per-org step was the
+ * only expansion revenue; sites carry that now. What stops an org from being
+ * free is the floor: every organization counts as at least one site. Without
+ * it, a customer connected only through vendor clouds has zero sites and costs
+ * storage, automation, and a NATS account against no revenue. Keep that floor
+ * in the site definition under the cards.
+ *
+ * The $29 step keeps an integrator's cost per customer below the Hosted price
+ * at every customer size, so the channel has room to mark up without the page
+ * suggesting what to charge. Do not reintroduce a resale price or margin
+ * table: the old one assumed $149 resale, which is the direct Hosted price,
+ * and showed integrators that their customers could go around them.
  *
  * Capacity is described, never promised as infinite. The framing line used to
  * say "everything in it is included" and the Hosted card "however many doors,
@@ -133,6 +157,14 @@ import PricingCard from '../pricing/PricingCard.vue';
  *
  * Read together, the paid cards are the same software plus somebody else's
  * operations, which is what they actually are.
+ *
+ * Paid support for self-hosters is a line under the cards, not a fourth card.
+ * Buyers who must self-host (regulated, air-gapped, OT) are worth reaching, but
+ * a priced card beside the free one would make self-hosting look like a lead
+ * offer and break rule 1, and the grid is three columns. It carries no price:
+ * support terms, like founding-partner terms, are a conversation. It also
+ * leaves rule 4 intact, since the free card still promises community support
+ * only and the paid option sits visibly outside it.
  */
 
 const pricingPlans = [
@@ -162,8 +194,8 @@ const pricingPlans = [
     features: [
       'Your own instance, your brand, your domains',
       'Your own signing keys, database, and encryption key',
-      'Includes 10 customer organizations ($49/mo each after)',
-      'Capacity sized for your whole fleet, with more added as it grows',
+      'Includes 10 sites across all organizations, $29/mo per additional site',
+      'Unlimited organizations for your customers, priced by site, not by org',
       'Each customer in its own NATS account and Nebula CA'
     ],
     ctaText: 'For integrators',

@@ -269,10 +269,10 @@ stone apply                      # idempotent, batched, performs no deletes</cod
             What it costs, and what you keep
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            A dedicated instance is <strong>$499/month and includes ten customer organizations</strong>.
-            Each organization after that is <strong>$49/month</strong>, counted from the platform. You set
-            your own price to your own customers. At $149 each, here is the arithmetic you were going to
-            do anyway.
+            A dedicated instance is <strong>$499/month and includes ten sites</strong> across all your
+            customer organizations. Each site after that is <strong>$29/month</strong>. Organizations are
+            unlimited, and each counts as at least one site. What you charge your customers, and how,
+            is yours to decide. Here is what you pay us at typical fleet sizes.
           </p>
         </div>
 
@@ -280,37 +280,35 @@ stone apply                      # idempotent, batched, performs no deletes</cod
           <table class="w-full text-sm">
             <thead>
               <tr :style="{ backgroundColor: 'var(--color-background-alt)' }">
+                <th class="text-left font-semibold px-4 py-3" :style="{ color: 'var(--color-content-primary)' }">
+                  Customer orgs
+                </th>
                 <th
-                  v-for="(heading, index) in marginHeadings"
-                  :key="`mh-${index}`"
+                  v-for="sites in fleetSiteAverages"
+                  :key="`fh-${sites}`"
                   class="text-left font-semibold px-4 py-3"
                   :style="{ color: 'var(--color-content-primary)' }"
-                >{{ heading }}</th>
+                >Avg {{ sites }} sites each</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="(row, index) in marginRows"
-                :key="`mr-${index}`"
+                v-for="orgs in fleetOrgCounts"
+                :key="`fr-${orgs}`"
                 :style="{ borderTop: '1px solid var(--color-border)' }"
               >
-                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">{{ row.orgs }}</td>
-                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">
-                  {{ money(row.pay) }}
-                  <!-- Fixed-width track, not a percentage of the cell: both columns
-                       have to share one axis or the bars are not comparable. -->
-                  <div class="bar-track">
-                    <div class="bar bar-pay" :style="{ width: barWidth(row.pay) }"></div>
+                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">{{ orgs }}</td>
+                <td
+                  v-for="sites in fleetSiteAverages"
+                  :key="`fc-${orgs}-${sites}`"
+                  class="px-4 py-3"
+                >
+                  <div class="font-semibold" :style="{ color: 'var(--color-content-primary)' }">
+                    {{ money(dedicatedMonthly(orgs * sites)) }}/mo
                   </div>
-                </td>
-                <td class="px-4 py-3" :style="{ color: 'var(--color-content-secondary)' }">
-                  {{ money(row.collect) }}
-                  <div class="bar-track">
-                    <div class="bar bar-collect" :style="{ width: barWidth(row.collect) }"></div>
+                  <div class="text-xs mt-0.5" :style="{ color: 'var(--color-content-secondary)' }">
+                    {{ money(Math.round(dedicatedMonthly(orgs * sites) / orgs)) }} per customer
                   </div>
-                </td>
-                <td class="px-4 py-3 font-semibold" :style="{ color: 'var(--color-content-primary)' }">
-                  {{ row.margin }}
                 </td>
               </tr>
             </tbody>
@@ -318,7 +316,8 @@ stone apply                      # idempotent, batched, performs no deletes</cod
         </div>
 
         <p class="max-w-3xl mt-6 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-          The margin holds as you scale, which means you can build a predictable business on it.
+          Past the included sites your cost settles near $30 a site, so it grows in a straight line
+          with your fleet, which means you can build a predictable business on it.
           There are no surprise per-device license fees or per-door meters underneath it to eat your
           margins. If a customer grows into high-volume streaming or long retention, we size the
           extra capacity and quote it before it's added, so you can price it into that customer's
@@ -465,26 +464,29 @@ const guardrails = [
   },
 ];
 
-// Channel margin at $149 per customer. $499 covers the first ten organizations,
-// $49 each thereafter. Keep these in sync with the price sheet; the founder-facing
-// business case carries the same table and the two must not drift.
-const marginHeadings = ['Your customer orgs', 'You pay us', 'You collect at $149', 'Your margin'];
+// What an integrator pays us, by fleet shape. $499 covers the first ten sites
+// across the instance, $29 each thereafter. Keep these in sync with the price
+// sheet and the Dedicated card in CallToAction.
+//
+// Only our side of the ledger is shown. The table this replaced assumed $149
+// resale per customer, which is our own direct Hosted price, so it anchored the
+// channel to list and showed integrators their customers could go around them.
+// What they charge is theirs to decide; what they pay is what they came for.
+//
+// The cells are computed from the price constants rather than typed in, so a
+// price change cannot leave the grid disagreeing with the copy above it. The
+// one-site-per-org floor never binds here because every average is at least 3.
+const DEDICATED_BASE = 499;
+const DEDICATED_INCLUDED_SITES = 10;
+const DEDICATED_SITE_PRICE = 29;
 
-// Numbers, not strings, so the bars can be drawn from the same figures the table
-// prints. barMax is the largest value in the set: both columns scale against it,
-// which is what makes the gap between what you pay and what you collect readable.
-const marginRows = [
-  { orgs: '10', pay: 499, collect: 1490, margin: '66%' },
-  { orgs: '25', pay: 1234, collect: 3725, margin: '67%' },
-  { orgs: '50', pay: 2459, collect: 7450, margin: '67%' },
-  { orgs: '100', pay: 4909, collect: 14900, margin: '67%' },
-];
+const fleetOrgCounts = [10, 15, 20, 25];
+const fleetSiteAverages = [3, 5, 8];
 
-const barMax = Math.max(...marginRows.map((row) => row.collect));
+const dedicatedMonthly = (sites) =>
+  DEDICATED_BASE + Math.max(0, sites - DEDICATED_INCLUDED_SITES) * DEDICATED_SITE_PRICE;
 
 const money = (amount) => `$${amount.toLocaleString('en-US')}`;
-
-const barWidth = (amount) => `${(amount / barMax) * 100}%`;
 
 const isolationPoints = [
   {
@@ -504,30 +506,4 @@ const isolationPoints = [
 
 <style scoped>
 /* Diagram primitives live in assets/css/diagrams.css — two pages use them. */
-
-/*
- * Margin bars. The track is a fixed width rather than a percentage of the table
- * cell, so the "you pay" and "you collect" columns share one axis and can be
- * compared across columns as well as down them.
- */
-.bar-track {
-  @apply mt-1.5 h-1.5 rounded-full;
-  width: 96px;
-  max-width: 100%;
-  background-color: var(--color-border-primary);
-}
-
-.bar {
-  @apply h-1.5 rounded-full;
-  min-width: 3px;
-}
-
-.bar-pay {
-  background-color: var(--color-content-secondary);
-  opacity: 0.5;
-}
-
-.bar-collect {
-  background-color: var(--color-primary-500);
-}
 </style>
