@@ -24,13 +24,7 @@
         />
       </div>
 
-      <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white">
-        Running it yourself in a regulated or air-gapped environment? Support subscriptions with
-        SLAs are available for self-hosted deployments.
-        <a href="mailto:info@stone-age.io?subject=Self-hosted%20support" class="underline font-medium hover:text-white/80">Talk to us</a>.
-      </p>
-
-      <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
+      <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white/90">
         A site is a place where equipment connects to the platform directly. Anything that arrives
         through a vendor's cloud counts as part of that cloud, not as a site. On Dedicated, every
         organization counts as at least one site.
@@ -40,11 +34,6 @@
         Hosted and Dedicated plans include connection and message storage headroom sized for
         typical commercial and industrial facilities. High-frequency streaming, extended
         historical retention, or enterprise-scale workloads move to dedicated capacity.
-      </p>
-
-      <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
-        All three run the same binaries, so you can start on your own hardware and move to a hosted
-        instance later without rebuilding anything.
       </p>
 
       <!-- Secondary actions -->
@@ -158,13 +147,19 @@ import PricingCard from '../pricing/PricingCard.vue';
  * Read together, the paid cards are the same software plus somebody else's
  * operations, which is what they actually are.
  *
- * Paid support for self-hosters is a line under the cards, not a fourth card.
- * Buyers who must self-host (regulated, air-gapped, OT) are worth reaching, but
- * a priced card beside the free one would make self-hosting look like a lead
- * offer and break rule 1, and the grid is three columns. It carries no price:
- * support terms, like founding-partner terms, are a conversation. It also
- * leaves rule 4 intact, since the free card still promises community support
- * only and the paid option sits visibly outside it.
+ * Paid support for self-hosters is a clause on the free card's last bullet,
+ * not a fourth card. Buyers who must self-host (regulated, air-gapped, OT) are
+ * worth reaching, and that card is where they are reading; a priced card beside
+ * the free one would make self-hosting look like a lead offer and break rule 1.
+ * It carries no price: support terms, like founding-partner terms, are a
+ * conversation, reached through Contact Us below the cards. Rule 4 still holds,
+ * since the free card promises community support only and names the paid
+ * option as a separate thing.
+ *
+ * Only two notes sit under the cards, the site definition and fair use, because
+ * both qualify the paid cards' meters. "All three run the same binaries" used
+ * to be a third; it repeated the Self-hosted card's first bullet, and the
+ * self-host-then-move story is told on ForItTeamsView.
  */
 
 const pricingPlans = [
@@ -212,7 +207,7 @@ const pricingPlans = [
       'The same binaries we run, under an open-source licence',
       'Nothing held back: no open-core edition, no feature gates',
       'You run the control plane, hold the keys, and own the backups',
-      'Community support through GitHub issues'
+      'Community support through GitHub issues; paid support with SLAs available'
     ],
     ctaText: 'View on GitHub',
     ctaLink: 'https://github.com/stone-age-io/platform',
