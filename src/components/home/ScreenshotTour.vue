@@ -1,7 +1,7 @@
 <template>
   <section id="platform-tour" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
     <div class="container">
-      <h2 class="section-title text-center">See It In Action</h2>
+      <h2 class="section-title text-center">See it in action</h2>
       <p class="section-subtitle text-center">
         One console for the substrate: identity, tenants, live state, and networks across every site
       </p>
@@ -189,17 +189,17 @@ const tabs = [
     icon: 'pi-th-large',
     url: 'console.stone-age.io/dashboard',
     image: '/images/screenshots/dashboard.png',
-    alt: 'Stone-Age.io dashboard with real-time widgets',
-    title: 'Real-Time Dashboard',
-    description: 'Build custom views with gauges, charts, switches, and maps. Widgets subscribe directly to NATS, data flows from things to browser without touching a database.'
+    alt: 'Cold-chain dashboard with live freezer temperatures, reefer gauges, a site map, and shipment events',
+    title: 'Real-time dashboard',
+    description: 'Build custom views with gauges, charts, maps, and live message feeds. Widgets subscribe directly to NATS, so data flows from things to the browser without touching a database.'
   },
   {
     label: 'Digital Twin',
     icon: 'pi-bolt',
-    url: 'console.stone-age.io/things/sensor-01/twin',
+    url: 'console.stone-age.io/things/791106vcjkb1b3l',
     image: '/images/screenshots/digital-twin.png',
-    alt: 'Digital Twin live state view',
-    title: 'Live State Management',
+    alt: 'Live state of a door: reported and desired values with revision history',
+    title: 'Live state management',
     description: 'View and edit the live state of any thing or location in real-time. Change a setpoint in the UI and the update is published to NATS instantly for the thing to receive.'
   },
   {
@@ -208,16 +208,16 @@ const tabs = [
     url: 'console.stone-age.io/things',
     image: '/images/screenshots/things.png',
     alt: 'Thing management list view',
-    title: 'Thing Registry & Management',
+    title: 'Thing registry and management',
     description: 'Manage your entire fleet from one interface. Each thing is a first-class auth record with NATS credentials, Nebula certificates, and metadata.'
   },
   {
     label: 'Floor Plans',
     icon: 'pi-map',
-    url: 'console.stone-age.io/.../floorplan',
+    url: 'console.stone-age.io/locations/3pvpmnkgl3pqnxm',
     image: '/images/screenshots/floorplan.png',
     alt: 'Floor plan with device overlays',
-    title: 'Spatial Visualization',
+    title: 'Spatial visualization',
     description: 'Upload floor plans and drag things onto their physical positions. See live status overlaid on your building layout for instant situational awareness.'
   },
   {
@@ -226,7 +226,7 @@ const tabs = [
     url: 'console.stone-age.io/organizations',
     image: '/images/screenshots/organizations.png',
     alt: 'Multi-tenant organization management',
-    title: 'Multi-Tenant Management',
+    title: 'Multi-tenant management',
     description: 'Each organization gets isolated NATS accounts and Nebula CAs. Manage hundreds of customers from a single deployment with cryptographic data separation.'
   }
 ];
