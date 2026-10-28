@@ -338,9 +338,11 @@ stone apply                      # idempotent, batched, performs no deletes</cod
         </div>
 
         <p class="max-w-3xl mt-6 leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-          The margin holds at every scale, which means you can build a plan on it. There is no tier to
-          graduate into, no renegotiation at a threshold, and no per-door meter underneath it that makes
-          one customer's building more expensive than another's.
+          The margin holds as you scale, which means you can build a predictable business on it.
+          There are no surprise per-device license fees or per-door meters underneath it to eat your
+          margins. If a customer grows into high-volume streaming or long retention, we size the
+          extra capacity and quote it before it's added, so you can price it into that customer's
+          contract.
         </p>
       </div>
     </section>
@@ -375,8 +377,8 @@ stone apply                      # idempotent, batched, performs no deletes</cod
           </div>
           <p class="text-xs mt-6" :style="{ color: 'var(--color-content-secondary)' }">
             Demo access is a read-only login to a reference environment. Its traffic is generated on
-            purpose: a few hundred users and tens of thousands of events a month, so you can see how
-            it behaves under load before you have load of your own.
+            purpose: a few hundred users and tens of thousands of events a month, so you can see it
+            with realistic traffic before you have traffic of your own.
           </p>
         </div>
       </div>
@@ -420,7 +422,7 @@ const bridgingPoints = [
   },
   {
     title: 'Cloud platforms too',
-    body: 'The fleet, drone and energy platforms your customers already pay for become subjects on the same bus. The gateway takes their webhooks, the scheduler polls their APIs, and their tokens refresh themselves. One screen across the building and the trucks that serve it.',
+    body: 'Router management clouds, energy monitoring portals, and business SaaS (CRMs, ERPs, ticketing) your customers already run become subjects on the same bus. The gateway takes their webhooks, the scheduler polls their APIs, and their tokens refresh themselves. One screen across physical equipment and cloud software.',
   },
 ];
 

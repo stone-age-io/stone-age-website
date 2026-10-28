@@ -1,9 +1,10 @@
 <template>
   <section id="pricing" class="py-16 md:py-24 dark-section" :style="{ backgroundColor: 'var(--color-primary)' }">
     <div class="container text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Get Started</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Get started</h2>
       <p class="text-lg sm:text-xl mb-12 max-w-2xl mx-auto text-white">
-        One price per site. Everything in it is included, and so is every vendor cloud you connect.
+        Predictable pricing per site, with room to grow. No per-door or per-device fees, and no
+        surcharge for the vendor clouds you connect.
       </p>
 
       <!-- Pricing cards grid -->
@@ -26,6 +27,12 @@
       <p class="text-sm leading-relaxed mt-8 max-w-2xl mx-auto text-white/90">
         A site is a place where equipment connects to the platform directly. Anything that arrives
         through a vendor's cloud counts as part of that cloud, not as a site.
+      </p>
+
+      <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
+        Hosted and Dedicated plans include connection and message storage headroom sized for
+        typical commercial and industrial facilities. High-frequency streaming, extended
+        historical retention, or enterprise-scale workloads move to dedicated capacity.
       </p>
 
       <p class="text-sm leading-relaxed mt-4 max-w-2xl mx-auto text-white/90">
@@ -53,7 +60,7 @@
 import PricingCard from '../pricing/PricingCard.vue';
 
 /**
- * Pricing section, headed "Get Started".
+ * Pricing section, headed "Get started".
  *
  * The heading names the job rather than the artefact: the section carries three
  * plans, a demo request, the integrator page, GitHub, the docs, and a contact
@@ -68,6 +75,19 @@ import PricingCard from '../pricing/PricingCard.vue';
  * "unlimited organizations" on Dedicated. The per-org step is the platform's
  * only expansion-revenue mechanism, and a published "unlimited" cannot be
  * walked back on a quote.
+ *
+ * Capacity is described, never promised as infinite. The framing line used to
+ * say "everything in it is included" and the Hosted card "however many doors,
+ * cameras, and devices are in them", which read as unlimited compute and
+ * storage on plans that run on real disks. What the page promises now is the
+ * absence of a per-door or per-device fee, plus fair-use headroom sized for a
+ * typical facility, and the second note under the cards says what happens past
+ * it: high-frequency streaming, long retention, and enterprise-scale workloads
+ * move to dedicated capacity. That keeps the advantage over per-door pricing
+ * while making a capacity review routine stewardship rather than a broken
+ * promise. Do not reintroduce "however many", "everything included", or "no
+ * renegotiation at a threshold", here or on the audience pages that repeat
+ * these terms (ForItTeamsView, ForIntegratorsView).
  *
  * "Customer" means the integrator's customer and belongs only on the Dedicated
  * card, where a possessive makes that explicit: "your customers". Hosted reads
@@ -125,7 +145,8 @@ const pricingPlans = [
     features: [
       'Every application: access control, video, kiosks, monitoring',
       'Up to 3 sites included, $49/mo per additional site',
-      'However many doors, cameras, and devices are in them',
+      'No per-door or per-device licensing; generous fair-use capacity included',
+      'Event retention and digital twin state; capacity expands as you grow',
       'Remote support and policy changes included; on-site work quoted'
     ],
     ctaText: 'Get demo access',
@@ -141,7 +162,8 @@ const pricingPlans = [
     features: [
       'Your own instance, your brand, your domains',
       'Your own signing keys, database, and encryption key',
-      'Includes 10 organizations, $49/mo each after',
+      'Includes 10 customer organizations ($49/mo each after)',
+      'Capacity sized for your whole fleet, with more added as it grows',
       'A service desk your customers see under your logo'
     ],
     ctaText: 'For integrators',

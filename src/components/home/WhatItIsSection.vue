@@ -2,7 +2,7 @@
   <section id="what-it-is" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
     <div class="container">
       <div class="max-w-5xl mx-auto">
-        <h2 class="section-title text-center">What It Is</h2>
+        <h2 class="section-title text-center">What it is</h2>
         <p class="section-subtitle text-center">
           A control plane for connected operations: one place to register equipment and the people
           who use it, one real-time bus to carry what it reports, and one encrypted network to reach
@@ -50,7 +50,7 @@
         <div class="mt-12 max-w-2xl mx-auto">
           <div class="bottom-card">
             <h4 class="text-sm font-semibold mb-3 text-center" :style="{ color: 'var(--color-content-primary)' }">
-              Works With What You Already Have
+              Works with what you already have
             </h4>
             <div class="grid grid-cols-4 gap-3">
               <div v-for="(proto, index) in protocols" :key="`proto-${index}`" class="text-center">

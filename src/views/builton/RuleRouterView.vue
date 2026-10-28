@@ -26,7 +26,7 @@ const project = {
     {
       icon: 'pi-globe',
       color: '#3b82f6',
-      title: 'HTTP Gateway',
+      title: 'HTTP gateway',
       text: 'Inbound webhooks (with HMAC verification) become NATS messages; outbound actions call HTTP APIs with retry and exponential backoff.',
     },
     {
@@ -38,24 +38,24 @@ const project = {
     {
       icon: 'pi-database',
       color: '#10b981',
-      title: 'KV-Backed State',
+      title: 'KV-backed state',
       text: 'Alarm dedup, presence tracking, and rate limiting via NATS KV: durable, shared across instances, and inspectable with standard tools.',
     },
     {
       icon: 'pi-refresh',
       color: '#ec4899',
-      title: 'GitOps Hot Reload',
+      title: 'GitOps hot reload',
       text: 'Load rules from files or a NATS KV rule store with atomic hot reload: push a rule change and running engines pick it up, no restart.',
     },
     {
       icon: 'pi-chart-bar',
       color: '#6366f1',
-      title: 'Production Plumbing',
+      title: 'Production plumbing',
       text: 'Prometheus metrics, structured logging, graceful drain, Docker images, and versioned releases. Runs central or at the edge next to a leaf node.',
     },
   ],
   codeExample: {
-    title: 'One Rule, Start to Finish',
+    title: 'One rule, start to finish',
     code: `- trigger:
     subject: sensors.*.temperature
   conditions:
@@ -74,7 +74,7 @@ const project = {
       }`,
   },
   stoneAge: {
-    title: 'Role in the Stack',
+    title: 'Role in the stack',
     points: [
       'Layer 1 of the platform: reflexes. It reacts to events in real time so nothing upstream has to poll.',
       'Deploys next to a NATS leaf node at the edge, so alerts keep firing with zero cloud dependency.',

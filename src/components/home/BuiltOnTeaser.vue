@@ -51,7 +51,7 @@
 defineProps({
   heading: {
     type: String,
-    default: 'More Than a Console',
+    default: 'More than a console',
   },
   subtitle: {
     type: String,

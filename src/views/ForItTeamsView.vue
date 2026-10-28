@@ -11,9 +11,10 @@
             The systems your team inherited should run like the systems it chose.
           </h1>
           <p class="text-lg sm:text-xl leading-relaxed mb-8" :style="{ color: 'var(--color-content-secondary)' }">
-            Door controllers, kiosks, cameras, and sensors usually arrive as an appliance with a
-            vendor cloud behind it. Here every event is a message on an open bus, on hardware you
-            own: scrape it, stream it, retain it, and graph it next to the rest of your infrastructure.
+            Cellular routers, power systems, cameras, door controllers, and cloud SaaS platforms usually arrive
+            as isolated silos with their own proprietary dashboards. Here every physical event and SaaS webhook
+            is a message on an open bus, on hardware you own: scrape it, stream it, retain it, and act on it
+            alongside the rest of your infrastructure.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a
@@ -55,19 +56,17 @@
         </div>
 
         <!--
-          Data-path diagram. The point is the fan-out: one bus, and anything can
-          subscribe to it. The lower path is drawn dashed because those three are
-          tooling the customer picks and runs, which the prose below the cards says
-          in words. Deliberately no "ours/yours" labels: the data is the customer's
-          on both paths, so any label of that kind would be wrong. Adapted from the
-          platform docs' observability flowchart; keep the two in agreement.
+          Data-path diagram. The point is convergence and fan-out: physical devices
+          and cloud SaaS platforms meet on one bus. The lower path is drawn dashed because
+          those three are tooling the customer picks and runs, which the prose below the cards
+          says in words. Deliberately no "ours/yours" labels: the data is the customer's on all paths.
         -->
         <div class="dg-scroll mb-10">
           <svg
             class="dg"
-            viewBox="0 40 720 168"
+            viewBox="0 20 740 195"
             role="img"
-            aria-label="Devices publish to NATS JetStream. The bus feeds the console and KV twin for live state, and Telegraf, a time-series database, and Grafana for history."
+            aria-label="Physical devices and cloud SaaS platforms publish events and webhooks to NATS JetStream and Rule-Router. The bus feeds live console state, triggers Helpdesk tickets, webhooks, and alerts, and streams history into time-series databases."
           >
             <defs>
               <marker
@@ -78,39 +77,53 @@
               </marker>
             </defs>
 
-            <!-- Source -->
-            <rect x="4" y="92" width="108" height="56" rx="6" class="dg-box" />
-            <text x="58" y="116" text-anchor="middle" class="dg-title">Door or sensor</text>
-            <text x="58" y="132" text-anchor="middle" class="dg-sub">or edge agent</text>
+            <!-- Physical Edge Source -->
+            <rect x="4" y="32" width="124" height="58" rx="6" class="dg-box" />
+            <text x="66" y="54" text-anchor="middle" class="dg-title">Physical devices</text>
+            <text x="66" y="70" text-anchor="middle" class="dg-sub">routers, power, doors</text>
 
-            <line x1="112" y1="120" x2="150" y2="120" class="dg-line" marker-end="url(#itArrow)" />
+            <line x1="128" y1="61" x2="168" y2="92" class="dg-line" marker-end="url(#itArrow)" />
 
-            <!-- The bus -->
-            <rect x="156" y="48" width="116" height="148" rx="8" class="dg-box dg-box-bus" />
-            <text x="214" y="116" text-anchor="middle" class="dg-title">NATS</text>
-            <text x="214" y="134" text-anchor="middle" class="dg-sub">JetStream</text>
+            <!-- Cloud SaaS Source -->
+            <rect x="4" y="122" width="124" height="58" rx="6" class="dg-box" />
+            <text x="66" y="144" text-anchor="middle" class="dg-title">SaaS & clouds</text>
+            <text x="66" y="160" text-anchor="middle" class="dg-sub">CRM, ticketing, energy</text>
 
-            <!-- Live state -->
-            <line x1="272" y1="80" x2="296" y2="80" class="dg-line" marker-end="url(#itArrow)" />
-            <rect x="300" y="55" width="196" height="50" rx="6" class="dg-box dg-box-platform" />
-            <text x="398" y="79" text-anchor="middle" class="dg-title">Console + KV twin</text>
-            <text x="398" y="95" text-anchor="middle" class="dg-sub">live state in the browser</text>
+            <line x1="128" y1="151" x2="168" y2="122" class="dg-line" marker-end="url(#itArrow)" />
 
-            <!-- History: tooling the customer picks -->
-            <line x1="272" y1="171" x2="296" y2="171" class="dg-line" marker-end="url(#itArrow)" />
-            <rect x="300" y="146" width="108" height="50" rx="6" class="dg-box dg-box-byo" />
-            <text x="354" y="170" text-anchor="middle" class="dg-title">Telegraf</text>
-            <text x="354" y="186" text-anchor="middle" class="dg-sub">consumer</text>
+            <!-- The Unified Bus -->
+            <rect x="174" y="26" width="134" height="162" rx="8" class="dg-box dg-box-bus" />
+            <text x="241" y="96" text-anchor="middle" class="dg-title">NATS JetStream</text>
+            <text x="241" y="114" text-anchor="middle" class="dg-title">+ Rule-Router</text>
+            <text x="241" y="132" text-anchor="middle" class="dg-sub">events and rules</text>
 
-            <line x1="408" y1="171" x2="432" y2="171" class="dg-line" marker-end="url(#itArrow)" />
-            <rect x="436" y="146" width="118" height="50" rx="6" class="dg-box dg-box-byo" />
-            <text x="495" y="170" text-anchor="middle" class="dg-title">Your TSDB</text>
-            <text x="495" y="186" text-anchor="middle" class="dg-sub">VictoriaMetrics</text>
+            <!-- Live State in Browser -->
+            <line x1="308" y1="52" x2="336" y2="52" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="340" y="30" width="186" height="46" rx="6" class="dg-box dg-box-platform" />
+            <text x="433" y="51" text-anchor="middle" class="dg-title">Console + KV twin</text>
+            <text x="433" y="66" text-anchor="middle" class="dg-sub">live state in the browser</text>
 
-            <line x1="554" y1="171" x2="578" y2="171" class="dg-line" marker-end="url(#itArrow)" />
-            <rect x="582" y="146" width="134" height="50" rx="6" class="dg-box dg-box-byo" />
-            <text x="649" y="170" text-anchor="middle" class="dg-title">Grafana / Perses</text>
-            <text x="649" y="186" text-anchor="middle" class="dg-sub">history and trends</text>
+            <!-- Automated Actions & Dispatches -->
+            <line x1="308" y1="107" x2="336" y2="107" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="340" y="85" width="186" height="46" rx="6" class="dg-box" />
+            <text x="433" y="105" text-anchor="middle" class="dg-title">Automated actions</text>
+            <text x="433" y="120" text-anchor="middle" class="dg-sub">Helpdesk tickets, webhooks, alerts</text>
+
+            <!-- History: Customer Stack -->
+            <line x1="308" y1="163" x2="336" y2="163" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="340" y="140" width="104" height="46" rx="6" class="dg-box dg-box-byo" />
+            <text x="392" y="161" text-anchor="middle" class="dg-title">Telegraf</text>
+            <text x="392" y="176" text-anchor="middle" class="dg-sub">consumer</text>
+
+            <line x1="444" y1="163" x2="468" y2="163" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="472" y="140" width="112" height="46" rx="6" class="dg-box dg-box-byo" />
+            <text x="528" y="161" text-anchor="middle" class="dg-title">Your TSDB</text>
+            <text x="528" y="176" text-anchor="middle" class="dg-sub">VictoriaMetrics</text>
+
+            <line x1="584" y1="163" x2="608" y2="163" class="dg-line" marker-end="url(#itArrow)" />
+            <rect x="612" y="140" width="124" height="46" rx="6" class="dg-box dg-box-byo" />
+            <text x="674" y="161" text-anchor="middle" class="dg-title">Grafana / Perses</text>
+            <text x="674" y="176" text-anchor="middle" class="dg-sub">history and trends</text>
           </svg>
         </div>
 
@@ -149,6 +162,10 @@ scrape_configs:
 $ nats sub 'acc.*.*.*.evt.tap'
 [#1] acc.hq.door.lobby-main.evt.tap {"user":"Alice Example","allow":true,"reason":"allow_grant"}
 
+# act on it: a rule turns a held-open door into a Helpdesk ticket
+$ nats sub 'helpdesk.tickets.create'
+[#1] helpdesk.tickets.create {"title":"Door held open: lobby-main","priority":"high","thing_code":"lobby-main","dedupe_key":"lobby-main-held"}
+
 # query it: current state of one door, straight from KV
 $ stone kv get ACC_STATUS portal.lobby-main
 {"code":"lobby-main","location":"hq","door":"closed","posture":"secure","held":false}</code></pre>
@@ -171,17 +188,33 @@ $ stone kv get ACC_STATUS portal.lobby-main
     -->
     <section class="section" :style="{ backgroundColor: 'var(--color-background)' }">
       <div class="container">
-        <div class="max-w-3xl">
+        <div class="max-w-3xl mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
             Keep the vendor clouds. Lose the silos.
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            Your fleet telematics, drone and energy platforms each come with their own dashboard and
-            their own API. The automation layer polls those APIs on a schedule and receives their
-            webhooks, so their events land on the same bus as your doors and sensors, and one rule can
-            act on both. API tokens refresh themselves and are stored in your organization's own
-            account on the bus, readable only by the identities you give access to.
+            Routers, energy monitors, cameras, access controllers, and business SaaS platforms (CRMs, ERPs, ticketing)
+            each come with their own dashboard and their own API. The automation layer polls those APIs on a schedule and
+            receives their webhooks, so their events land on the same bus as your physical equipment, and one rule can
+            act on both. API tokens refresh themselves and are stored in your organization's own account on the bus,
+            readable only by the identities you give access to.
           </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            v-for="(integration, index) in cloudIntegrations"
+            :key="`cloud-${index}`"
+            class="p-5 rounded-lg"
+            :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
+          >
+            <h3 class="font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
+              {{ integration.title }}
+            </h3>
+            <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+              {{ integration.body }}
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -292,8 +325,9 @@ $ stone kv get ACC_STATUS portal.lobby-main
           <p class="leading-relaxed mb-6" :style="{ color: 'var(--color-content-secondary)' }">
             A hosted account is <strong :style="{ color: 'var(--color-content-primary)' }">$149/month</strong>
             for every application across up to three sites, and $49/month for each site after that,
-            however many doors, cameras, and devices are in them. The source is open and the binaries
-            are yours, so nothing you build on top of it depends on us still being here in five years.
+            with no per-door or per-device licensing fees to penalize adding equipment. The source is
+            open and the binaries are yours, so nothing you build on top of it depends on us still being
+            here in five years.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -310,7 +344,7 @@ $ stone kv get ACC_STATUS portal.lobby-main
           </div>
           <p class="text-xs mt-6" :style="{ color: 'var(--color-content-secondary)' }">
             The reference environment's traffic is generated on purpose: a few hundred users and tens of
-            thousands of events a month, so you can see how it behaves under load before you have load
+            thousands of events a month, so you can see it with realistic traffic before you have traffic
             of your own.
           </p>
         </div>
@@ -344,7 +378,10 @@ import BuiltOnTeaser from '../components/home/BuiltOnTeaser.vue';
  * metrics listener, acc.{location}.{type}.{thing}.evt.tap is what access controllers
  * publish per tap, and ACC_STATUS holds one portal.{code} key per door (both from
  * access-control docs/protocol.md; the sample values match its demo rules).
- * `stone kv get <bucket> <key>` is the CLI's documented KV read. Keep them runnable.
+ * helpdesk.tickets.create and its payload fields are Helpdesk's ingest subject (its
+ * docs/protocol.md). `stone kv get <bucket> <key>` is the CLI's documented KV read.
+ * Keep them runnable, and keep the ticket example on Helpdesk rather than a
+ * third-party desk: it is our own product and the integration actually ships.
  * A snippet a reader cannot paste is worse than no snippet. An earlier version showed
  * `access.decision.>` and a `twins` bucket, neither of which exists.
  *
@@ -366,6 +403,20 @@ const dataPaths = [
   {
     title: 'Query it',
     body: 'Device state lives in JetStream key-value buckets you can read directly, and the whole management API is plain REST with an admin UI in front of it. Nothing is hidden behind an integration tier.',
+  },
+];
+const cloudIntegrations = [
+  {
+    title: 'Cellular and router clouds',
+    body: 'The management clouds behind your cellular routers and gateways. Link and failover events arrive by webhook where the vendor sends them, or by a scheduled poll of its API where it does not.',
+  },
+  {
+    title: 'Energy monitoring portals',
+    body: 'Solar, battery, and power-monitoring portals. Readings land in the live device state beside your own equipment, so one rule can watch a battery level and a door together.',
+  },
+  {
+    title: 'Business SaaS',
+    body: 'CRMs, ERPs, and ticketing systems. Their webhooks become events your rules can act on, and rules can call their APIs back, with retries, from the same YAML.',
   },
 ];
 const deployPoints = [
