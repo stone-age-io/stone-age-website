@@ -41,7 +41,7 @@
           <!-- Screenshot viewport — fixed aspect ratio prevents layout shift -->
           <div class="screenshot-viewport" @click="openLightbox">
             <!-- Skeleton loader shown until image is ready -->
-            <div v-if="!loadedTabs[activeTab]" class="screenshot-skeleton">
+            <div v-if="!isLoaded(activeTab)" class="screenshot-skeleton">
               <div class="skeleton-shimmer"></div>
             </div>
 
@@ -50,15 +50,15 @@
               v-for="(tab, index) in tabs"
               :key="`img-${index}`"
               class="screenshot-layer"
-              :class="{ 'screenshot-layer-active': activeTab === index && loadedTabs[index] }"
+              :class="{ 'screenshot-layer-active': activeTab === index && isLoaded(index) }"
             >
               <img
                 v-if="visitedTabs[index]"
-                :src="tab.image"
+                :src="imageFor(tab)"
                 :alt="tab.alt"
                 class="w-full h-auto"
                 loading="lazy"
-                @load="onImageLoad(index)"
+                @load="onImageLoad"
               />
             </div>
 
@@ -125,17 +125,18 @@
               v-for="(tab, index) in tabs"
               :key="`lb-${index}`"
               class="lightbox-layer"
-              :class="{ 'lightbox-layer-active': activeTab === index && loadedTabs[index] }"
+              :class="{ 'lightbox-layer-active': activeTab === index && isLoaded(index) }"
             >
               <img
                 v-if="visitedTabs[index]"
-                :src="tab.image"
+                :src="imageFor(tab)"
                 :alt="tab.alt"
                 class="lightbox-image"
+                @load="onImageLoad"
               />
             </div>
             <!-- Lightbox skeleton -->
-            <div v-if="!loadedTabs[activeTab]" class="lightbox-skeleton">
+            <div v-if="!isLoaded(activeTab)" class="lightbox-skeleton">
               <div class="skeleton-shimmer"></div>
             </div>
           </div>
@@ -163,6 +164,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
+import { useTheme } from '@/composables/useTheme';
 
 /**
  * Screenshot Tour component
@@ -173,6 +175,13 @@ import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
  * - Skeleton shimmer while images load
  * - Adjacent tab preloading via Image() constructor
  * - Images only mount in DOM once their tab has been visited
+ *
+ * Each tab has a dark and a light screenshot of the same console view, and the
+ * one shown follows the site theme. "Loaded" is tracked per image URL rather
+ * than per tab, so a theme switch shows the skeleton until the other set
+ * arrives instead of a blank frame. Recapture both sets together: they should
+ * show the same view, the dark set with the console in dark mode and the light
+ * set with it in light mode.
  */
 
 const activeTab = ref(0);
@@ -180,8 +189,12 @@ const lightboxOpen = ref(false);
 
 // Track which tabs have been visited (triggers DOM mount of <img>)
 const visitedTabs = reactive({});
-// Track which images have fully loaded (triggers fade-in)
-const loadedTabs = reactive({});
+// Track which image URLs have fully loaded (triggers fade-in)
+const loadedImages = reactive({});
+
+const { isDarkMode } = useTheme();
+const imageFor = (tab) => (isDarkMode.value ? tab.image : tab.imageLight);
+const isLoaded = (index) => !!loadedImages[imageFor(tabs[index])];
 
 const tabs = [
   {
@@ -189,6 +202,7 @@ const tabs = [
     icon: 'pi-th-large',
     url: 'console.stone-age.io/dashboard',
     image: '/images/screenshots/dashboard.png',
+    imageLight: '/images/screenshots/dashboard-light.png',
     alt: 'Cold-chain dashboard with live freezer temperatures, reefer gauges, a site map, and shipment events',
     title: 'Real-time dashboard',
     description: 'Build custom views with gauges, charts, maps, and live message feeds. Widgets subscribe directly to NATS, so data flows from things to the browser without touching a database.'
@@ -198,6 +212,7 @@ const tabs = [
     icon: 'pi-bolt',
     url: 'console.stone-age.io/things/791106vcjkb1b3l',
     image: '/images/screenshots/digital-twin.png',
+    imageLight: '/images/screenshots/digital-twin-light.png',
     alt: 'Live state of a door: reported and desired values with revision history',
     title: 'Live state management',
     description: 'View and edit the live state of any thing or location in real-time. Change a setpoint in the UI and the update is published to NATS instantly for the thing to receive.'
@@ -207,6 +222,7 @@ const tabs = [
     icon: 'pi-server',
     url: 'console.stone-age.io/things',
     image: '/images/screenshots/things.png',
+    imageLight: '/images/screenshots/things-light.png',
     alt: 'Thing management list view',
     title: 'Thing registry and management',
     description: 'Manage your entire fleet from one interface. Each thing is a first-class auth record with NATS credentials, Nebula certificates, and metadata.'
@@ -216,6 +232,7 @@ const tabs = [
     icon: 'pi-map',
     url: 'console.stone-age.io/locations/3pvpmnkgl3pqnxm',
     image: '/images/screenshots/floorplan.png',
+    imageLight: '/images/screenshots/floorplan-light.png',
     alt: 'Floor plan with device overlays',
     title: 'Spatial visualization',
     description: 'Upload floor plans and drag things onto their physical positions. See live status overlaid on your building layout for instant situational awareness.'
@@ -225,6 +242,7 @@ const tabs = [
     icon: 'pi-building',
     url: 'console.stone-age.io/organizations',
     image: '/images/screenshots/organizations.png',
+    imageLight: '/images/screenshots/organizations-light.png',
     alt: 'Multi-tenant organization management',
     title: 'Multi-tenant management',
     description: 'Each organization gets isolated NATS accounts and Nebula CAs. Manage hundreds of customers from a single deployment with cryptographic data separation.'
@@ -241,10 +259,11 @@ const switchTab = (index) => {
 };
 
 /**
- * Called when an image finishes loading
+ * Called when an image finishes loading. Keyed by the src that loaded, which
+ * is still right if the theme changed while it was in flight.
  */
-const onImageLoad = (index) => {
-  loadedTabs[index] = true;
+const onImageLoad = (event) => {
+  loadedImages[event.target.getAttribute('src')] = true;
 };
 
 /**
@@ -257,7 +276,7 @@ const preloadNeighbors = (index) => {
       visitedTabs[n] = true;
       // Also prefetch via Image() for browser cache
       const img = new Image();
-      img.src = tabs[n].image;
+      img.src = imageFor(tabs[n]);
     }
   });
 };
@@ -337,9 +356,10 @@ onBeforeUnmount(() => {
   border: 1px solid var(--color-border-primary);
 }
 
+/* The frame follows the site theme, as the screenshot inside it does. */
 .screenshot-chrome {
   @apply flex items-center gap-2 px-2.5 py-2 sm:px-4 sm:py-2.5;
-  background-color: #232A35;
+  background-color: #E6E9EF;
 }
 
 .dark .screenshot-chrome {
@@ -355,8 +375,13 @@ onBeforeUnmount(() => {
 }
 
 .chrome-url {
-  @apply flex items-center text-gray-400 rounded px-2.5 py-1 min-w-0 flex-1;
+  @apply flex items-center text-gray-500 rounded px-2.5 py-1 min-w-0 flex-1;
   font-size: 0.6875rem;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.dark .chrome-url {
+  @apply text-gray-400;
   background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -369,9 +394,14 @@ onBeforeUnmount(() => {
    ============================== */
 .screenshot-viewport {
   @apply relative overflow-hidden cursor-pointer;
+  background-color: #F3F4F6;
+  /* Fixed aspect ratio prevents layout shift. It matches the screenshots,
+     which are all 1920x900, so no band shows above or below them. */
+  aspect-ratio: 1920 / 900;
+}
+
+.dark .screenshot-viewport {
   background-color: #0D1017;
-  /* Fixed aspect ratio prevents layout shift */
-  aspect-ratio: 16 / 8;
 }
 
 /* ==============================
@@ -396,6 +426,10 @@ onBeforeUnmount(() => {
    ============================== */
 .screenshot-skeleton {
   @apply absolute inset-0 overflow-hidden;
+  background-color: #E5E7EB;
+}
+
+.dark .screenshot-skeleton {
   background-color: #232A35;
 }
 
