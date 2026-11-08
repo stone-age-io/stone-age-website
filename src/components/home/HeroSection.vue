@@ -8,12 +8,12 @@
     
     <div class="container relative z-10">
       <div class="max-w-4xl">
-        <!-- Each beat is unbreakable, so a line can only end at a period. A
-             fixed <br> stranded a single word once the headline grew. Keep the
-             spans on one line: Vue drops whitespace between tags when it holds
-             a newline, which leaves no space to break at. -->
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-          <span class="whitespace-nowrap">Every site.</span> <span class="whitespace-nowrap">Every vendor cloud.</span> <span class="whitespace-nowrap">One screen.</span>
+        <!-- "Simple." stays whole so it never splits off mid-word; the first
+             sentence is too long to hold on one line on a phone, so it wraps
+             normally. Keep the span on the same line as the text before it:
+             Vue drops whitespace between tags when it holds a newline. -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white text-balance">
+          Make your equipment and your apps talk. <span class="whitespace-nowrap">Simple.</span>
         </h1>
 
         <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl text-pretty">
@@ -62,16 +62,23 @@
  * first and machines and sensors alongside them keeps the range visible. Do not
  * narrow this to buildings.
  *
- * The headline is three beats and names both halves: the sites, and the vendor
- * clouds the automation layer pulls in beside them. "One screen", not "one
- * place": a screen is a promise a reader can check by opening the console.
- * When it said only "every site you manage", the SaaS side read as an
- * afterthought in the subhead, and that combination is the part nobody else
- * sells: an iPaaS cannot open a door and an access-control vendor cannot read a
- * telematics feed. Do not merge the two into one abstract noun ("every system
- * you run"); that is the abstraction problem above again. "Vendor cloud" is the
- * IT page's term too ("Keep the vendor clouds. Lose the silos."), so the two
- * pages say it the same way.
+ * The headline says what the product does, with a verb, and names both halves:
+ * the equipment, and the apps it talks to. That combination is the part nobody
+ * else sells: an iPaaS cannot open a door and an access-control vendor cannot
+ * read a telematics feed. Do not merge the two into one abstract noun
+ * ("everything you run"); that is the abstraction problem above again. Keep the
+ * second "your": "your equipment and apps" reads as the equipment's own
+ * companion apps, not two separate camps.
+ *
+ * It replaced "Every site. Every vendor cloud. One screen." "One screen" sold a
+ * dashboard, the oldest pitch in the category, when the difference is the
+ * automation across the boundary; and "vendor cloud" was a term a buyer had to
+ * translate. The consolidation claim lives on in the subhead ("One console").
+ *
+ * "Simple." is the pitch, in the grug-brained voice the Stone Age name points
+ * at. No "finally": point-to-point integrations already exist, so claiming to
+ * be first is false. What they lack is simplicity, so say that instead.
+ * Imperative "Make", not "Making": the reader does the connecting.
  *
  * The subhead is a range ("everything from ... to ..."), not two lists. It used
  * to list five kinds of equipment and then fleet, drone and energy platforms,
