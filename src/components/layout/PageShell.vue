@@ -22,10 +22,12 @@ const { isDarkMode } = useTheme();
 </script>
 
 <style>
-/* Global container style */
+/* Global container style. 1440px uses wide screens without stretching prose:
+   text blocks carry their own max-w-* measure, so only grids and screenshots
+   grow. */
 .container {
-  @apply px-4 sm:px-6 mx-auto;
-  max-width: 1280px;
+  @apply px-4 sm:px-6 lg:px-8 mx-auto;
+  max-width: 1440px;
 }
 
 /* Add smooth scrolling to the entire page */

@@ -1,15 +1,13 @@
 <template>
   <section id="platform-tour" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
     <div class="container">
-      <h2 class="section-title text-center">See it in action</h2>
-      <!-- Names the four tabs in order, so the subtitle previews the tour.
-           Concrete screens, not architecture ("substrate", "live state"). -->
-      <p class="section-subtitle text-center text-balance">
-        Live dashboards, every device, your floor plans and each customer's organization, all in one console.
-      </p>
+      <!-- No visible header: the tiles name the four screens themselves, and
+           the section reads as a continuation of the hero. The heading stays
+           for screen readers and the document outline. -->
+      <h2 class="sr-only">See it in action</h2>
 
-      <!-- Tab buttons -->
-      <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-10">
+      <!-- Tab buttons: pills below lg, where two columns do not fit -->
+      <div class="flex flex-wrap gap-2 sm:gap-3 lg:hidden">
         <button
           v-for="(tab, index) in tabs"
           :key="`tab-${index}`"
@@ -24,9 +22,44 @@
         </button>
       </div>
 
-      <!-- Screenshot display -->
-      <div class="mt-8 max-w-5xl mx-auto">
-        <div class="screenshot-frame">
+      <!-- Screenshot display. On lg and up: tiles left, screenshot right,
+           description under the screenshot only, so the tile stack matches
+           the frame's height. -->
+      <div class="tour-layout mt-6 lg:mt-0">
+        <div
+          class="tile-list"
+          role="tablist"
+          aria-orientation="vertical"
+          aria-label="Console screens"
+        >
+          <button
+            v-for="(tab, index) in tabs"
+            :key="`tile-${index}`"
+            :ref="(el) => (tileRefs[index] = el)"
+            :id="`tour-tile-${index}`"
+            role="tab"
+            :aria-selected="activeTab === index"
+            aria-controls="tour-panel"
+            :tabindex="activeTab === index ? 0 : -1"
+            class="tour-tile"
+            :class="{ 'tour-tile-active': activeTab === index }"
+            @click="switchTab(index)"
+            @keydown="onTileKeydown($event, index)"
+          >
+            <i :class="`pi ${tab.icon} tour-tile-icon`" aria-hidden="true"></i>
+            <span class="min-w-0">
+              <span class="tour-tile-label">{{ tab.label }}</span>
+              <span class="tour-tile-summary">{{ tab.summary }}</span>
+            </span>
+          </button>
+        </div>
+
+        <div
+          id="tour-panel"
+          class="screenshot-frame tour-frame"
+          role="tabpanel"
+          :aria-labelledby="`tour-tile-${activeTab}`"
+        >
           <!-- Browser chrome bar -->
           <div class="screenshot-chrome">
             <div class="chrome-dots">
@@ -73,7 +106,7 @@
         </div>
 
         <!-- Description below screenshot -->
-        <div class="mt-6 text-center max-w-2xl mx-auto">
+        <div class="tour-caption mt-6 max-w-3xl">
           <h3 class="text-xl font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
             {{ tabs[activeTab].title }}
           </h3>
@@ -184,9 +217,17 @@ import { useTheme } from '@/composables/useTheme';
  * arrives instead of a blank frame. Recapture both sets together: they should
  * show the same view, the dark set with the console in dark mode and the light
  * set with it in light mode.
+ *
+ * Layout: below lg, pills above a full-width screenshot. From lg up, a column
+ * of touching tiles sits left of the screenshot, so all four screens and a
+ * one-line summary of each are readable without clicking anything. The tiles
+ * stretch to the frame's height (the caption sits below the frame, not beside
+ * the tiles), and they are a vertical tablist: arrow keys, Home and End move
+ * between them. Keep each summary short enough for one line at lg width.
  */
 
 const activeTab = ref(0);
+const tileRefs = [];
 const lightboxOpen = ref(false);
 
 // Track which tabs have been visited (triggers DOM mount of <img>)
@@ -206,6 +247,7 @@ const tabs = [
     image: '/images/screenshots/dashboard.png',
     imageLight: '/images/screenshots/dashboard-light.png',
     alt: 'Cold-chain dashboard with live freezer temperatures, reefer gauges, a site map, and shipment events',
+    summary: 'Live gauges, charts and maps',
     title: 'Real-time dashboard',
     description: 'Build custom views with gauges, charts, maps, and live message feeds. Widgets subscribe directly to NATS, so data flows from things to the browser without touching a database.'
   },
@@ -216,6 +258,7 @@ const tabs = [
     image: '/images/screenshots/things.png',
     imageLight: '/images/screenshots/things-light.png',
     alt: "An access controller's thing page: inventory details, its NATS user and role, its Nebula host and overlay IP, and its subjects",
+    summary: 'Every device and its credentials',
     title: 'Thing registry and management',
     description: 'Each thing is one record: its inventory entry, its NATS login and credentials, its Nebula host on the private network, and the subjects it publishes. Regenerate or revoke from the same page.'
   },
@@ -226,6 +269,7 @@ const tabs = [
     image: '/images/screenshots/floorplan.png',
     imageLight: '/images/screenshots/floorplan-light.png',
     alt: 'Floor plan with device overlays',
+    summary: 'Live status on your layout',
     title: 'Spatial visualization',
     description: 'Upload floor plans and drag things onto their physical positions. See live status overlaid on your building layout for instant situational awareness.'
   },
@@ -236,6 +280,7 @@ const tabs = [
     image: '/images/screenshots/organizations.png',
     imageLight: '/images/screenshots/organizations-light.png',
     alt: "An organization's page: its details, counts of things, locations and members, and its own NATS account and Nebula certificate authority",
+    summary: 'A walled-off tenant for each',
     title: 'Multi-tenant management',
     description: "Each organization gets its own NATS account and its own Nebula CA, so one tenant's certificates can't be trusted by another. Its size and both identity boundaries are on one page."
   }
@@ -293,6 +338,23 @@ const nextTab = () => {
   switchTab(idx);
 };
 
+/**
+ * Vertical tablist keys: select follows focus, wrapping at the ends.
+ */
+const onTileKeydown = (e, index) => {
+  const last = tabs.length - 1;
+  const target = {
+    ArrowDown: index === last ? 0 : index + 1,
+    ArrowUp: index === 0 ? last : index - 1,
+    Home: 0,
+    End: last,
+  }[e.key];
+  if (target === undefined) return;
+  e.preventDefault();
+  switchTab(target);
+  tileRefs[target]?.focus();
+};
+
 const handleKeydown = (e) => {
   if (!lightboxOpen.value) return;
   if (e.key === 'Escape') closeLightbox();
@@ -337,6 +399,90 @@ onBeforeUnmount(() => {
 .tab-button-active:hover {
   color: white;
   background-color: var(--color-primary-800);
+}
+
+/* ==============================
+   Desktop tiles
+   ============================== */
+.tile-list {
+  @apply hidden;
+}
+
+@media (min-width: 1024px) {
+  .tour-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+    column-gap: 1.5rem;
+  }
+
+  .tile-list {
+    @apply flex flex-col rounded-lg overflow-hidden;
+    grid-column: 1;
+    grid-row: 1;
+    border: 1px solid var(--color-border-primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .tour-frame {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .tour-caption {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+.tour-tile {
+  @apply relative flex flex-1 items-center gap-4 px-5 text-left transition-colors;
+  background-color: var(--color-surface-secondary);
+  color: var(--color-content-secondary);
+}
+
+.tour-tile + .tour-tile {
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.tour-tile:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.tour-tile:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* Accent bar on the left edge marks the selected tile */
+.tour-tile::before {
+  content: '';
+  @apply absolute left-0 top-0 bottom-0 w-1 transition-colors;
+  background-color: transparent;
+}
+
+.tour-tile-active {
+  background-color: var(--color-surface-primary);
+}
+
+.tour-tile-active::before {
+  background-color: var(--color-primary);
+}
+
+.tour-tile-icon {
+  @apply flex-shrink-0 text-xl transition-colors;
+}
+
+.tour-tile-active .tour-tile-icon {
+  color: var(--color-primary);
+}
+
+.tour-tile-label {
+  @apply block text-lg font-semibold;
+  color: var(--color-content-primary);
+}
+
+.tour-tile-summary {
+  @apply block text-sm truncate mt-1;
 }
 
 /* ==============================

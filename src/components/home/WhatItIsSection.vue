@@ -1,83 +1,93 @@
 <template>
-  <section id="what-it-is" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
+  <section id="what-it-is" class="section" :style="{ backgroundColor: 'var(--color-background-alt)' }">
     <div class="container">
-      <div class="max-w-5xl mx-auto">
-        <h2 class="section-title text-center">What it is</h2>
-        <p class="section-subtitle text-center">
-          A control plane for connected operations: one place to register equipment and the people
-          who use it, one real-time bus to carry what it reports, and one encrypted network to reach
-          it. Composable pieces that each do one job well, so you adopt what you need today and grow
-          into the rest without rewrites.
-        </p>
-
+      <!-- Row 1: two questions side by side. What it does on the left, what
+           it is built from on the right; the stack cards below answer the
+           right-hand one in detail. -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-10">
+        <div>
+          <h2 class="section-title">What it is</h2>
+          <p class="intro-text">
+            A control plane for connected operations: one place to register equipment and the people
+            who use it, one real-time bus to carry what it reports, and one encrypted network to reach
+            it. Composable pieces that each do one job well, so you adopt what you need today and grow
+            into the rest without rewrites.
+          </p>
+        </div>
         <!-- The stack. Named projects matter to the two buyers who read
              repositories before they read a price sheet. -->
-        <div class="mt-12">
-          <h3 class="text-xl sm:text-2xl font-bold mb-3" :style="{ color: 'var(--color-content-primary)' }">
-            What it is made of
-          </h3>
-          <p class="mb-8 max-w-3xl leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+        <div>
+          <h3 class="section-title">What it is made of</h3>
+          <p class="intro-text">
             Three well-known open-source projects, each doing the job it is good at, plus our own
             components alongside them. Nothing here is a proprietary protocol you would have to
             reverse engineer later, and nothing is a fork you would be stuck maintaining.
           </p>
+        </div>
+      </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div v-for="(part, index) in stack" :key="`stack-${index}`" class="bottom-card">
-              <div class="flex items-center mb-2">
-                <i :class="`pi ${part.icon}`" class="mr-2" :style="{ color: part.color }"></i>
-                <span class="font-mono text-sm font-semibold" :style="{ color: 'var(--color-content-primary)' }">
-                  {{ part.name }}
-                </span>
-              </div>
-              <p class="text-xs leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-                {{ part.role }}
-              </p>
+      <!-- Row 2: the stack -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div v-for="(part, index) in stack" :key="`stack-${index}`" class="bottom-card">
+          <div class="flex items-center mb-2">
+            <i :class="`pi ${part.icon}`" class="mr-2" :style="{ color: part.color }"></i>
+            <span class="font-mono text-sm font-semibold" :style="{ color: 'var(--color-content-primary)' }">
+              {{ part.name }}
+            </span>
+          </div>
+          <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            {{ part.role }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 3: three supporting facts, a card each, so none of them reads
+           as an afterthought trailing the stack. -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+        <!-- Protocol compatibility. The icons fill the space under the title
+             and sit centered in it, since the cards beside this one are taller
+             with text. -->
+        <div class="bottom-card flex flex-col">
+          <h4 class="fact-title">
+            <i class="pi pi-link fact-icon"></i>
+            Works with what you already have
+          </h4>
+          <div class="grid grid-cols-4 gap-3 flex-1 content-center py-2">
+            <div v-for="(proto, index) in protocols" :key="`proto-${index}`" class="text-center">
+              <i :class="`pi ${proto.icon}`" class="text-2xl mb-2" :style="{ color: proto.color }"></i>
+              <div class="text-xs font-medium" :style="{ color: 'var(--color-content-primary)' }">{{ proto.name }}</div>
+              <div class="text-xs opacity-60">{{ proto.note }}</div>
             </div>
           </div>
+        </div>
 
-          <!-- The off-ramps. Heavy analytics and long-term history are somebody
-               else's job; saying so is the point, not an omission. -->
-          <p class="mt-6 max-w-3xl text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-            Everything else plugs into the same bus. Telegraf ships JetStream data to whichever
-            time-series database you prefer; eKuiper or Benthos handle windowed aggregations and
-            anomaly detection and publish results back for the rules to act on. Stone-Age stays
-            small because the heavy jobs stay with the tools built for them.
+        <!-- The off-ramps. Heavy analytics and long-term history are somebody
+             else's job; saying so is the point, not an omission. -->
+        <div class="bottom-card">
+          <h4 class="fact-title">
+            <i class="pi pi-sitemap fact-icon"></i>
+            Everything else plugs into the same bus
+          </h4>
+          <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            Telegraf ships JetStream data to whichever time-series database you prefer; eKuiper or
+            Benthos handle windowed aggregations and anomaly detection and publish results back for
+            the rules to act on. Stone-Age stays small because the heavy jobs stay with the tools
+            built for them.
           </p>
         </div>
 
-        <!-- Protocol compatibility -->
-        <div class="mt-12 max-w-2xl mx-auto">
-          <div class="bottom-card">
-            <h4 class="text-sm font-semibold mb-3 text-center" :style="{ color: 'var(--color-content-primary)' }">
-              Works with what you already have
-            </h4>
-            <div class="grid grid-cols-4 gap-3">
-              <div v-for="(proto, index) in protocols" :key="`proto-${index}`" class="text-center">
-                <i :class="`pi ${proto.icon}`" class="text-lg mb-1" :style="{ color: proto.color }"></i>
-                <div class="text-xs font-medium" :style="{ color: 'var(--color-content-primary)' }">{{ proto.name }}</div>
-                <div class="text-xs opacity-60">{{ proto.note }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout-box rounded-lg p-6 border-l-4 border-blue-500 mt-12">
-          <div class="flex items-start">
-            <i class="pi pi-info-circle text-blue-500 text-2xl mr-4 mt-1 flex-shrink-0"></i>
-            <div>
-              <h4 class="text-lg font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
-                Every piece is one file
-              </h4>
-              <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
-                Start with the control plane binary: run
-                <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs">./stone-age serve</code>
-                and open your browser. The database, REST API, and UI are already inside it. Add NATS,
-                Nebula, Rule-Router, and the agent alongside it as you need them. Bare metal,
-                containers, or VMs, on FreeBSD, Linux, or Windows.
-              </p>
-            </div>
-          </div>
+        <div class="bottom-card">
+          <h4 class="fact-title">
+            <i class="pi pi-file fact-icon"></i>
+            Every piece is one file
+          </h4>
+          <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            Start with the control plane binary: run
+            <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs whitespace-nowrap">./stone-age serve</code>
+            and open your browser. The database, REST API, and UI are already inside it. Add NATS,
+            Nebula, Rule-Router, and the agent alongside it as you need them. Bare metal,
+            containers, or VMs, on FreeBSD, Linux, or Windows.
+          </p>
         </div>
       </div>
     </div>
@@ -98,6 +108,12 @@
  * before they had decided they cared. Depth of that kind belongs in the docs,
  * which now has a nav link of its own.
  *
+ * Layout: left aligned in rows, like the tour above it. Row 1 puts the
+ * definition and the "made of" paragraph side by side, row 2 is the stack,
+ * row 3 gives the protocols, the off-ramps and the single-binary note a card
+ * each. They used to trail the stack one under another, centered and full
+ * width by turns, and read as leftovers.
+ *
  * What survived is what a reader needs here: one paragraph saying what the
  * thing is, the named projects underneath it, the protocols it already speaks,
  * and the single-binary claim. The audience pages carry the argument; this
@@ -105,10 +121,10 @@
  *
  * The heading avoids "built on" on purpose. That phrase is taken: Built On is
  * the hub for the components and reference applications, linked from the nav
- * and teased, components only, in the section directly above this one.
+ * and teased, components only, in the section directly below this one.
  *
  * No docs link closes this section. The nav carries one permanently and the
- * Get Started section a screen below has "Read Documentation" as a button;
+ * Get Started section further down has "Read Documentation" as a button;
  * a third inside one scroll would read as pleading rather than helpful.
  */
 
@@ -148,25 +164,30 @@ const stack = [
     name: 'Stone-Age',
     icon: 'pi-box',
     color: '#f59e0b',
-    role: 'Ours: the console you run the fleet from, plus the components in the strip above. Rule-Router automates across NATS, HTTP, and cron, the agent reports and controls a single device, and the stone CLI drives it all from a terminal.',
+    role: 'Ours: the console you run the fleet from, plus the components in the section below. Rule-Router automates across NATS, HTTP, and cron, the agent reports and controls a single device, and the stone CLI drives it all from a terminal.',
   },
 ];
 </script>
 
 <style scoped>
-/* Card shell, shared by the stack cards and the protocol strip. */
+/* Card shell, shared by the stack cards and the three fact cards. */
 .bottom-card {
   @apply rounded-lg p-4;
   background-color: var(--color-surface-secondary);
   border: 1px solid var(--color-border-primary);
 }
 
-/* Moved here with the single-binary note when PillarsSection was removed. */
-.callout-box {
-  background-color: rgba(var(--color-primary-rgb), 0.05);
+.intro-text {
+  @apply text-lg leading-relaxed max-w-2xl;
+  color: var(--color-content-secondary);
 }
 
-.dark .callout-box {
-  background-color: rgba(var(--color-primary-rgb), 0.1);
+.fact-title {
+  @apply flex items-center gap-2 text-base font-semibold mb-3;
+  color: var(--color-content-primary);
+}
+
+.fact-icon {
+  color: var(--color-primary);
 }
 </style>

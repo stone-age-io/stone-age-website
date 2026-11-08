@@ -1,6 +1,6 @@
 <template>
   <section 
-    class="py-16 sm:py-20 md:py-28 lg:py-32 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+    class="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-cover bg-center bg-no-repeat"
     :style="{ backgroundImage: 'url(/images/stone-field.jpg)' }"
   >
     <!-- Dark overlay -->
@@ -12,11 +12,14 @@
              sentence is too long to hold on one line on a phone, so it wraps
              normally. Keep the span on the same line as the text before it:
              Vue drops whitespace between tags when it holds a newline. -->
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white text-balance">
+        <!-- Line height rides on each size (/tight): text-5xl and text-6xl set
+             line-height 1 themselves, which overrode a separate leading-* and
+             let the q of "equipment" touch the k of "talk". -->
+        <h1 class="text-3xl/tight sm:text-4xl/tight md:text-5xl/tight lg:text-6xl/tight font-bold mb-6 text-white text-balance">
           Make your equipment and your apps talk. <span class="whitespace-nowrap">Simple.</span>
         </h1>
 
-        <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl text-pretty">
+        <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed max-w-3xl text-pretty">
           One open-source platform for everything from the door controllers, sensors
           and machines on your sites to the cloud services you log into separately today. Nothing
           gets ripped out to make room for us.

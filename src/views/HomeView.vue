@@ -2,8 +2,8 @@
   <div>
     <HeroSection />
     <ScreenshotTour />
-    <BuiltOnTeaser />
     <WhatItIsSection />
+    <BuiltOnTeaser background="var(--color-background)" />
     <CallToAction />
   </div>
 </template>
@@ -14,10 +14,17 @@
  *
  * Section flow (concrete before architecture):
  * 1. Hero: what it does, plus the audience split into the two buyer pages
- * 2. Screenshots: visual proof of the console
- * 3. Built On teaser: the components around the console, named as things
- * 4. What It Is: the one-paragraph definition and the stack underneath
+ * 2. Screenshots: visual proof of the console, with no visible header so it
+ *    reads as a continuation of the hero
+ * 3. What It Is: the definition and the stack underneath, once the reader has
+ *    seen the console. Not above the tour: architecture before the concrete
+ *    thing is the problem the hero's notes describe.
+ * 4. Built On teaser: the components around the console, named as things,
+ *    right after the stack card that introduces them
  * 5. Get Started: pricing and the ways in
+ *
+ * Backgrounds alternate: tour (base), What It Is (alt), Built On (base, passed
+ * in because the teaser defaults to alt for the IT page), then the CTA.
  *
  * Three sections were removed rather than rewritten. PillarsSection led with a
  * radio-network analogy and restated the architecture a third time; its only

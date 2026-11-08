@@ -159,7 +159,7 @@ stone apply                      # idempotent, batched, performs no deletes</cod
             <h3 class="font-semibold mb-2" :style="{ color: 'var(--color-content-primary)' }">
               {{ guard.title }}
             </h3>
-            <p class="text-sm leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
+            <p class="text-sm leading-relaxed max-w-3xl" :style="{ color: 'var(--color-content-secondary)' }">
               {{ guard.body }}
             </p>
           </div>

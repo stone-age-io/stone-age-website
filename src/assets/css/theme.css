@@ -130,8 +130,10 @@ body {
 }
 
 /* Section Styles */
+/* Trimmed from py-12/20/24: with the wider container, the old vertical rhythm
+   left each section feeling like its own page. */
 .section {
-  @apply py-12 md:py-20 lg:py-24;
+  @apply py-10 md:py-14 lg:py-16;
 }
 
 /*
@@ -143,13 +145,68 @@ body {
 }
 
 .section-title {
-  @apply text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8;
+  @apply text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6;
   color: var(--color-content-primary);
 }
 
 .section-subtitle {
-  @apply text-lg sm:text-xl font-medium mb-8 md:mb-12 max-w-3xl mx-auto;
+  @apply text-lg sm:text-xl font-medium mb-6 md:mb-8 max-w-3xl mx-auto;
   color: var(--color-content-secondary);
+}
+
+/*
+ * Section header: title, subtitle directly beneath, a rule underneath, all
+ * left aligned so it shares an edge with the content below it. A centered
+ * header over left-aligned content floats; a subtitle pushed to the right
+ * made the eye jump across the page to find it. Read top-left, in order.
+ *
+ *   <header class="section-header">
+ *     <h2 class="section-title">…</h2>
+ *     <p class="section-subtitle">…</p>
+ *   </header>
+ */
+.section-header {
+  @apply flex flex-col gap-2 pb-4 mb-8;
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.section-header .section-title {
+  @apply mb-0;
+}
+
+.section-header .section-subtitle {
+  @apply mb-0 mx-0 max-w-2xl text-base sm:text-lg text-balance;
+}
+
+/*
+ * Inline lead-in variant: one run of text at one size. The title is bold and
+ * ends with a period; the subtitle continues it in the muted color. The title
+ * has to read as the start of a sentence for this to work. Keep the space
+ * between the two tags on one line ({{ ' ' }} in Vue): Vue drops whitespace
+ * between tags when it holds a newline, which runs the words together.
+ *
+ *   <header class="section-header section-header-inline">
+ *     <h2 class="section-title">See it in action.</h2>
+ *     <p class="section-subtitle">Live dashboards, …</p>
+ *   </header>
+ */
+.section-header-inline {
+  @apply block text-xl sm:text-3xl md:text-4xl leading-snug text-balance;
+}
+
+.section-header-inline .section-title,
+.section-header-inline .section-subtitle {
+  @apply inline max-w-none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.section-header-inline .section-title {
+  @apply font-bold;
+}
+
+.section-header-inline .section-subtitle {
+  @apply font-medium;
 }
 
 /* Card Styles */
