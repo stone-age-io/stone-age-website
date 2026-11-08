@@ -17,8 +17,8 @@
         </h1>
 
         <p class="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200 font-light leading-relaxed max-w-3xl text-pretty">
-          One console and one automation layer for everything from the door controllers, sensors
-          and machines on your sites to the cloud platforms you log into separately today. Nothing
+          One open-source platform for everything from the door controllers, sensors
+          and machines on your sites to the cloud services you log into separately today. Nothing
           gets ripped out to make room for us.
         </p>
 
@@ -73,7 +73,7 @@
  * It replaced "Every site. Every vendor cloud. One screen." "One screen" sold a
  * dashboard, the oldest pitch in the category, when the difference is the
  * automation across the boundary; and "vendor cloud" was a term a buyer had to
- * translate. The consolidation claim lives on in the subhead ("One console").
+ * translate.
  *
  * "Simple." is the pitch, in the grug-brained voice the Stone Age name points
  * at. No "finally": point-to-point integrations already exist, so claiming to
@@ -90,6 +90,13 @@
  * what the automation layer does with them. A vendor name (Samsara, Victron,
  * Skydio) belongs on this site only once a recipe for it ships. The protocol
  * list moved out of this sentence; the "What it is" section below carries it.
+ *
+ * The subhead opens with "One open-source platform", not "One console and one
+ * automation layer". Naming parts made the product sound smaller than it is:
+ * it is a registry, a message bus and an overlay network as well, and a list of
+ * those does not fit a sentence a first-time reader skims. "Platform" is broad
+ * enough to stay true; "open-source" is the difference the hero otherwise never
+ * mentions. The architecture belongs to "What it is" below.
  *
  * The two buttons are the audience split. Both revenue-bearing buyers have a
  * page written for them, and this is the only prominent route to either one.

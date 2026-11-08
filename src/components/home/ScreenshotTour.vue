@@ -2,8 +2,10 @@
   <section id="platform-tour" class="section" :style="{ backgroundColor: 'var(--color-background)' }">
     <div class="container">
       <h2 class="section-title text-center">See it in action</h2>
-      <p class="section-subtitle text-center">
-        One console for the substrate: identity, tenants, live state, and networks across every site
+      <!-- Names the four tabs in order, so the subtitle previews the tour.
+           Concrete screens, not architecture ("substrate", "live state"). -->
+      <p class="section-subtitle text-center text-balance">
+        Live dashboards, every device, your floor plans and each customer's organization, all in one console.
       </p>
 
       <!-- Tab buttons -->
