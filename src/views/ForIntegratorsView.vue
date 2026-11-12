@@ -49,7 +49,7 @@
             Their installed base is the asset, not the obstacle. The automation layer speaks HTTP in
             both directions and MQTT natively, so systems already running in a customer's buildings, and
             the cloud platforms beside them, can put their events on the bus without new hardware. You
-            get one screen across their sites now,
+            get automation across their sites now,
             and replacing a panel becomes a decision you make later, per door, instead of a precondition
             for the first invoice.
           </p>
@@ -404,7 +404,7 @@ const bridgingPoints = [
   },
   {
     title: 'Cloud platforms too',
-    body: 'Router management clouds, energy monitoring portals, and business SaaS (CRMs, ERPs, ticketing) your customers already run become subjects on the same bus. The gateway takes their webhooks, the scheduler polls their APIs, and their tokens refresh themselves. One screen across physical equipment and cloud software.',
+    body: 'Router management clouds, energy monitoring portals, and business SaaS (CRMs, ERPs, ticketing) your customers already run become subjects on the same bus. The gateway takes their webhooks, the scheduler polls their APIs, and their tokens refresh themselves. One rule can act on physical equipment and cloud software together.',
   },
 ];
 
@@ -420,7 +420,7 @@ const structuralArguments = [
 ];
 
 const iacPoints = [
-  'Every thing, location, type, and schema pulls down as plain YAML, one file per record, diffable in any editor.',
+  'Every thing, location, and type pulls down as plain YAML, one file per record, diffable in any editor.',
   'apply is idempotent and performs no deletes, so a re-run is safe and a mistake stays recoverable.',
   'Typed flags for one-off changes: create a location, a thing type, or a device without opening a browser.',
   'The same CLI reads and writes NATS subjects and JetStream KV, so commissioning and troubleshooting are one tool.',
