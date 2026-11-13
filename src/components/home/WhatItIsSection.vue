@@ -88,8 +88,8 @@
             <code class="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded text-xs whitespace-nowrap">./stone-age serve --nats</code>,
             and open your browser. The database, REST API, UI, and a NATS server are already inside
             it. Add Nebula, Rule-Router, and the agent alongside it as you need them. Bare metal,
-            containers, or VMs: the control plane runs on Linux, macOS, or Windows, and the agent
-            on FreeBSD too.
+            containers, or VMs, on Linux, FreeBSD, or Windows. The control plane also runs on
+            macOS.
           </p>
         </div>
       </div>
