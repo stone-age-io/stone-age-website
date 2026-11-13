@@ -119,9 +119,9 @@
           class="rounded-lg p-5 overflow-x-auto mb-6"
           :style="{ backgroundColor: 'var(--color-background-alt)', border: '1px solid var(--color-border)' }"
         >
-          <pre class="font-mono text-xs sm:text-sm leading-relaxed" :style="{ color: 'var(--color-content-primary)' }"><code>stone pull --set-workspace .     # every thing, location, type → YAML
-git diff                         # review the change like any other code
-stone apply                      # idempotent, batched, performs no deletes</code></pre>
+          <pre class="font-mono text-xs sm:text-sm leading-relaxed" :style="{ color: 'var(--color-content-primary)' }"><code>stone pull --workspace . --set-workspace   # every thing, location, type → YAML
+git diff                                   # review the change like any other code
+stone apply                                # creates and updates, never deletes</code></pre>
         </div>
 
         <ul class="space-y-3 max-w-3xl">
@@ -421,7 +421,7 @@ const structuralArguments = [
 
 const iacPoints = [
   'Every thing, location, and type pulls down as plain YAML, one file per record, diffable in any editor.',
-  'apply is idempotent and performs no deletes, so a re-run is safe and a mistake stays recoverable.',
+  'apply creates and updates records in batches and never deletes one, so a mistake stays recoverable.',
   'Typed flags for one-off changes: create a location, a thing type, or a device without opening a browser.',
   'The same CLI reads and writes NATS subjects and JetStream KV, so commissioning and troubleshooting are one tool.',
 ];
