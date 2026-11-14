@@ -178,7 +178,7 @@ stone apply                                # creates and updates, never deletes<
       <div class="container">
         <div class="max-w-3xl mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4" :style="{ color: 'var(--color-content-primary)' }">
-            Your customers are isolated by cryptography, not by a database column
+            On the wire, your customers are isolated by cryptography, not by a database column
           </h2>
           <p class="leading-relaxed" :style="{ color: 'var(--color-content-secondary)' }">
             Each customer organization gets its own NATS account and its own Nebula certificate
@@ -186,7 +186,9 @@ stone apply                                # creates and updates, never deletes<
             one customer's building has no path into another's. Where you do want traffic to cross, it is
             an export and a matching import you can point at: a managed organization exports its
             application events into your own account, remapped under a prefix carrying the customer's
-            identity in a signed token rather than in a payload. On a dedicated instance you also hold
+            identity in a signed token rather than in a payload. The console is the exception: on a
+            shared instance every customer's inventory and issued credentials sit in one database,
+            scoped by access rules we test on every release. On a dedicated instance you also hold
             your own signing keys, your own database, and your own encryption key, so the isolation
             boundary is the machine rather than the correctness of our rules.
           </p>
@@ -400,7 +402,7 @@ const bridgingPoints = [
   },
   {
     title: 'MQTT and agents',
-    body: 'Devices already speaking MQTT connect straight to the bus, and the edge agent covers the servers and gateways in the closet. Nothing has to be re-flashed to become visible.',
+    body: 'Devices already speaking MQTT 3.1.1 connect straight to the bus once its MQTT listener is switched on, and the edge agent covers the servers and gateways in the closet. Nothing has to be re-flashed to become visible.',
   },
   {
     title: 'Cloud platforms too',
